@@ -3,101 +3,58 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - 3D Project Management</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body bgcolor="#eeeeee">
+<body>
+    <main class="content-area">
+        <!-- HEADER -->
+        <header class="dashboard-header">
+            <div class="dashboard-welcome">
+                <h1>Dashboard</h1>
+                <p>Welcome back, Shane!</p>
+                <small>Here's what's happening with your projects.</small>
+            </div>
 
-<table width="100%" border="0" cellspacing="10" cellpadding="8">
+            <div class="dashboard-actions">
+                <time datetime="2026-08-28">August 28, 2026</time>
+                <label>
+                    <input type="checkbox"> Share
+                </label>
+            </div>
+        </header>
 
-    <!-- HEADER -->
+        <!-- STATISTICS -->
+        <section class="stats-grid">
+            <article class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">To Do</div>
+            </article>
 
-    <tr>
-        <td colspan="2">
+            <article class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">In Progress</div>
+            </article>
 
-            <h1>Dashboard</h1>
+            <article class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">Done</div>
+            </article>
 
-            <table width="100%" border="0">
+            <article class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Overdue</div>
+            </article>
+        </section>
 
-                <tr>
+        <!-- PROJECT PROGRESS -->
+        <section class="card">
+            <h2>Project Progress</h2>
 
-                    <td width="60%">
-                        Welcome back, Shane!
-                        <br>
-                        <small>Here's what's happening with your projects.</small>
-                    </td>
-
-                    <td align="right">
-                        August 28, 2026
-                        &nbsp;&nbsp;
-                        <input type="checkbox"> Share
-                    </td>
-
-                </tr>
-
-            </table>
-
-        </td>
-    </tr>
-
-
-    <!-- STATISTICS -->
-
-    <tr>
-
-        <td colspan="2">
-
-            <table width="100%" border="1" cellspacing="5" cellpadding="10">
-
-                <tr>
-
-                    <td align="center">
-                        <font size="6">12</font>
-                        <br>
-                        To do
-                    </td>
-
-                    <td align="center">
-                        <font size="6">8</font>
-                        <br>
-                        In Progress
-                    </td>
-
-                    <td align="center">
-                        <font size="6">18</font>
-                        <br>
-                        Done
-                    </td>
-
-                    <td align="center">
-                        <font size="6">3</font>
-                        <br>
-                        Overdue
-                    </td>
-
-                </tr>
-
-            </table>
-
-        </td>
-
-    </tr>
-
-
-    <!-- PROJECT PROGRESS -->
-
-    <tr>
-
-        <td width="50%" valign="top">
-
-            <fieldset>
-
-                <legend>Project Progress</legend>
-
-                <table width="100%" cellpadding="8">
-
-                    <tr>
-                        <td>Project 1</td>
+            <article>
+                <h3>Project 1</h3>
                         <td align="right">65%</td>
                     </tr>
 

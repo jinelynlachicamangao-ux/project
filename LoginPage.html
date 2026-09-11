@@ -1,54 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>My First Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - 3D Project Management</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    
-    <main>
-        <section class="logo">
-            <img src="" alt="">
-            <h1>Drag, Drop, Done</h1>
-            <h3>
-                Manage tasks. Track progress. 
-                Get things done.
-            </h3>
-        </section>
+    <main class="content-area">
+        <section class="card" style="max-width: 500px; margin: 40px auto;">
+            <!-- Logo Section -->
+            <header style="text-align: center; margin-bottom: 30px;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">3D</h1>
+                <p style="color: #7f8c8d; font-size: 1rem;">Manage tasks. Track progress. Get things done.</p>
+            </header>
 
-        <section class="login">
-            <h1>Login</h1>
+            <!-- Login Form -->
             <form action="index.html" method="post">
-                <input type="username" placeholder="username" required>
-                <input type="password" placeholder="Password" required>
-                <button type="submit">Login</button>
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
 
-                   <div class="options">
-                        <label class="remember">
-                            <input type="checkbox">
-                            <span>Remember me</span>
-                        </label>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
 
-                        <a href="#">Forgot your password?</a>
-                    </div>
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="submit">Login</button>
             </form>
 
+            <!-- Social Login Divider -->
             <div class="divider">
-               <span>or continue with</span>
+                <span>or continue with</span>
             </div>
 
-            <div class="social-login">
-                <button class="google">Google</button>
-                <button class="github">GitHub</button>
+            <!-- Social Login Buttons -->
+            <div style="display: flex; gap: 10px;">
+                <button type="button" class="social google" style="flex: 1;">Google</button>
+                <button type="button" class="social github" style="flex: 1;">GitHub</button>
             </div>
 
-            <p class="register">
+            <!-- Register Link -->
+            <p class="register-link">
                 Don't have an account?
                 <a href="#">Register here</a>
             </p>
-
         </section>
-
     </main>
-
 </body>
+
 </html>

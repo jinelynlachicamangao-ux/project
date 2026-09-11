@@ -3,101 +3,77 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D - Project Management</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
-<body bgcolor="#eeeeee">
+<body>
+    <div class="app-container">
+        <!-- For sidebar Nav (Donnot touch this just the css)  -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>3D</h1>
+                <p>Drag, Drop, Done</p>
+            </div>
 
-<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
-
-    <tr>
-
-        <!-- LEFT NAVIGATION -->
-        <td width="220" valign="top" bgcolor="#b8b3b3">
-
-            <table width="100%" border="0" cellspacing="0" cellpadding="10">
-
-                <tr>
-                    <td align="center">
-                        <font size="6">3D</font>
-                        <br>
-                        <font size="2">Drag, Drop, Done</font>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <a href="dashboard.html" target="content">
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="Dashboard.html" target="content">
                             Dashboard
                         </a>
-                    </td>
-                </tr>
+                    </li>
 
-                <tr>
-                    <td>
+                    <li class="nav-item">
                         <a href="projects.html" target="content">
                             Projects
                         </a>
-                    </td>
-                </tr>
+                    </li>
 
-                <tr>
-                    <td>
+                    <li class="nav-item">
                         <a href="tasks.html" target="content">
                             My Tasks
                         </a>
-                    </td>
-                </tr>
+                    </li>
 
-                <tr>
-                    <td>
-                        <a href="kaban.html" target="content">
-                            Kaban Board
+                    <li class="nav-item">
+                        <a href="Kaban.html" target="content">
+                            Kanban Board
                         </a>
-                    </td>
-                </tr>
+                    </li>
 
-                <tr>
-                    <td>
+                    <li class="nav-item">
                         <a href="calendar.html" target="content">
                             Calendar
                         </a>
-                    </td>
-                </tr>
+                    </li>
 
-                <tr>
-                    <td>
+                    <li class="nav-item">
                         <a href="notifications.html" target="content">
                             Notifications
                         </a>
-                    </td>
-                </tr>
+                    </li>
 
-                <tr>
-                    <td>
+                    <li class="nav-item">
                         <a href="activity.html" target="content">
                             Activity
                         </a>
-                    </td>
-                </tr>
+                    </li>
 
-                <tr>
-                    <td>
+                    <li class="nav-item">
                         <a href="settings.html" target="content">
                             Settings
                         </a>
-                    </td>
-                </tr>
-
-            </table>
-
-        </td>
-
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
         <!-- RIGHT CONTENT -->
-        <td valign="top">
-
-            <iframe
+        <main class="main-content">
+            <div class="content-area">
+                <iframe
                 src="dashboard.html"
                 name="content"
                 width="100%"
