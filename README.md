@@ -6,6 +6,8 @@ A modern, intuitive project management application designed to help teams organi
 
 ---
 
+(All of this is not final)
+
 ## 📋 Features
 
 ### Core Features
@@ -66,6 +68,7 @@ cd 3D-project-management
 ├── Kaban.html          # Kanban board view
 ├── styles.css          # Global styling
 └── README.md           # This file
+    Theres More!!(not permanent)
 ```
 
 ### File Descriptions
