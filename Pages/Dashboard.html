@@ -31,7 +31,16 @@
                     <button class="search-btn">🔍</button>
                 </div>
                 <time datetime="2026-08-28">August 28, 2026</time>
-                <button class="profile-circle" aria-label="Profile Menu">S</button>
+                <div class="profile-menu-container">
+                    <button class="profile-circle" aria-label="Profile Menu">S</button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <a href="#profile">My Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#preferences">Preferences</a>
+                        <hr>
+                        <a href="LoginPage.html">Logout</a>
+                    </div>
+                </div>
             </div>
 
         </header>
@@ -152,6 +161,32 @@
         </section>
 
     </main>
+
+    <script>
+        // Profile dropdown menu functionality
+        const profileButton = document.querySelector('.profile-circle');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        // Toggle dropdown when profile button is clicked
+        profileButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.profile-menu-container')) {
+                profileDropdown.classList.remove('show');
+            }
+        });
+
+        // Close dropdown when a menu item is clicked
+        profileDropdown.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                profileDropdown.classList.remove('show');
+            });
+        });
+    </script>
 </body>
 
 </html>
