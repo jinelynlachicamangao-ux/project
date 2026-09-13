@@ -5,13 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - 3D Project Management</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../styles.css">
 </head>
 
 <body>
     <main class="content-area">
-        <!-- HEADER -->
+        
+        <!-- HEADER SECTION -->
         <header class="dashboard-header">
+            <button class="menu-icon" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <div class="dashboard-welcome">
                 <h1>Dashboard</h1>
                 <p>Welcome back, Shane!</p>
@@ -19,14 +26,17 @@
             </div>
 
             <div class="dashboard-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search projects, tasks...">
+                    <button class="search-btn">🔍</button>
+                </div>
                 <time datetime="2026-08-28">August 28, 2026</time>
-                <label>
-                    <input type="checkbox"> Share
-                </label>
+                <button class="profile-circle" aria-label="Profile Menu">S</button>
             </div>
+
         </header>
 
-        <!-- STATISTICS -->
+        <!-- STATISTICS CARDS -->
         <section class="stats-grid">
             <article class="stat-card">
                 <div class="stat-number">12</div>
@@ -49,97 +59,99 @@
             </article>
         </section>
 
-        <!-- PROJECT PROGRESS -->
-        <section class="card">
-            <h2>Project Progress</h2>
+        <!-- UPCOMING DEADLINES SECTION -->
+        <section class="cards-grid">
+            <div class="card">
+                <h2 class="card-title">Upcoming Deadlines</h2>
+                
+                <div class="item-card">
+                    <div class="item-name">Login Page</div>
+                    <div class="item-date">May 23, 2026</div>
+                </div>
 
-            <article>
-                <h3>Project 1</h3>
-                        <td align="right">65%</td>
-                    </tr>
+                <div class="item-card">
+                    <div class="item-name">Database Design</div>
+                    <div class="item-date">May 24, 2026</div>
+                </div>
 
-                    <tr>
-                        <td>Project 2</td>
-                        <td align="right">40%</td>
-                    </tr>
-
-                </table>
-
-            </fieldset>
-
-        </td>
-
-
-        <!-- UPCOMING DEADLINES -->
-
-        <td width="50%" valign="top">
-
-            <fieldset>
-
-                <legend>Upcoming Deadlines</legend>
-
-                <table width="100%" cellpadding="6">
-
-                    <tr>
-                        <td>Login Page</td>
-                        <td align="right">May 23, 2026</td>
-                    </tr>
-
-                    <tr>
-                        <td>Database Design</td>
-                        <td align="right">May 24, 2026</td>
-                    </tr>
-
-                    <tr>
-                        <td>User Testing</td>
-                        <td align="right">Jun 02, 2026</td>
-                    </tr>
-
-                </table>
-
-            </fieldset>
-
-        </td>
-
-    </tr>
+                <div class="item-card">
+                    <div class="item-name">User Testing</div>
+                    <div class="item-date">Jun 02, 2026</div>
+                </div>
+            </div>
 
 
-    <!-- RECENT ACTIVITY -->
+            <!-- MY TASK SECTION -->
+            <div class="card">
+                <h2 class="card-title">My Tasks</h2>
+                
+                <div class="item-card">
+                    <div class="item-name">Maria moved Homepage Design to In Progress</div>
+                    <div class="item-time">2m ago</div>
+                </div>
 
-    <tr>
+                <div class="item-card">
+                    <div class="item-name">John completed Logo Design</div>
+                    <div class="item-time">1h ago</div>
+                </div>
 
-        <td colspan="2">
+                <div class="item-card">
+                    <div class="item-name">You created a new task: Setup Database</div>
+                    <div class="item-time">2h ago</div>
+                </div>
+            </div>
 
-            <fieldset>
 
-                <legend>Recent Activity</legend>
+            <!-- PROJECTS SECTION -->
+            <div class="card">
+                <h2 class="card-title">PROJECTS</h2>
+                
+                <div class="item-card">
+                    <div class="item-name">Maria moved Homepage Design to In Progress</div>
+                    <div class="item-time">2m ago</div>
+                </div>
 
-                <table width="100%" cellpadding="5">
+                <div class="item-card">
+                    <div class="item-name">John completed Logo Design</div>
+                    <div class="item-time">1h ago</div>
+                </div>
 
-                    <tr>
-                        <td>Maria moved Homepage Design to In Progress</td>
-                        <td align="right">2m ago</td>
-                    </tr>
+                <div class="item-card">
+                    <div class="item-name">You created a new task: Setup Database</div>
+                    <div class="item-time">2h ago</div>
+                </div>
+            </div>
 
-                    <tr>
-                        <td>John completed Logo Design</td>
-                        <td align="right">1h ago</td>
-                    </tr>
+            
 
-                    <tr>
-                        <td>You created a new task: Setup Database</td>
-                        <td align="right">2h ago</td>
-                    </tr>
+        
+        </section>
 
-                </table>
+        <!-- RECENT ACTIVITY SECTION -->
+        <section class="cards-grid">
+            <div class="card full-width">
+                <h2 class="card-title">Recent Activity</h2>
+                
+                <div class="activity-grid">
+                    <div class="activity-square">
+                        <div class="activity-title">Homepage Design</div>
+                        <div class="activity-detail">Viewed 2m ago</div>
+                    </div>
 
-            </fieldset>
+                    <div class="activity-square">
+                        <div class="activity-title">Logo Design</div>
+                        <div class="activity-detail">Edited 15m ago</div>
+                    </div>
 
-        </td>
+                    <div class="activity-square">
+                        <div class="activity-title">Setup Database</div>
+                        <div class="activity-detail">Created 2h ago</div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    </tr>
-
-</table>
-
+    </main>
 </body>
+
 </html>
