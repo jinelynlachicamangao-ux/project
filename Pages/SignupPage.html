@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - 3D Project Management</title>
+    <link rel="stylesheet" href="../css/login&signup.css">
+</head>
+
+<body>
+    <main class="content-area">
+        <section class="card" style="max-width: 500px; margin: 40px auto;">
+            <!-- Logo Section -->
+            <header style="text-align: center; margin-bottom: 30px;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">3D</h1>
+                <p style="color: #7f8c8d; font-size: 1rem;">Manage tasks. Track progress. Get things done.</p>
+                <h1 style="font-size: 1.5rem; margin-top: 20px;">Sign Up</h1>
+            </header>
+
+            <!-- Signup Form -->
+            <form action="LoginPage.html" method="post">
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-Privacy">
+                    <label class="privacy-policy">
+                        <span>By clicking Sign In, you agree to our <a href="#">Privacy Policy</a></span>
+                    </label>
+        
+                </div>
+
+                <button type="submit" class="submit">Sign Up</button>
+            </form>
+
+            <!-- Social Login Divider -->
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+
+            <!-- Social Login Buttons -->
+            <div class="social-row">
+                <button type="button" class="social google">Google</button>
+                <button type="button" class="social github">GitHub</button>
+            </div>
+
+            <!-- Register Link -->
+            <p class="register-link">
+                You already have an account?
+                <a href="LoginPage.html">Login here</a>
+            </p>
+        </section>
+    </main>
+</body>
+
+</html>

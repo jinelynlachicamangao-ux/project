@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - 3D Project Management</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+
+<body>
+    <main class="content-area">
+        
+        <!-- HEADER SECTION -->
+        <header class="dashboard-header">
+            <button class="menu-icon" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="dashboard-welcome">
+                <h1>Dashboard</h1>
+                <p>Welcome back, Shane!</p>
+                <small>Here's what's happening with your projects.</small>
+            </div>
+
+            <div class="dashboard-actions">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search projects, tasks...">
+                    <button class="search-btn">🔍</button>
+                </div>
+                <time datetime="2026-08-28">August 28, 2026</time>
+                <div class="profile-menu-container">
+                    <button class="profile-circle" aria-label="Profile Menu">S</button>
+                    <div class="profile-dropdown" id="profileDropdown">
+                        <a href="#profile">My Profile</a>
+                        <a href="#settings">Settings</a>
+                        <a href="#preferences">Preferences</a>
+                        <hr>
+                        <a href="LoginPage.html">Logout</a>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <!-- STATISTICS CARDS -->
+        <section class="stats-grid">
+            <article class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">To Do</div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-number">8</div>
+                <div class="stat-label">In Progress</div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-number">18</div>
+                <div class="stat-label">Done</div>
+            </article>
+
+            <article class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Overdue</div>
+            </article>
+        </section>
+
+        <!-- UPCOMING DEADLINES SECTION -->
+        <section class="cards-grid">
+            <div class="card">
+                <h2 class="card-title">Upcoming Deadlines</h2>
+                
+                <div class="item-card">
+                    <div class="item-name">Login Page</div>
+                    <div class="item-date">May 23, 2026</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">Database Design</div>
+                    <div class="item-date">May 24, 2026</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">User Testing</div>
+                    <div class="item-date">Jun 02, 2026</div>
+                </div>
+            </div>
+
+
+            <!-- MY TASK SECTION -->
+            <div class="card">
+                <h2 class="card-title">My Tasks</h2>
+                
+                <div class="item-card">
+                    <div class="item-name">Maria moved Homepage Design to In Progress</div>
+                    <div class="item-time">2m ago</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">John completed Logo Design</div>
+                    <div class="item-time">1h ago</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">You created a new task: Setup Database</div>
+                    <div class="item-time">2h ago</div>
+                </div>
+            </div>
+
+
+            <!-- PROJECTS SECTION -->
+            <div class="card">
+                <h2 class="card-title">PROJECTS</h2>
+                
+                <div class="item-card">
+                    <div class="item-name">Maria moved Homepage Design to In Progress</div>
+                    <div class="item-time">2m ago</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">John completed Logo Design</div>
+                    <div class="item-time">1h ago</div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-name">You created a new task: Setup Database</div>
+                    <div class="item-time">2h ago</div>
+                </div>
+            </div>
+
+            
+
+        
+        </section>
+
+        <!-- RECENT ACTIVITY SECTION -->
+        <section class="cards-grid">
+            <div class="card full-width">
+                <h2 class="card-title">Recent Activity</h2>
+                
+                <div class="activity-grid">
+                    <div class="activity-square">
+                        <div class="activity-title">Homepage Design</div>
+                        <div class="activity-detail">Viewed 2m ago</div>
+                    </div>
+
+                    <div class="activity-square">
+                        <div class="activity-title">Logo Design</div>
+                        <div class="activity-detail">Edited 15m ago</div>
+                    </div>
+
+                    <div class="activity-square">
+                        <div class="activity-title">Setup Database</div>
+                        <div class="activity-detail">Created 2h ago</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Profile dropdown menu functionality
+        const profileButton = document.querySelector('.profile-circle');
+        const profileDropdown = document.getElementById('profileDropdown');
+
+        // Toggle dropdown when profile button is clicked
+        profileButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            profileDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.profile-menu-container')) {
+                profileDropdown.classList.remove('show');
+            }
+        });
+
+        // Close dropdown when a menu item is clicked
+        profileDropdown.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                profileDropdown.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - 3D Project Management</title>
+    <link rel="stylesheet" href="../css/login&signup.css">
+</head>
+
+<body>
+    <main class="content-area">
+        <section class="card" style="max-width: 500px; margin: 40px auto;">
+            <!-- Logo Section -->
+            <header style="text-align: center; margin-bottom: 30px;">
+                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">3D</h1>
+                <p style="color: #7f8c8d; font-size: 1rem;">Manage tasks. Track progress. Get things done.</p>
+                <h1 style="font-size: 1.5rem; margin-top: 20px;">Login</h1>
+            </header>
+
+            <!-- Login Form -->
+            <form action="index.html" method="post">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" name="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#">Forgot your password?</a>
+                </div>
+
+                <button type="submit" class="submit">Login</button>
+            </form>
+
+            <!-- Social Login Divider -->
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+
+            <!-- Social Login Buttons -->
+            <div class="social-row">
+                <button type="button" class="social google">Google</button>
+                <button type="button" class="social github">GitHub</button>
+            </div>
+
+            <!-- Register Link -->
+            <p class="register-link">
+                Don't have an account?
+                <a href="SignupPage.html">Register here</a>
+            </p>
+        </section>
+    </main>
+</body>
+
+</html>
