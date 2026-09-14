@@ -1,167 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban Board - 3D Project Management</title>
+    <title>Project Kanban</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .project-header h1 {
+            margin: 0;
+            font-size: 24px;
+            flex: 1;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .return-btn, .add-task-btn-new {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .return-btn {
+            background-color: #95a3a6;
+            color: white;
+        }
+
+        .return-btn:hover {
+            background-color: #7a8a8d;
+        }
+
+        .add-task-btn-new {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .add-task-btn-new:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-
 <body>
-    <main class="content-area">
-        <!-- HEADER -->
-        <header class="kanban-header">
-            <div>
-                <h2>Kanban Board</h2>
-                <p>Project: Website Development</p>
-            </div>
+  <div class="project-header">
+    <h1 id="projectTitle">Project Kanban</h1>
+    <div class="header-controls">
+      <button class="return-btn" onclick="returnToProject()">← Return</button>
+      <button class="add-task-btn-new" id="addBtn">+ New task</button>
+    </div>
+  </div>
 
-            <div>
-                <button class="secondary">List View</button>
-                <button class="primary">+ Add Task</button>
-            </div>
-        </header>
+  <div class="app">
+    <main class="board" id="board">
+      <section class="column" data-status="todo">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="dot todo"></span>
+            <h2>To Do</h2>
+          </div>
+          <span class="count" data-count="todo">0</span>
+        </div>
+        <div class="cards" id="todoList"></div>
+      </section>
 
-        <!-- BOARD -->
-        <section class="kanban-board">
-            <!-- TODO COLUMN -->
-            <article class="kanban-column">
-                <h3>To Do (12)</h3>
+      <section class="column" data-status="doing">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="dot doing"></span>
+            <h2>In Progress</h2>
+          </div>
+          <span class="count" data-count="doing">0</span>
+        </div>
+        <div class="cards" id="doingList"></div>
+      </section>
 
-                <div class="task-card">
-                    <div class="task-title">Login Page</div>
-                    <div class="task-description">Design login screen</div>
-                    <div class="task-date">May 25</div>
-                </div>
+      <section class="column" data-status="done">
+        <div class="column-header">
+          <div class="column-title-wrap">
+            <span class="dot done"></span>
+            <h2>Done</h2>
+          </div>
+          <span class="count" data-count="done">0</span>
+        </div>
+        <div class="cards" id="doneList"></div>
+      </section>
+    </main>
+  </div>
 
-                <div class="task-card">
-                    <div class="task-title">Database Setup</div>
-                    <div class="task-description">Create database schema</div>
-                    <div class="task-date">May 26</div>
-                </div>
+  <div class="modal" id="taskModal" aria-hidden="true">
+    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="taskTitle">
+      <h3 id="taskTitle">Create a task</h3>
+      <form id="taskForm">
+        <div class="form-group">
+          <label for="taskTitleInput">Title</label>
+          <input id="taskTitleInput" type="text" maxlength="60" placeholder="Task title" required />
+        </div>
 
-                <div class="task-card">
-                    <div class="task-title">Research</div>
-                    <div class="task-description">Gather requirements</div>
-                    <div class="task-date">May 30</div>
-                </div>
+        <div class="form-group">
+          <label for="taskDescInput">Description</label>
+          <textarea id="taskDescInput" maxlength="220" placeholder="Add details..."></textarea>
+        </div>
 
-                <div class="add-task-btn">+ Add Task</div>
-            </article>
+        <div class="form-group">
+          <label for="taskStatusInput">Status</label>
+          <select id="taskStatusInput">
+            <option value="todo">To Do</option>
+            <option value="doing">In Progress</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
 
-            <!-- IN PROGRESS COLUMN -->
-            <article class="kanban-column">
-                <h3>In Progress (8)</h3>
+        <div class="modal-actions">
+          <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
+          <button type="submit" class="primary-btn">Save task</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-                        <h3>IN PROGRESS (7)</h3>
+  <script>
+    // Get project name from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const projectName = urlParams.get('project') || 'Project';
+    
+    document.getElementById('projectTitle').textContent = `${projectName} - Kanban`;
+    document.title = `${projectName} - Kanban - 3D Project Management`;
 
-                        <fieldset>
+    // Return to project page
+    function returnToProject() {
+      window.history.back();
+    }
 
-                            <legend>Login Page</legend>
+    // Sample task data
+    let tasks = [
+      { id: 1, title: 'Design UI', description: 'Create wireframes', status: 'todo' },
+      { id: 2, title: 'Setup Database', description: 'Configure database schema', status: 'doing' },
+      { id: 3, title: 'Review Code', description: 'Code review and testing', status: 'done' }
+    ];
 
-                            <small>Design login screen</small>
-                            <br><br>
+    // Render tasks
+    function renderTasks() {
+      document.getElementById('todoList').innerHTML = '';
+      document.getElementById('doingList').innerHTML = '';
+      document.getElementById('doneList').innerHTML = '';
 
-                            May 25
+      tasks.forEach(task => {
+        const card = document.createElement('div');
+        card.className = 'task-card';
+        card.innerHTML = `
+          <div class="task-title">${task.title}</div>
+          <div class="task-description">${task.description}</div>
+        `;
+        
+        if (task.status === 'todo') {
+          document.getElementById('todoList').appendChild(card);
+        } else if (task.status === 'doing') {
+          document.getElementById('doingList').appendChild(card);
+        } else if (task.status === 'done') {
+          document.getElementById('doneList').appendChild(card);
+        }
+      });
 
-                        </fieldset>
+      updateCounts();
+    }
 
-                        <br>
+    // Update task counts
+    function updateCounts() {
+      document.querySelector('[data-count="todo"]').textContent = 
+        document.getElementById('todoList').children.length;
+      document.querySelector('[data-count="doing"]').textContent = 
+        document.getElementById('doingList').children.length;
+      document.querySelector('[data-count="done"]').textContent = 
+        document.getElementById('doneList').children.length;
+    }
 
-                        <fieldset>
+    // Modal functionality
+    const modal = document.getElementById('taskModal');
+    const addBtn = document.getElementById('addBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const taskForm = document.getElementById('taskForm');
 
-                            <legend>Database Setup</legend>
+    addBtn.addEventListener('click', () => {
+      modal.removeAttribute('aria-hidden');
+      modal.style.display = 'flex';
+    });
 
-                            <small>Create database schema</small>
-                            <br><br>
+    cancelBtn.addEventListener('click', () => {
+      modal.setAttribute('aria-hidden', 'true');
+      modal.style.display = 'none';
+      taskForm.reset();
+    });
 
-                            May 26
+    taskForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('taskTitleInput').value;
+      const description = document.getElementById('taskDescInput').value;
+      const status = document.getElementById('taskStatusInput').value;
 
-                        </fieldset>
+      tasks.push({
+        id: tasks.length + 1,
+        title,
+        description,
+        status
+      });
 
-                        <br>
+      renderTasks();
+      modal.setAttribute('aria-hidden', 'true');
+      modal.style.display = 'none';
+      taskForm.reset();
+    });
 
-                        <fieldset>
-
-                            <legend>Research</legend>
-
-                            <small>Gather requirements</small>
-                            <br><br>
-
-                            May 30
-
-                        </fieldset>
-
-                        <br>
-
-                        <center>
-                            + Add Task
-                        </center>
-
-                    </td>
-
-
-                    <!-- DONE -->
-
-                    <td width="33%" valign="top">
-
-                        <h3>DONE (18)</h3>
-
-                        <fieldset>
-
-                            <legend>Login Page</legend>
-
-                            <small>Design login screen</small>
-                            <br><br>
-
-                            May 25
-
-                        </fieldset>
-
-                        <br>
-
-                        <fieldset>
-
-                            <legend>Database Setup</legend>
-
-                            <small>Create database schema</small>
-                            <br><br>
-
-                            May 26
-
-                        </fieldset>
-
-                        <br>
-
-                        <fieldset>
-
-                            <legend>Research</legend>
-
-                            <small>Gather requirements</small>
-                            <br><br>
-
-                            May 30
-
-                        </fieldset>
-
-                        <br>
-
-                        <center>
-                            + Add Task
-                        </center>
-
-                    </td>
-
-                </tr>
-
-            </table>
-
-        </td>
-
-    </tr>
-
-</table>
-
+    // Initialize
+    renderTasks();
+  </script>
 </body>
 </html>
