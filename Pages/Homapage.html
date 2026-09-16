@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D - Drag, Drop, Done</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            background-color: #08082b;
+            background-image: radial-gradient(circle at 15% 10%, #1f1f79, transparent 45%),
+                               radial-gradient(circle at 85% 90%, #0066ff, transparent 50%);
+            background-attachment: fixed;
+            color: #1c2340;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #0066ff, #00c2d1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 26px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #0047ab, #00c2d1);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            opacity: 0.92;
+        }
+
+        .btn-outline {
+            background: #ffffff;
+            border: 1.5px solid #dfe4f5;
+            color: #1c2340;
+        }
+
+        .btn-outline:hover {
+            border-color: #3b6bff;
+            color: #3b6bff;
+        }
+
+        /* ============ NAVBAR ============ */
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 32px;
+        }
+
+        .nav-logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .nav-tagline {
+            font-size: 11px;
+            color: #FFFFFF;
+            margin-top: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav-links a:not(.btn) {
+            font-size: 14px;
+            font-weight: 500;
+            color: #4b567f;
+        }
+
+        .nav-links a:not(.btn):hover {
+            color: #12173a;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* ============ HERO ============ */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 32px 90px;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-copy {
+            flex: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1px solid #dfe4f5;
+            border-radius: 999px;
+            padding: 7px 16px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: #4b567f;
+            margin-bottom: 22px;
+            box-shadow: 0 2px 6px rgba(30, 45, 110, 0.06);
+        }
+
+        .hero-badge .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #00c2d1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #FFFFFF;
+            max-width: 480px;
+            margin-bottom: 32px;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 36px;
+        }
+
+        .btn-large {
+            padding: 15px 30px;
+            font-size: 16px;
+        }
+        .logo {
+    max-width: 70%;
+    height: auto;
+    max-height: 130px;
+    display: block;
+    margin: 0;
+}
+
+        .hero-stats {
+            display: flex;
+            gap: 36px;
+        }
+
+        .hero-stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFFFf;
+        }
+
+        .hero-stat-label {
+            font-size: 12.5px;
+            color: #FFFFFF;
+        }
+
+        /* ============ HERO VISUAL (mock board) ============ */
+        .hero-visual {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #e5e9f7;
+            border-radius: 18px;
+            padding: 22px;
+            box-shadow: 0 20px 50px rgba(30, 45, 110, 0.1);
+        }
+
+        .mock-col {
+            background: #f6f8fd;
+            border: 1px solid #e9ecf9;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+        }
+
+        .mock-col-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #7581ac;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 10px;
+        }
+
+        .mock-card {
+            background: #ffffff;
+            border: 1px solid #e9ecf9;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 13px;
+            color: #2b3357;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mock-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .mock-tag {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        .tag-blue { background: #e8edfb; color: #3b6bff; }
+        .tag-teal { background: #e3f9fb; color: #00a8b5; }
+        .tag-red  { background: #fdeaea; color: #e5484d; }
+
+        /* ============ FEATURES ============ */
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 32px 90px;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 560px;
+            margin: 0 auto 48px;
+        }
+
+        .section-heading h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #12173a;
+            margin-bottom: 12px;
+        }
+
+        .section-heading p {
+            font-size: 15px;
+            color: #4b567f;
+            line-height: 1.6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature-card {
+            background: #ffffff;
+            border: 1px solid #e5e9f7;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 4px 14px rgba(30, 45, 110, 0.05);
+        }
+
+        .feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3b6bff, #00c2d1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 18px;
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #12173a;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 13.5px;
+            color: #7581ac;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* ============ CTA BAND ============ */
+        .cta-band {
+            max-width: 1200px;
+            margin: 0 auto 90px;
+            padding: 0 32px;
+        }
+
+        .cta-inner {
+            background: linear-gradient(160deg, #1a1f6e 0%, #0a0e30 100%);
+            border-radius: 20px;
+            padding: 56px 40px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .cta-inner h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cta-inner p {
+            font-size: 14.5px;
+            color: #9fb3d9;
+            margin-bottom: 28px;
+        }
+
+        /* ============ FOOTER ============ */
+        footer {
+            border-top: 1px solid #e5e9f7;
+            padding: 28px 32px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-inner p {
+            font-size: 13px;
+            color: #8891b8;
+            margin: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 22px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: #7581ac;
+        }
+
+        .footer-links a:hover {
+            color: #12173a;
+        }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 900px) {
+            .nav-links a:not(.btn) {
+                display: none;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 34px;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-large {
+                width: 100%;
+            }
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+        }
+
+        .login-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(8, 8, 43, 0.75);
+        }
+
+        .login-modal.open {
+            display: flex;
+        }
+
+        .login-modal-content {
+            position: relative;
+            width: min(100%, 520px);
+            height: min(720px, 90vh);
+            overflow: hidden;
+            border-radius: 16px;
+            background: #2f4bbd;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .login-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .login-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            z-index: 1;
+            border: 0;
+            background: transparent;
+            color: #1c2340;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div>
+            <div class="nav-logo gradient-text"><img src="../logo&icons/logo3d.png" alt="Logo" class="logo"></div>
+            <div class="nav-tagline">Drag, Drop, Done</div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How it works</a>
+            <a href="#pricing">Pricing</a>
+        </div>
+
+        <div class="nav-actions">
+            <a href="LoginPage.html" class="btn btn-outline" id="login-link">Log In</a>
+            <a href="SignupPage.html" class="btn btn-primary">Sign Up Free</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-copy">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Built for fast-moving teams
+            </div>
+            <h1>Organize your work.<br><span class="gradient-text">Ship it faster.</span></h1>
+            <p>3D brings your tasks, projects, and deadlines into one clean board. Drag it, drop it, get it done — no clutter, no chaos.</p>
+
+            <div class="hero-actions">
+                <a href="SignupPage.html" class="btn btn-primary btn-large">Get Started Free</a>
+                <a href="#how-it-works" class="btn btn-outline btn-large">See How It Works</a>
+            </div>
+
+            <div class="hero-stats">
+                <div>
+                    <div class="hero-stat-number">12k+</div>
+                    <div class="hero-stat-label">Tasks completed</div>
+                </div>
+                <div>
+                    <div class="hero-stat-number">3,200+</div>
+                    <div class="hero-stat-label">Active teams</div>
+                </div>
+                <div>
+                    <div class="hero-stat-number">4.8/5</div>
+                    <div class="hero-stat-label">Average rating</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="mock-col">
+                <div class="mock-col-title">To Do</div>
+                <div class="mock-card">
+                    Login Page
+                    <span class="mock-tag tag-blue">UI</span>
+                </div>
+                <div class="mock-card">
+                    Database Design
+                    <span class="mock-tag tag-red">Urgent</span>
+                </div>
+            </div>
+            <div class="mock-col">
+                <div class="mock-col-title">In Progress</div>
+                <div class="mock-card">
+                    Homepage Design
+                    <span class="mock-tag tag-teal">Design</span>
+                </div>
+            </div>
+            <div class="mock-col" style="margin-bottom: 0;">
+                <div class="mock-col-title">Done</div>
+                <div class="mock-card">
+                    Logo Design
+                    <span class="mock-tag tag-blue">Brand</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features" id="features">
+        <div class="section-heading">
+            <h2>Everything your team needs</h2>
+            <p>From quick to-dos to full project timelines, 3D keeps everything visible and in sync.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-table-columns"></i></div>
+                <h3>Drag & Drop Boards</h3>
+                <p>Move tasks across To Do, In Progress, and Done with a single drag. No forms, no friction.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
+                <h3>Deadlines & Calendar</h3>
+                <p>See every upcoming deadline at a glance, and never miss a launch date again.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Real-Time Analytics</h3>
+                <p>Track team progress with live stats on completed, overdue, and in-progress work.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                <h3>Team Collaboration</h3>
+                <p>Assign tasks, leave updates, and keep everyone aligned inside one shared workspace.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-bell"></i></div>
+                <h3>Smart Activity Feed</h3>
+                <p>Know exactly who moved what, and when — recent activity is always one glance away.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Built for Speed</h3>
+                <p>A fast, lightweight interface that stays out of your way so your team can focus on work.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="login-modal" id="login-modal" role="dialog" aria-modal="true" aria-label="Log in">
+        <div class="login-modal-content">
+            <button class="login-modal-close" id="login-modal-close" aria-label="Close login popup">&times;</button>
+            <iframe src="LoginPage.html" title="Log in"></iframe>
+        </div>
+    </div>
+
+    <script>
+        const loginLink = document.getElementById('login-link');
+        const loginModal = document.getElementById('login-modal');
+        const loginFrame = loginModal.querySelector('iframe');
+        const closeLoginModal = () => loginModal.classList.remove('open');
+
+        const continueAfterLogin = (destination) => {
+            closeLoginModal();
+            if (destination) window.location.href = destination;
+        };
+
+        loginLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            loginModal.classList.add('open');
+        });
+
+        document.getElementById('login-modal-close').addEventListener('click', closeLoginModal);
+        loginModal.addEventListener('click', (event) => {
+            if (event.target === loginModal) closeLoginModal();
+        });
+
+        // LoginPage.html should send this message after a successful login.
+        window.addEventListener('message', (event) => {
+            if (event.source !== loginFrame.contentWindow) return;
+            if (event.data?.type !== 'login-complete') return;
+
+            continueAfterLogin(event.data.destination || event.data.redirectUrl);
+        });
+
+        // Also continue if the login page redirects the iframe after login.
+        loginFrame.addEventListener('load', () => {
+            try {
+                const destination = loginFrame.contentWindow.location.href;
+                if (loginModal.classList.contains('open') &&
+                    !destination.endsWith('/LoginPage.html') &&
+                    !destination.endsWith('LoginPage.html')) {
+                    continueAfterLogin(destination);
+                }
+            } catch (error) {
+                // Ignore cross-origin iframe navigation.
+            }
+        });
+    </script>
+
+    <!-- CTA BAND -->
+    <section class="cta-band">
+        <div class="cta-inner">
+            <h2>Ready to get organized?</h2>
+            <p>Join thousands of teams already using 3D to plan, track, and ship their work.</p>
+            <a href="SignupPage.html" class="btn btn-primary btn-large">Create Your Free Account</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <p>&copy; 2026 3D Project Management. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
