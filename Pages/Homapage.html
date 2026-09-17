@@ -110,11 +110,11 @@
         .nav-links a:not(.btn) {
             font-size: 14px;
             font-weight: 500;
-            color: #4b567f;
+            color: #ffffff;
         }
 
         .nav-links a:not(.btn):hover {
-            color: #12173a;
+            color: rgba(0, 42, 255, 0.533);
         }
 
         .nav-actions {
@@ -282,13 +282,13 @@
         .section-heading h2 {
             font-size: 32px;
             font-weight: 700;
-            color: #12173a;
+            color: #FFFFFF;
             margin-bottom: 12px;
         }
 
         .section-heading p {
             font-size: 15px;
-            color: #4b567f;
+            color: #FFFFFF;
             line-height: 1.6;
         }
 
@@ -480,6 +480,51 @@
             line-height: 1;
             cursor: pointer;
         }
+
+        .signup-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: rgba(8, 8, 43, 0.75);
+        }
+
+        .signup-modal.open {
+            display: flex;
+        }
+
+        .signup-modal-content {
+            position: relative;
+            width: min(100%, 520px);
+            height: min(720px, 90vh);
+            overflow: hidden;
+            border-radius: 16px;
+            background: #2f4bbd;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        .signup-modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .signup-modal-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            z-index: 1;
+            border: 0;
+            background: transparent;
+            color: #1c2340;
+            font-size: 28px;
+            line-height: 1;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 
@@ -488,7 +533,7 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <div>
-            <div class="nav-logo gradient-text"><img src="../logo&icons/logo3d.png" alt="Logo" class="logo"></div>
+            <div class="nav-logo gradient-text"><img src="../logo&icons/logo3dnew.png" alt="Logo" class="logo"></div>
             <div class="nav-tagline">Drag, Drop, Done</div>
         </div>
 
@@ -500,7 +545,7 @@
 
         <div class="nav-actions">
             <a href="LoginPage.html" class="btn btn-outline" id="login-link">Log In</a>
-            <a href="SignupPage.html" class="btn btn-primary">Sign Up Free</a>
+            <a href="SignupPage.html" class="btn btn-primary" id="signup-link">Sign Up Free</a>
         </div>
     </nav>
 
@@ -617,6 +662,13 @@
         </div>
     </div>
 
+    <div class="signup-modal" id="signup-modal" role="dialog" aria-modal="true" aria-label="Sign up">
+        <div class="signup-modal-content">
+            <button class="signup-modal-close" id="signup-modal-close" aria-label="Close signup popup">&times;</button>
+            <iframe src="SignupPage.html" title="Sign up"></iframe>
+        </div>
+    </div>
+
     <script>
         const loginLink = document.getElementById('login-link');
         const loginModal = document.getElementById('login-modal');
@@ -631,6 +683,7 @@
         loginLink.addEventListener('click', (event) => {
             event.preventDefault();
             loginModal.classList.add('open');
+            loginFrame.src = 'LoginPage.html';
         });
 
         document.getElementById('login-modal-close').addEventListener('click', closeLoginModal);
@@ -654,6 +707,49 @@
                     !destination.endsWith('/LoginPage.html') &&
                     !destination.endsWith('LoginPage.html')) {
                     continueAfterLogin(destination);
+                }
+            } catch (error) {
+                // Ignore cross-origin iframe navigation.
+            }
+        });
+
+        const signupLink = document.getElementById('signup-link');
+        const signupModal = document.getElementById('signup-modal');
+        const signupFrame = signupModal.querySelector('iframe');
+        const closeSignupModal = () => signupModal.classList.remove('open');
+
+        const continueAfterSignup = (destination) => {
+            closeSignupModal();
+            if (destination) window.location.href = destination;
+        };
+
+        signupLink.addEventListener('click', (event) => {
+            event.preventDefault();
+            signupModal.classList.add('open');
+            signupFrame.src = 'SignupPage.html';
+        });
+
+        document.getElementById('signup-modal-close').addEventListener('click', closeSignupModal);
+        signupModal.addEventListener('click', (event) => {
+            if (event.target === signupModal) closeSignupModal();
+        });
+
+        // SignupPage.html should send this message after a successful signup.
+        window.addEventListener('message', (event) => {
+            if (event.source !== signupFrame.contentWindow) return;
+            if (!event.data || typeof event.data !== 'object' || event.data.type !== 'signup-complete') return;
+
+            continueAfterSignup(event.data.destination || event.data.redirectUrl);
+        });
+
+        // Also continue if the signup page redirects the iframe after signup.
+        signupFrame.addEventListener('load', () => {
+            try {
+                const destination = signupFrame.contentWindow.location.href;
+                if (signupModal.classList.contains('open') &&
+                    !destination.endsWith('/SignupPage.html') &&
+                    !destination.endsWith('SignupPage.html')) {
+                    continueAfterSignup(destination);
                 }
             } catch (error) {
                 // Ignore cross-origin iframe navigation.
@@ -683,5 +779,4 @@
     </footer>
 
 </body>
-
 </html>
