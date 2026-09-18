@@ -1,64 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - 3D Project Management</title>
-    <link rel="stylesheet" href="../css/login&signup.css">
+    <title>Log In</title>
+    <link rel="stylesheet" type="text/css" href="../css/login-signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
-    <main class="content-area">
-        <section class="card" style="max-width: 500px; margin: 40px auto;">
-            <!-- Logo Section -->
-            <header style="text-align: center; margin-bottom: 30px;">
-                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">3D</h1>
-                <p style="color: #7f8c8d; font-size: 1rem;">Manage tasks. Track progress. Get things done.</p>
-                <h1 style="font-size: 1.5rem; margin-top: 20px;">Login</h1>
-            </header>
+    <div class="background-blur"></div>
 
-            <!-- Login Form -->
-            <form action="index.html" method="post">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
+    <div class="login-box">
+        <div class="login-header">
+            <img src="../logo&icons/logo3dnew.png" alt="Logo" class="logo">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+        </div>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
+        <h1>Welcome!</h1>
+        <h3>Login your account</h3>
 
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" name="remember">
-                        <span>Remember me</span>
-                    </label>
-                    <a href="#">Forgot your password?</a>
-                </div>
+        <form action="index.html" method="post">
+            <input type="text" placeholder="Enter your email" required>
 
-                <button type="submit" class="submit">Login</button>
-            </form>
-
-            <!-- Social Login Divider -->
-            <div class="divider">
-                <span>or continue with</span>
+            <div class="input-with-icon">
+                <input type="password" placeholder="Enter your password" required>
+                <span class="icon-eye"><i class="fa-regular fa-eye"></i></span>
             </div>
+            
+            <p class="hint-text">Use 8 or more letters, numbers and symbols</p>
 
-            <!-- Social Login Buttons -->
-            <div class="social-row">
-                <button type="button" class="social google">Google</button>
-                <button type="button" class="social github">GitHub</button>
-            </div>
+            <input type="submit" value="Continue">
+        </form>
 
-            <!-- Register Link -->
-            <p class="register-link">
-                Don't have an account?
-                <a href="SignupPage.html">Register here</a>
-            </p>
-        </section>
-    </main>
+        <p class="divider">OR</p>
+
+        <div class="social-buttons">
+            <button><img src="../logo&icons/devicon--google.svg" alt="Google">Continue with Google</button>
+            <button><img src="../logo&icons/logos--facebook.svg" alt="Facebook">Continue with Facebook</button>
+        </div>
+
+        <p class="return">You dont have an account? <a href="SignupPage.html">Signup</a></p>
+
+        <div class="fine-print">
+        
+          <p class>
+             By continuing, you agree to our
+             <a href="#">Terms of Service</a> and acknowledge you've read our
+             <a href="#">Privacy Policy</a>.
+          </p>
+        </div>
+
+    </div>
+    <script>
+       function togglePassword() {
+            const pwd = document.getElementById('password');
+            const icon = document.querySelector('.icon-eye i');
+            const isPassword = pwd.type === 'password';
+            pwd.type = isPassword ? 'text' : 'password';
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        }
+ 
+        function closeModal() {
+            window.parent.postMessage({ type: 'close-modal' }, '*');
+        }
+    </script>
 </body>
-
 </html>

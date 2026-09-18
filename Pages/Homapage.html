@@ -437,6 +437,9 @@
             }
         }
 
+
+
+        /* ============ MODAL POPUPS ============ */
         .login-modal {
             display: none;
             position: fixed;
@@ -454,31 +457,18 @@
 
         .login-modal-content {
             position: relative;
-            width: min(100%, 520px);
-            height: min(720px, 90vh);
+            width: min(100%, 560px);
+            height: min(780px, 90vh);
             overflow: hidden;
             border-radius: 16px;
-            background: #2f4bbd;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            background: transparent;
+            box-shadow: none;
         }
 
         .login-modal-content iframe {
             width: 100%;
             height: 100%;
             border: 0;
-        }
-
-        .login-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 14px;
-            z-index: 1;
-            border: 0;
-            background: transparent;
-            color: #1c2340;
-            font-size: 28px;
-            line-height: 1;
-            cursor: pointer;
         }
 
         .signup-modal {
@@ -498,31 +488,18 @@
 
         .signup-modal-content {
             position: relative;
-            width: min(100%, 520px);
-            height: min(720px, 90vh);
+            width: min(100%, 510px);
+            height: min(840px, 90vh);
             overflow: hidden;
             border-radius: 16px;
-            background: #2f4bbd;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            background: transparent;
+            box-shadow: none;
         }
 
         .signup-modal-content iframe {
             width: 100%;
             height: 100%;
             border: 0;
-        }
-
-        .signup-modal-close {
-            position: absolute;
-            top: 10px;
-            right: 14px;
-            z-index: 1;
-            border: 0;
-            background: transparent;
-            color: #1c2340;
-            font-size: 28px;
-            line-height: 1;
-            cursor: pointer;
         }
 
     </style>
@@ -556,7 +533,7 @@
                 <span class="dot"></span>
                 Built for fast-moving teams
             </div>
-            <h1>Organize your work.<br><span class="gradient-text">Ship it faster.</span></h1>
+            <h1>Organize your work.<br><span class="gradient-text">Do it faster.</span></h1>
             <p>3D brings your tasks, projects, and deadlines into one clean board. Drag it, drop it, get it done — no clutter, no chaos.</p>
 
             <div class="hero-actions">
@@ -566,15 +543,15 @@
 
             <div class="hero-stats">
                 <div>
-                    <div class="hero-stat-number">12k+</div>
+                    <div class="hero-stat-number">0+</div>
                     <div class="hero-stat-label">Tasks completed</div>
                 </div>
                 <div>
-                    <div class="hero-stat-number">3,200+</div>
+                    <div class="hero-stat-number">1+</div>
                     <div class="hero-stat-label">Active teams</div>
                 </div>
                 <div>
-                    <div class="hero-stat-number">4.8/5</div>
+                    <div class="hero-stat-number">5/5</div>
                     <div class="hero-stat-label">Average rating</div>
                 </div>
             </div>
@@ -657,14 +634,12 @@
 
     <div class="login-modal" id="login-modal" role="dialog" aria-modal="true" aria-label="Log in">
         <div class="login-modal-content">
-            <button class="login-modal-close" id="login-modal-close" aria-label="Close login popup">&times;</button>
             <iframe src="LoginPage.html" title="Log in"></iframe>
         </div>
     </div>
 
     <div class="signup-modal" id="signup-modal" role="dialog" aria-modal="true" aria-label="Sign up">
         <div class="signup-modal-content">
-            <button class="signup-modal-close" id="signup-modal-close" aria-label="Close signup popup">&times;</button>
             <iframe src="SignupPage.html" title="Sign up"></iframe>
         </div>
     </div>
@@ -686,7 +661,6 @@
             loginFrame.src = 'LoginPage.html';
         });
 
-        document.getElementById('login-modal-close').addEventListener('click', closeLoginModal);
         loginModal.addEventListener('click', (event) => {
             if (event.target === loginModal) closeLoginModal();
         });
@@ -729,7 +703,6 @@
             signupFrame.src = 'SignupPage.html';
         });
 
-        document.getElementById('signup-modal-close').addEventListener('click', closeSignupModal);
         signupModal.addEventListener('click', (event) => {
             if (event.target === signupModal) closeSignupModal();
         });
@@ -754,6 +727,13 @@
             } catch (error) {
                 // Ignore cross-origin iframe navigation.
             }
+        });
+
+        // The X inside LoginPage.html / SignupPage.html sends this message to close its modal.
+        window.addEventListener('message', (event) => {
+            if (event.data?.type !== 'close-modal') return;
+            if (event.source === loginFrame.contentWindow) closeLoginModal();
+            if (event.source === signupFrame.contentWindow) closeSignupModal();
         });
     </script>
 

@@ -4,70 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - 3D Project Management</title>
-    <link rel="stylesheet" href="../css/login&signup.css">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../css/login-signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 
 <body>
-    <main class="content-area">
-        <section class="card" style="max-width: 500px; margin: 40px auto;">
-            <!-- Logo Section -->
-            <header style="text-align: center; margin-bottom: 30px;">
-                <h1 style="font-size: 2.5rem; margin-bottom: 10px;">3D</h1>
-                <p style="color: #7f8c8d; font-size: 1rem;">Manage tasks. Track progress. Get things done.</p>
-                <h1 style="font-size: 1.5rem; margin-top: 20px;">Sign Up</h1>
-            </header>
+    <div class="signup-box">
 
-            <!-- Signup Form -->
-            <form action="LoginPage.html" method="post">
-                <div class="form-group">
-                    <label for="firstname">First Name</label>
-                    <input type="text" id="firstname" name="firstname" placeholder="Enter your first name" required>
-                </div>
+        <!-- Header: logo + close button -->
+        <div class="signup-header">
+            <img src="../logo&icons/logo3dnew.png" alt="Logo" class="logo">
+           <span class="close-btn" onclick="parent.document.getElementById('signup-modal').classList.remove('open')">&times;</span>
 
-                <div class="form-group">
-                    <label for="lastname">Last Name</label>
-                    <input type="text" id="lastname" name="lastname" placeholder="Enter your last name" required>
-                </div>
+        </div>
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Enter your email" required>
-                </div>
+        <h1>Create Account</h1>
+        <h3>Manage tasks. Track progress. Get things done.</h3>
 
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                </div>
+        <!-- Signup Form -->
+        <form action="LoginPage.html" method="post">
 
-                <div class="form-Privacy">
-                    <label class="privacy-policy">
-                        <span>By clicking Sign In, you agree to our <a href="#">Privacy Policy</a></span>
-                    </label>
-        
-                </div>
+            <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
 
-                <button type="submit" class="submit">Sign Up</button>
-            </form>
+            <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
 
-            <!-- Social Login Divider -->
-            <div class="divider">
-                <span>or continue with</span>
+            <input type="text" id="email" name="email" placeholder="Email" required>
+
+            <input type="text" placeholder="Enter your birthday (mm/dd/yyyy)">
+
+            <div class="input-with-icon">
+                <input type="password" placeholder="Enter your password" required>
+                <span class="icon-eye"><i class="fa-regular fa-eye"></i></span>
             </div>
+            <p class="hint-text">Must be at least 8 characters</p>
 
-            <!-- Social Login Buttons -->
-            <div class="social-row">
-                <button type="button" class="social google">Google</button>
-                <button type="button" class="social github">GitHub</button>
-            </div>
-
-            <!-- Register Link -->
-            <p class="register-link">
-                You already have an account?
-                <a href="LoginPage.html">Login here</a>
+            <p>
+                By clicking Sign Up, you agree to our <a href="#">Privacy Policy</a>
             </p>
-        </section>
-    </main>
+
+            <input type="submit" value="Sign Up">
+        </form>
+
+        <!-- Social Login Divider -->
+        <div class="divider">
+            <span>or continue with</span>
+        </div>
+
+        <!-- Social Login Buttons -->
+        <div class="social-buttons">
+            <button type="button">
+                <img src="../logo&icons/devicon--google.svg" alt="Google">
+                Google
+            </button>
+            <button type="button">
+                <img src="../logo&icons/akar-icons--github-fill.svg" alt="Facebook">
+                GitHub
+            </button>
+        </div>
+
+        <!-- Login Link -->
+        <p>
+            You already have an account?
+            <a href="LoginPage.html">Login here</a>
+        </p>
+
+        <p class="fine-print">
+            By continuing, you agree to our <a href="#">Terms of Service</a>.
+        </p>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const pwd = document.getElementById('password');
+            pwd.type = pwd.type === 'password' ? 'text' : 'password';
+        }
+    </script>
 </body>
 
 </html>

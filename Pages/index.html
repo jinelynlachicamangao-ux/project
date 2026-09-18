@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D - Project Management</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
         <!-- For sidebar Nav (Donnot touch this just the css)  -->
         <aside class="sidebar">
             <div class="sidebar-header">
-                <h1>3D</h1>
+                <h1><img src="../logo&icons/logo3d.png" alt="Logo" class="logo"></h1>
                 <p>Drag, Drop, Done</p>
             </div>
 
@@ -57,11 +57,30 @@
             <div class="content-area">
                 <iframe
                 src="dashboard.html"
-                name="content"
-                width="100%"
-                height="700"
-                frameborder="0">
+        name="content"
+        id="contentFrame"
+        scrolling="no"
+        frameborder="0">
             </iframe>
+            </div>
+            <script>
+    const iframe = document.getElementById('contentFrame');
+
+    function resizeIframe() {
+        try {
+            iframe.style.height =
+                iframe.contentWindow.document.documentElement.scrollHeight + 'px';
+        } catch (e) {
+            console.warn('Could not resize iframe:', e);
+        }
+    }
+
+    iframe.addEventListener('load', () => {
+        resizeIframe();
+        // in case content loads/changes images etc. after load
+        iframe.contentWindow.addEventListener('resize', resizeIframe);
+    });
+</script>
 
         </td>
 

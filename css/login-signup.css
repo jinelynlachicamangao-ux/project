@@ -1,0 +1,263 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial;
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* ==========================================================
+   Shared box styling — applies to both the Login and Signup
+   cards (.login-box, .signup-box)
+   ========================================================== */
+
+.signup-box,
+.login-box {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(160deg, #1a1f6e 0%, #0a0e30 100%);
+    width: 100%;
+    max-width: 480px;
+    padding: 45px;
+    padding-bottom: 5px;
+    padding-top: 1px;
+    border-radius: 16px;
+    text-align: left;
+    box-sizing: border-box;
+    box-shadow: none;
+    margin: 20px;
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    color: #9fb3d9;
+}
+
+.signup-header,
+.login-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.logo {
+    max-width: 50%;
+    height: auto;
+    max-height: 90px;
+    display: block;
+    margin: 0;
+}
+
+.close-btn {
+    all: unset;
+    cursor: pointer;
+    font-size: 26px;
+    line-height: 1;
+    color: #9fb3d9;
+}
+
+.close-btn:hover {
+    color: #ffffff;
+}
+
+.signup-box h1,
+.login-box h1 {
+    font-size: 28px;
+    margin: 0 0 5px;
+    color: #ffffff;
+}
+
+.signup-box h3,
+.login-box h3 {
+    font-weight: normal;
+    font-size: 15px;
+    margin: 0 0 20px;
+    color: #9fb3d9;
+}
+
+.signup-box input[type="text"],
+.signup-box input[type="email"],
+.signup-box input[type="date"],
+.signup-box input[type="password"],
+.login-box input[type="text"],
+.login-box input[type="email"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border: 1.5px solid #3d4a8a;
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #141b42;
+    color: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.signup-box input[type="text"]:focus,
+.signup-box input[type="email"]:focus,
+.signup-box input[type="date"]:focus,
+.signup-box input[type="password"]:focus,
+.login-box input[type="text"]:focus,
+.login-box input[type="email"]:focus,
+.login-box input[type="password"]:focus {
+    outline: none;
+    border-color: #00e5ff;
+    background-color: #182050;
+}
+
+.signup-box input::placeholder,
+.login-box input::placeholder {
+    color: #7c8fb8;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-icon input {
+    padding-right: 40px;
+}
+
+.signup-box .input-with-icon input[type="password"],
+.login-box .input-with-icon input[type="password"] {
+    margin-bottom: 0;
+    padding-right: 40px;
+}
+
+.icon-eye {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9fb3d9;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.icon-eye:hover {
+    color: #ffffff;
+}
+
+.hint-text {
+    margin: 4px 0 10px;
+    font-size: 10px;
+    color: #7c8fb8;
+}
+
+.signup-box input[type="submit"],
+.login-box input[type="submit"] {
+    width: 100%;
+    padding: 13px;
+    background: linear-gradient(90deg, #0047ab, #00c2d1);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    transition: opacity 0.2s ease;
+}
+
+.signup-box input[type="submit"]:hover,
+.login-box input[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+.signup-box .divider,
+.login-box .divider {
+    text-align: center;
+    color: #9fb3d9;
+    margin: 5px 0 15px;
+}
+
+.social-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.social-buttons button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    background-color: #0d1230;
+    border: 1.5px solid #2a3566;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-buttons button:hover {
+    background-color: #141b42;
+    border-color: #00e5ff;
+}
+
+.social-buttons img {
+    width: 18px;
+    height: 18px;
+}
+
+.signup-box p,
+.login-box p {
+    text-align: left;
+    font-size: 13px;
+    color: #9fb3d9;
+    margin: 0 0 10px;
+    margin-top: 1ch;
+}
+
+.signup-box p a,
+.login-box p a {
+    color: #00e5ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-box p a:hover,
+.login-box p a:hover {
+    text-decoration: underline;
+}
+
+.fine-print p {
+    font-size: 13px;
+    color: #7c8fb8;
+    margin-top: 15px;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.fine-print a {
+    color: #7c8fb8;
+    text-decoration: underline;
+    font-weight: normal;
+}
+.close-btn {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    -webkit-appearance: none;
+    appearance: none;
+}
