@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D - Project Management</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .folder-cell {
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
+        .folder-cell:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.05);
+        }
+
+        .folder-cell:active {
+            transform: scale(0.98);
+        }
+    </style>
 </head>
 <body>
 
@@ -20,17 +34,17 @@
             Create Folder
         </td>
 
-        <td width="120" height="100" align="center">
+        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 1')">
             📁<br>
             <span contenteditable="true">Project 1</span>
         </td>
 
-        <td width="120" height="100" align="center">
+        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 2')">
             📁<br>
             <span contenteditable="true">Project 2</span>
         </td>
 
-        <td width="120" height="100" align="center">
+        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 3')">
             📁<br>
             <span contenteditable="true">Project 3</span>
         </td>
@@ -39,22 +53,22 @@
 
     <tr>
 
-        <td width="120" height="100" align="center">
+        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 4')">
             📁<br>
             <span contenteditable="true">Project 4</span>
         </td>
 
-        <td width="120" height="100" align="center">
+        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 5')">
             📁<br>
             <span contenteditable="true">Project 5</span>
         </td>
 
-        <td width="120" height="100" align="center">
+        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 6')">
             📁<br>
             <span contenteditable="true">Project 6</span>
         </td>
 
-        <td width="120" height="100" align="center">
+        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 7')">
             📁<br>
             <span contenteditable="true">Project 7</span>
         </td>
@@ -62,6 +76,11 @@
     </tr>
 </table>
 
+<script>
+    function openProjectKanban(projectName) {
+        window.location.href = `Kaban.html?project=${encodeURIComponent(projectName)}`;
+    }
+</script>
 
 </body>
 </html>
