@@ -4,228 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Kanban</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: #f5f5f5;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 20px;
-        }
 
-        .project-header h1 {
-            margin: 0;
-            font-size: 24px;
-            flex: 1;
-        }
-
-        .header-controls {
-            display: flex;
-            gap: 10px;
-        }
-
-        .return-btn, .add-task-btn-new {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
-
-        .return-btn {
-            background-color: #95a3a6;
-            color: white;
-        }
-
-        .return-btn:hover {
-            background-color: #7a8a8d;
-        }
-
-        .add-task-btn-new {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        .add-task-btn-new:hover {
-            background-color: #45a049;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/kanban.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
-  <div class="project-header">
-    <h1 id="projectTitle">Project Kanban</h1>
-    <div class="header-controls">
-      <button class="return-btn" onclick="returnToProject()">← Return</button>
-      <button class="add-task-btn-new" id="addBtn">+ New task</button>
+
+    <div class="page-layout">
+
+        <div id="sidebar-container"></div>
+
+        <div class="app">
+
+            <header class="header">
+
+                <div class="header-left">
+                    <button class="return-btn" id="returnBtn" type="button" aria-label="Return to projects">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+
+                    <div>
+                        <h1 class="title" id="projectTitle">Project Kanban</h1>
+                        <p class="subtitle">Board view for this project</p>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+
+                    <button class="invite-btn" id="inviteBtn" type="button">
+                        <i class="fa-solid fa-user-plus"></i>
+                        Invite
+                    </button>
+
+                    <button class="add-btn" id="addBtn" type="button">
+                        <i class="fa-solid fa-plus"></i>
+                        New Task
+                    </button>
+
+                </div>
+
+            </header>
+
+            <div class="members-row" id="membersRow"></div>
+
+            <main class="board" id="board">
+
+                <section class="column" data-status="todo">
+                    <div class="column-header">
+                        <div class="column-title-wrap">
+                            <span class="dot todo"></span>
+                            <h2>To Do</h2>
+                        </div>
+                        <span class="count" data-count="todo">0</span>
+                    </div>
+                    <div class="cards" id="todoList"></div>
+                </section>
+
+                <section class="column" data-status="doing">
+                    <div class="column-header">
+                        <div class="column-title-wrap">
+                            <span class="dot doing"></span>
+                            <h2>In Progress</h2>
+                        </div>
+                        <span class="count" data-count="doing">0</span>
+                    </div>
+                    <div class="cards" id="doingList"></div>
+                </section>
+
+                <section class="column" data-status="done">
+                    <div class="column-header">
+                        <div class="column-title-wrap">
+                            <span class="dot done"></span>
+                            <h2>Done</h2>
+                        </div>
+                        <span class="count" data-count="done">0</span>
+                    </div>
+                    <div class="cards" id="doneList"></div>
+                </section>
+
+            </main>
+
+        </div>
+
     </div>
-  </div>
 
-  <div class="app">
-    <main class="board" id="board">
-      <section class="column" data-status="todo">
-        <div class="column-header">
-          <div class="column-title-wrap">
-            <span class="dot todo"></span>
-            <h2>To Do</h2>
-          </div>
-          <span class="count" data-count="todo">0</span>
-        </div>
-        <div class="cards" id="todoList"></div>
-      </section>
+    <!-- TASK MODAL -->
 
-      <section class="column" data-status="doing">
-        <div class="column-header">
-          <div class="column-title-wrap">
-            <span class="dot doing"></span>
-            <h2>In Progress</h2>
-          </div>
-          <span class="count" data-count="doing">0</span>
-        </div>
-        <div class="cards" id="doingList"></div>
-      </section>
+    <div class="modal" id="taskModal" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="taskTitleLabel">
 
-      <section class="column" data-status="done">
-        <div class="column-header">
-          <div class="column-title-wrap">
-            <span class="dot done"></span>
-            <h2>Done</h2>
-          </div>
-          <span class="count" data-count="done">0</span>
-        </div>
-        <div class="cards" id="doneList"></div>
-      </section>
-    </main>
-  </div>
+            <div class="modal-header">
+                <div>
+                    <span class="modal-label">TASK</span>
+                    <h3 id="taskTitleLabel">Create a task</h3>
+                </div>
+                <button type="button" class="modal-close" id="closeModalBtn" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
 
-  <div class="modal" id="taskModal" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="taskTitle">
-      <h3 id="taskTitle">Create a task</h3>
-      <form id="taskForm">
-        <div class="form-group">
-          <label for="taskTitleInput">Title</label>
-          <input id="taskTitleInput" type="text" maxlength="60" placeholder="Task title" required />
-        </div>
+            <form id="taskForm">
 
-        <div class="form-group">
-          <label for="taskDescInput">Description</label>
-          <textarea id="taskDescInput" maxlength="220" placeholder="Add details..."></textarea>
-        </div>
+                <div class="form-group">
+                    <label for="taskTitleInput">Title</label>
+                    <input id="taskTitleInput" type="text" maxlength="60" placeholder="Task title" required>
+                </div>
 
-        <div class="form-group">
-          <label for="taskStatusInput">Status</label>
-          <select id="taskStatusInput">
-            <option value="todo">To Do</option>
-            <option value="doing">In Progress</option>
-            <option value="done">Done</option>
-          </select>
-        </div>
+                <div class="form-group">
+                    <label for="taskDescInput">Description</label>
+                    <textarea id="taskDescInput" maxlength="220" placeholder="Add details..."></textarea>
+                </div>
 
-        <div class="modal-actions">
-          <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
-          <button type="submit" class="primary-btn">Save task</button>
+                <div class="form-group">
+                    <label for="taskStatusInput">Status</label>
+                    <select id="taskStatusInput">
+                        <option value="todo">To Do</option>
+                        <option value="doing">In Progress</option>
+                        <option value="done">Done</option>
+                    </select>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="primary-btn">
+                        <i class="fa-solid fa-check"></i>
+                        Save Task
+                    </button>
+                </div>
+
+            </form>
+
         </div>
-      </form>
     </div>
-  </div>
 
-  <script>
-    // Get project name from URL parameter
-    const urlParams = new URLSearchParams(window.location.search);
-    const projectName = urlParams.get('project') || 'Project';
-    
-    document.getElementById('projectTitle').textContent = `${projectName} - Kanban`;
-    document.title = `${projectName} - Kanban - 3D Project Management`;
+    <!-- INVITE MODAL -->
 
-    // Return to project page
-    function returnToProject() {
-      window.history.back();
-    }
+    <div class="modal" id="inviteModal" aria-hidden="true">
+        <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="inviteTitleLabel">
 
-    // Sample task data
-    let tasks = [
-      { id: 1, title: 'Design UI', description: 'Create wireframes', status: 'todo' },
-      { id: 2, title: 'Setup Database', description: 'Configure database schema', status: 'doing' },
-      { id: 3, title: 'Review Code', description: 'Code review and testing', status: 'done' }
-    ];
+            <div class="modal-header">
+                <div>
+                    <span class="modal-label">TEAM</span>
+                    <h3 id="inviteTitleLabel">Invite a member</h3>
+                </div>
+                <button type="button" class="modal-close" id="closeInviteModalBtn" aria-label="Close">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
 
-    // Render tasks
-    function renderTasks() {
-      document.getElementById('todoList').innerHTML = '';
-      document.getElementById('doingList').innerHTML = '';
-      document.getElementById('doneList').innerHTML = '';
+            <form id="inviteForm">
 
-      tasks.forEach(task => {
-        const card = document.createElement('div');
-        card.className = 'task-card';
-        card.innerHTML = `
-          <div class="task-title">${task.title}</div>
-          <div class="task-description">${task.description}</div>
-        `;
-        
-        if (task.status === 'todo') {
-          document.getElementById('todoList').appendChild(card);
-        } else if (task.status === 'doing') {
-          document.getElementById('doingList').appendChild(card);
-        } else if (task.status === 'done') {
-          document.getElementById('doneList').appendChild(card);
-        }
-      });
+                <div class="form-group">
+                    <label for="inviteEmailInput">Email address</label>
+                    <input id="inviteEmailInput" type="email" placeholder="name@example.com" required>
+                </div>
 
-      updateCounts();
-    }
+                <div class="form-group">
+                    <label for="inviteRoleInput">Role</label>
+                    <select id="inviteRoleInput">
+                        <option value="editor">Editor</option>
+                        <option value="viewer">Viewer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
 
-    // Update task counts
-    function updateCounts() {
-      document.querySelector('[data-count="todo"]').textContent = 
-        document.getElementById('todoList').children.length;
-      document.querySelector('[data-count="doing"]').textContent = 
-        document.getElementById('doingList').children.length;
-      document.querySelector('[data-count="done"]').textContent = 
-        document.getElementById('doneList').children.length;
-    }
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" id="cancelInviteBtn">Cancel</button>
+                    <button type="submit" class="primary-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Send Invite
+                    </button>
+                </div>
 
-    // Modal functionality
-    const modal = document.getElementById('taskModal');
-    const addBtn = document.getElementById('addBtn');
-    const cancelBtn = document.getElementById('cancelBtn');
-    const taskForm = document.getElementById('taskForm');
+            </form>
 
-    addBtn.addEventListener('click', () => {
-      modal.removeAttribute('aria-hidden');
-      modal.style.display = 'flex';
-    });
+        </div>
+    </div>
 
-    cancelBtn.addEventListener('click', () => {
-      modal.setAttribute('aria-hidden', 'true');
-      modal.style.display = 'none';
-      taskForm.reset();
-    });
+    <script src="../jscode/sidebar.js"></script>
+    <script src="../jscode/kanban.js"></script>
 
-    taskForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const title = document.getElementById('taskTitleInput').value;
-      const description = document.getElementById('taskDescInput').value;
-      const status = document.getElementById('taskStatusInput').value;
-
-      tasks.push({
-        id: tasks.length + 1,
-        title,
-        description,
-        status
-      });
-
-      renderTasks();
-      modal.setAttribute('aria-hidden', 'true');
-      modal.style.display = 'none';
-      taskForm.reset();
-    });
-
-    // Initialize
-    renderTasks();
-  </script>
 </body>
 </html>

@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { min-height: 100%; }
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #15155A 0%, #09092D 38%, #060622 100%);
+    color: #ffffff;
+    min-height: 100vh;
+}
+
+button { font-family: inherit; cursor: pointer; }
+
+.logout-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.logout-card {
+    width: min(400px, 100%);
+    padding: 36px 30px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 16px;
+    background: linear-gradient(180deg, #12124A, #09092D);
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+.logout-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 75, 90, 0.12);
+    color: #FF6372;
+    font-size: 22px;
+}
+
+.logout-card h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 19px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.logout-card p {
+    color: #8995B5;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 26px;
+}
+
+.logout-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.secondary-btn, .danger-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    min-height: 44px;
+    border-radius: 9px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.secondary-btn {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    background: rgba(255, 255, 255, 0.04);
+    color: #A8B2C7;
+}
+
+.secondary-btn:hover { background: rgba(255, 255, 255, 0.08); color: #ffffff; }
+
+.danger-btn {
+    border: 1px solid #FF4B5A;
+    background: #FF4B5A;
+    color: #ffffff;
+}
+
+.danger-btn:hover { background: #E13B4A; transform: translateY(-1px); }
+
+@media (max-width: 430px) {
+    .logout-card { padding: 28px 20px; }
+    .logout-actions { flex-direction: column; }
+}

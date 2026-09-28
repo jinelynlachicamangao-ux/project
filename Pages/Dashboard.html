@@ -4,193 +4,841 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - 3D Project Management</title>
+
+    <title>Dashboard | 3D Project Management</title>
+
+   
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+          rel="stylesheet">
+      
+          <link rel="stylesheet" href="../css/theme.css">
+    <script src="../jscode/theme.js"></script>
+
+    <!-- Shared Sidebar CSS -->
+    <link rel="stylesheet" href="../css/sidebar.css">
+
+    <!-- Dashboard CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 
 <body>
+
     <div class="dashboard-layout">
 
+      
+        <div id="sidebar-container"></div>
+
+
        
+        <main class="main-area">
 
-        <!-- MAIN CONTENT — everything below is unchanged -->
-        <main class="content-area">
+           
 
-            <!-- HEADER SECTION -->
-            <header class="dashboard-header">
-                <button class="menu-icon" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+            <header class="topbar">
 
-                <div class="dashboard-welcome">
-                    <h1>Dashboard</h1>
-                    <p>Welcome back, Shane!</p>
-                    <small>Here's what's happening with your projects.</small>
+                <div class="topbar-left">
+
+                    <button
+                        class="menu-toggle"
+                        id="menuToggle"
+                        type="button"
+                        aria-label="Open menu">
+
+                        <i class="fa-solid fa-bars"></i>
+
+                    </button>
+
+
+                    <div class="page-title">
+
+                        <span>WORKSPACE</span>
+
+                        <strong>Dashboard</strong>
+
+                    </div>
+
                 </div>
 
-                <div class="dashboard-actions">
-                    <div class="search-bar">
-                        <input type="text" placeholder="Search projects, tasks...">
-                        <button class="search-btn">🔍</button>
+
+                <!-- ================= TOP RIGHT ================= -->
+
+                <div class="topbar-right">
+
+                    <div class="top-search">
+
+                        <i class="fa-solid fa-magnifying-glass"></i>
+
+                        <input
+                            type="text"
+                            placeholder="Search projects, tasks...">
+
                     </div>
-                    <time datetime="2026-08-28">August 28, 2026</time>
-                    <div class="profile-menu-container">
-                        <button class="profile-circle" aria-label="Profile Menu">S</button>
-                        <div class="profile-dropdown" id="profileDropdown">
-                            <a href="#profile">My Profile</a>
-                            <a href="#settings">Settings</a>
-                            <a href="#preferences">Preferences</a>
-                            <hr>
-                            <a href="Homapage.html" target="_top">Logout</a>
+
+
+                    <button class="top-icon" type="button">
+
+                        <i class="fa-regular fa-bell"></i>
+
+                        <span class="notification-dot"></span>
+
+                    </button>
+
+
+                    <button class="top-icon" type="button">
+
+                        <i class="fa-solid fa-gear"></i>
+
+                    </button>
+
+
+                    <!-- PROFILE -->
+
+                    <div class="profile-container">
+
+                        <button
+                            class="profile-button"
+                            type="button"
+                            id="profileButton">
+
+                            <div class="profile-avatar">
+                                S
+                            </div>
+
+                        </button>
+
+
+                        <div
+                            class="profile-dropdown"
+                            id="profileDropdown">
+
+                            <a href="#">
+                                <i class="fa-solid fa-user"></i>
+                                Profile
+                            </a>
+
+                            <a href="#">
+                                <i class="fa-solid fa-gear"></i>
+                                Settings
+                            </a>
+
+                            <div class="dropdown-line"></div>
+
+                            <a href="#" class="logout-link">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                Logout
+                            </a>
+
                         </div>
+
                     </div>
+
                 </div>
 
             </header>
 
-            <!-- STATISTICS CARDS -->
-            <section class="stats-grid">
-                <article class="stat-card">
-                    <div class="stat-number">12</div>
-                    <div class="stat-label">To Do</div>
-                </article>
 
-                <article class="stat-card">
-                    <div class="stat-number">8</div>
-                    <div class="stat-label">In Progress</div>
-                </article>
+            <!-- =================================================
+                 CONTENT
+                 ================================================= -->
 
-                <article class="stat-card">
-                    <div class="stat-number">18</div>
-                    <div class="stat-label">Done</div>
-                </article>
-
-                <article class="stat-card">
-                    <div class="stat-number">3</div>
-                    <div class="stat-label">Overdue</div>
-                </article>
-            </section>
-
-            <!-- UPCOMING DEADLINES SECTION -->
-            <section class="cards-grid">
-                <div class="card">
-                    <h2 class="card-title">Upcoming Deadlines</h2>
-
-                    <div class="item-card">
-                        <div class="item-name">Login Page</div>
-                        <div class="item-date">May 23, 2026</div>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-name">Database Design</div>
-                        <div class="item-date">May 24, 2026</div>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-name">User Testing</div>
-                        <div class="item-date">Jun 02, 2026</div>
-                    </div>
-                </div>
+            <section class="content-area">
 
 
-                <!-- MY TASK SECTION -->
-                <div class="card">
-                    <h2 class="card-title">My Tasks</h2>
+                <!-- ================= WELCOME ================= -->
 
-                    <div class="item-card">
-                        <div class="item-name">Maria moved Homepage Design to In Progress</div>
-                        <div class="item-time">2m ago</div>
-                    </div>
+                <div class="welcome-section">
 
-                    <div class="item-card">
-                        <div class="item-name">John completed Logo Design</div>
-                        <div class="item-time">1h ago</div>
-                    </div>
+                    <div>
 
-                    <div class="item-card">
-                        <div class="item-name">You created a new task: Setup Database</div>
-                        <div class="item-time">2h ago</div>
-                    </div>
-                </div>
+                        <div class="breadcrumb">
 
+                            <span>Apps</span>
 
-                <!-- PROJECTS SECTION -->
-                <div class="card">
-                    <h2 class="card-title">PROJECTS</h2>
+                            <i class="fa-solid fa-chevron-right"></i>
 
-                    <div class="item-card">
-                        <div class="item-name">Maria moved Homepage Design to In Progress</div>
-                        <div class="item-time">2m ago</div>
-                    </div>
+                            <strong>Dashboard</strong>
 
-                    <div class="item-card">
-                        <div class="item-name">John completed Logo Design</div>
-                        <div class="item-time">1h ago</div>
-                    </div>
-
-                    <div class="item-card">
-                        <div class="item-name">You created a new task: Setup Database</div>
-                        <div class="item-time">2h ago</div>
-                    </div>
-                </div>
-
-            </section>
-
-            <!-- RECENT ACTIVITY SECTION -->
-            <section class="cards-grid">
-                <div class="card full-width">
-                    <h2 class="card-title">Recent Activity</h2>
-
-                    <div class="activity-grid">
-                        <div class="activity-square">
-                            <div class="activity-title">Homepage Design</div>
-                            <div class="activity-detail">Viewed 2m ago</div>
                         </div>
 
-                        <div class="activity-square">
-                            <div class="activity-title">Logo Design</div>
-                            <div class="activity-detail">Edited 15m ago</div>
+
+                        <h1>Dashboard</h1>
+
+                        <p>
+                            Welcome back, Shanel! Here's what's happening
+                            with your projects.
+                        </p>
+
+                    </div>
+
+
+                    <div class="date-display">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <span>August 28, 2026</span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     STATISTICS
+                     ================================================= -->
+
+                <div class="stats-grid">
+
+
+                    <!-- TO DO -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon blue">
+
+                            <i class="fa-solid fa-list-check"></i>
+
                         </div>
 
-                        <div class="activity-square">
-                            <div class="activity-title">Setup Database</div>
-                            <div class="activity-detail">Created 2h ago</div>
+                        <div class="stat-content">
+
+                            <span>To Do</span>
+
+                            <strong>12</strong>
+
+                            <small>
+                                <i class="fa-solid fa-arrow-up"></i>
+                                8% from last week
+                            </small>
+
                         </div>
+
                     </div>
+
+
+                    <!-- IN PROGRESS -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon cyan">
+
+                            <i class="fa-solid fa-spinner"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>In Progress</span>
+
+                            <strong>8</strong>
+
+                            <small>
+                                <i class="fa-solid fa-arrow-up"></i>
+                                5% from last week
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- COMPLETED -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon green">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>Completed</span>
+
+                            <strong>18</strong>
+
+                            <small>
+                                <i class="fa-solid fa-arrow-up"></i>
+                                12% from last week
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- OVERDUE -->
+
+                    <div class="stat-card">
+
+                        <div class="stat-icon red">
+
+                            <i class="fa-solid fa-clock"></i>
+
+                        </div>
+
+                        <div class="stat-content">
+
+                            <span>Overdue</span>
+
+                            <strong>3</strong>
+
+                            <small class="danger-text">
+                                Needs attention
+                            </small>
+
+                        </div>
+
+                    </div>
+
                 </div>
+
+
+                <!-- =================================================
+                     DASHBOARD GRID
+                     ================================================= -->
+
+                <div class="dashboard-grid">
+
+
+                    <!-- ================= DEADLINES ================= -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    SCHEDULE
+                                </span>
+
+                                <h2>
+                                    Upcoming Deadlines
+                                </h2>
+
+                            </div>
+
+                            <button
+                                class="more-button"
+                                type="button">
+
+                                <i class="fa-solid fa-ellipsis"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="deadline-list">
+
+
+                            <!-- DEADLINE 1 -->
+
+                            <div class="deadline-item">
+
+                                <div class="deadline-icon">
+
+                                    <i class="fa-solid fa-code"></i>
+
+                                </div>
+
+                                <div class="deadline-info">
+
+                                    <strong>
+                                        Login Page
+                                    </strong>
+
+                                    <span>
+                                        Web Development
+                                    </span>
+
+                                </div>
+
+                                <div class="deadline-date">
+
+                                    <strong>May 23</strong>
+
+                                    <span>2026</span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DEADLINE 2 -->
+
+                            <div class="deadline-item">
+
+                                <div class="deadline-icon">
+
+                                    <i class="fa-solid fa-database"></i>
+
+                                </div>
+
+                                <div class="deadline-info">
+
+                                    <strong>
+                                        Database Design
+                                    </strong>
+
+                                    <span>
+                                        System Development
+                                    </span>
+
+                                </div>
+
+                                <div class="deadline-date">
+
+                                    <strong>May 24</strong>
+
+                                    <span>2026</span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- DEADLINE 3 -->
+
+                            <div class="deadline-item">
+
+                                <div class="deadline-icon">
+
+                                    <i class="fa-solid fa-users"></i>
+
+                                </div>
+
+                                <div class="deadline-info">
+
+                                    <strong>
+                                        User Testing
+                                    </strong>
+
+                                    <span>
+                                        Research
+                                    </span>
+
+                                </div>
+
+                                <div class="deadline-date">
+
+                                    <strong>Jun 02</strong>
+
+                                    <span>2026</span>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="view-button"
+                            type="button">
+
+                            View all deadlines
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+
+                    <!-- ================= MY TASKS ================= -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    TASKS
+                                </span>
+
+                                <h2>
+                                    My Tasks
+                                </h2>
+
+                            </div>
+
+                            <button
+                                class="add-button"
+                                type="button">
+
+                                <i class="fa-solid fa-plus"></i>
+
+                                Add Task
+
+                            </button>
+
+                        </div>
+
+
+                        <div class="task-list">
+
+
+                            <div class="task-item">
+
+                                <label class="task-check">
+
+                                    <input
+                                        type="checkbox">
+
+                                </label>
+
+                                <div class="task-info">
+
+                                    <strong>
+                                        Homepage Design
+                                    </strong>
+
+                                    <span>
+                                        Due today
+                                    </span>
+
+                                </div>
+
+                                <span class="status progress">
+                                    In Progress
+                                </span>
+
+                            </div>
+
+
+                            <div class="task-item">
+
+                                <label class="task-check">
+
+                                    <input
+                                        type="checkbox">
+
+                                </label>
+
+                                <div class="task-info">
+
+                                    <strong>
+                                        Logo Design
+                                    </strong>
+
+                                    <span>
+                                        Due tomorrow
+                                    </span>
+
+                                </div>
+
+                                <span class="status todo">
+                                    To Do
+                                </span>
+
+                            </div>
+
+
+                            <div class="task-item">
+
+                                <label class="task-check">
+
+                                    <input
+                                        type="checkbox">
+
+                                </label>
+
+                                <div class="task-info">
+
+                                    <strong>
+                                        Setup Database
+                                    </strong>
+
+                                    <span>
+                                        Due in 3 days
+                                    </span>
+
+                                </div>
+
+                                <span class="status progress">
+                                    In Progress
+                                </span>
+
+                            </div>
+
+
+                            <div class="task-item">
+
+                                <label class="task-check">
+
+                                    <input
+                                        type="checkbox">
+
+                                </label>
+
+                                <div class="task-info">
+
+                                    <strong>
+                                        User Interface
+                                    </strong>
+
+                                    <span>
+                                        Due in 5 days
+                                    </span>
+
+                                </div>
+
+                                <span class="status todo">
+                                    To Do
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ================= PROJECT PROGRESS ================= -->
+
+                    <div class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <div>
+
+                                <span class="card-label">
+                                    OVERVIEW
+                                </span>
+
+                                <h2>
+                                    Project Progress
+                                </h2>
+
+                            </div>
+
+                            <button
+                                class="more-button"
+                                type="button">
+
+                                <i class="fa-solid fa-ellipsis"></i>
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- WEBSITE REDESIGN -->
+
+                        <div class="progress-header">
+
+                            <div>
+
+                                <strong>
+                                    Website Redesign
+                                </strong>
+
+                                <span>
+                                    18 of 25 tasks completed
+                                </span>
+
+                            </div>
+
+                            <strong>72%</strong>
+
+                        </div>
+
+
+                        <div class="progress-bar">
+
+                            <div
+                                class="progress-fill"
+                                style="width:72%;">
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="project-members">
+
+                            <div class="avatars">
+
+                                <div class="avatar">M</div>
+
+                                <div class="avatar">J</div>
+
+                                <div class="avatar">A</div>
+
+                                <div class="avatar more">
+                                    +4
+                                </div>
+
+                            </div>
+
+                            <span>
+                                7 members
+                            </span>
+
+                        </div>
+
+
+                        <div class="project-divider"></div>
+
+
+                        <!-- MOBILE APP -->
+
+                        <div class="mini-project">
+
+                            <div class="mini-project-icon">
+
+                                <i class="fa-solid fa-mobile-screen"></i>
+
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Mobile App
+                                </strong>
+
+                                <span>
+                                    12 of 20 tasks
+                                </span>
+
+                            </div>
+
+                            <strong>60%</strong>
+
+                        </div>
+
+
+                        <div class="mini-progress">
+
+                            <div style="width:60%;"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     ACTIVITY
+                     ================================================= -->
+
+                <div class="dashboard-card activity-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <span class="card-label">
+                                RECENT ACTIVITY
+                            </span>
+
+                            <h2>
+                                Team Activity
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity-list">
+
+                        <div class="activity-item">
+
+                            <div class="activity-avatar blue-bg">
+                                M
+                            </div>
+
+                            <div class="activity-text">
+
+                                <strong>Maria</strong>
+                                completed
+                                <b>Login Page</b>
+
+                                <small>
+                                    2 hours ago
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-avatar cyan-bg">
+                                J
+                            </div>
+
+                            <div class="activity-text">
+
+                                <strong>John</strong>
+                                updated
+                                <b>Database Design</b>
+
+                                <small>
+                                    5 hours ago
+                                </small>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="activity-item">
+
+                            <div class="activity-avatar purple-bg">
+                                A
+                            </div>
+
+                            <div class="activity-text">
+
+                                <strong>Anna</strong>
+                                added a new task
+
+                                <span>
+                                    User Interface
+                                </span>
+
+                                <small>
+                                    Yesterday
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </section>
 
         </main>
 
     </div>
 
-    <script>
-        // Profile dropdown menu functionality
-        const profileButton = document.querySelector('.profile-circle');
-        const profileDropdown = document.getElementById('profileDropdown');
 
-        // Toggle dropdown when profile button is clicked
-        profileButton.addEventListener('click', function(e) {
-            e.stopPropagation();
-            profileDropdown.classList.toggle('show');
-        });
+    
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.profile-menu-container')) {
-                profileDropdown.classList.remove('show');
-            }
-        });
+    <!-- Shared Sidebar -->
+    <script src="../jscode/sidebar.js"></script>
 
-        // Close dropdown when a menu item is clicked
-        profileDropdown.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
-                profileDropdown.classList.remove('show');
-            });
-        });
-    </script>
+    <!-- Dashboard -->
+    <script src="../js/dashboard.js"></script>
+
 </body>
 
 </html>

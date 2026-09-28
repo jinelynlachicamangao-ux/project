@@ -1,83 +1,377 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Personal Task</title>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>My Tasks - 3D Project Management</title>
+
+   <link rel="stylesheet" href="../css/theme.css">
+    <script src="../jscode/theme.js"></script>
+    <link
+        rel="stylesheet"
+        href="../css/mytask.css"
+    >
+
+    <!-- SHARED SIDEBAR CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/sidebar.css"
+    >
+    
+    <!-- FONT AWESOME -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
 </head>
+
+
 <body>
-  <div class="app">
-    <header class="header">
-      <h1 class="title">Personal Task</h1>
-      <button class="add-btn" id="addBtn">+ New task</button>
-    </header>
 
-    <main class="board" id="board">
-      <section class="column" data-status="todo">
-        <div class="column-header">
-          <div class="column-title-wrap">
-            <span class="dot todo"></span>
-            <h2>To Do</h2>
-          </div>
-          <span class="count" data-count="todo">0</span>
-        </div>
-        <div class="cards" id="todoList"></div>
-      </section>
+    
 
-      <section class="column" data-status="doing">
-        <div class="column-header">
-          <div class="column-title-wrap">
-            <span class="dot doing"></span>
-            <h2>In Progress</h2>
-          </div>
-          <span class="count" data-count="doing">0</span>
-        </div>
-        <div class="cards" id="doingList"></div>
-      </section>
+    <div class="page-layout">
 
-      <section class="column" data-status="done">
-        <div class="column-header">
-          <div class="column-title-wrap">
-            <span class="dot done"></span>
-            <h2>Done</h2>
-          </div>
-          <span class="count" data-count="done">0</span>
-        </div>
-        <div class="cards" id="doneList"></div>
-      </section>
-    </main>
-  </div>
+        <div id="sidebar-container"></div>
 
-  <div class="modal" id="taskModal" aria-hidden="true">
-    <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="taskTitle">
-      <h3 id="taskTitle">Create a task</h3>
-      <form id="taskForm">
-        <div class="form-group">
-          <label for="taskTitleInput">Title</label>
-          <input id="taskTitleInput" type="text" maxlength="60" placeholder="Task title" required />
+
+       
+        <div class="app">
+
+            <header class="header">
+
+                <div class="header-left">
+
+                    <h1 class="title">
+                        Personal Task
+                    </h1>
+
+                    <p class="subtitle">
+                        Manage and organize your tasks
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="add-btn"
+                    id="addBtn"
+                    type="button"
+                >
+
+                    <i class="fa-solid fa-plus"></i>
+
+                    New Task
+
+                </button>
+
+            </header>
+
+
+            <!-- =================================================
+                 TASK BOARD
+            ================================================== -->
+
+            <main
+                class="board"
+                id="board"
+            >
+
+
+                <!-- ================= TO DO ================= -->
+
+                <section
+                    class="column"
+                    data-status="todo"
+                >
+
+                    <div class="column-header">
+
+                        <div class="column-title-wrap">
+
+                            <span class="dot todo"></span>
+
+                            <h2>
+                                To Do
+                            </h2>
+
+                        </div>
+
+
+                        <span
+                            class="count"
+                            data-count="todo"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="cards"
+                        id="todoList"
+                    ></div>
+
+                </section>
+
+
+
+                <!-- ================= IN PROGRESS ================= -->
+
+                <section
+                    class="column"
+                    data-status="doing"
+                >
+
+                    <div class="column-header">
+
+                        <div class="column-title-wrap">
+
+                            <span class="dot doing"></span>
+
+                            <h2>
+                                In Progress
+                            </h2>
+
+                        </div>
+
+
+                        <span
+                            class="count"
+                            data-count="doing"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="cards"
+                        id="doingList"
+                    ></div>
+
+                </section>
+
+
+
+                <!-- ================= DONE ================= -->
+
+                <section
+                    class="column"
+                    data-status="done"
+                >
+
+                    <div class="column-header">
+
+                        <div class="column-title-wrap">
+
+                            <span class="dot done"></span>
+
+                            <h2>
+                                Done
+                            </h2>
+
+                        </div>
+
+
+                        <span
+                            class="count"
+                            data-count="done"
+                        >
+                            0
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="cards"
+                        id="doneList"
+                    ></div>
+
+                </section>
+
+
+            </main>
+
         </div>
 
-        <div class="form-group">
-          <label for="taskDescInput">Description</label>
-          <textarea id="taskDescInput" maxlength="220" placeholder="Add details..."></textarea>
-        </div>
 
-        <div class="form-group">
-          <label for="taskStatusInput">Status</label>
-          <select id="taskStatusInput">
-            <option value="todo">To Do</option>
-            <option value="doing">In Progress</option>
-            <option value="done">Done</option>
-          </select>
-        </div>
-
-        <div class="modal-actions">
-          <button type="button" class="secondary-btn" id="cancelBtn">Cancel</button>
-          <button type="submit" class="primary-btn">Save task</button>
-        </div>
-      </form>
     </div>
-  </div>
+
+
+
+    <!-- =====================================================
+         TASK MODAL
+    ====================================================== -->
+
+    <div
+        class="modal"
+        id="taskModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="taskTitle"
+        >
+
+
+            <div class="modal-header">
+
+                <div>
+
+                    <span class="modal-label">
+                        TASK
+                    </span>
+
+                    <h3 id="taskTitle">
+                        Create a task
+                    </h3>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="modal-close"
+                    id="closeModalBtn"
+                    aria-label="Close"
+                >
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- FORM -->
+
+            <form id="taskForm">
+
+
+                <!-- TITLE -->
+
+                <div class="form-group">
+
+                    <label for="taskTitleInput">
+                        Title
+                    </label>
+
+                    <input
+                        id="taskTitleInput"
+                        type="text"
+                        maxlength="60"
+                        placeholder="Task title"
+                        required
+                    >
+
+                </div>
+
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-group">
+
+                    <label for="taskDescInput">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="taskDescInput"
+                        maxlength="220"
+                        placeholder="Add details..."
+                    ></textarea>
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="form-group">
+
+                    <label for="taskStatusInput">
+                        Status
+                    </label>
+
+                    <select id="taskStatusInput">
+
+                        <option value="todo">
+                            To Do
+                        </option>
+
+                        <option value="doing">
+                            In Progress
+                        </option>
+
+                        <option value="done">
+                            Done
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="modal-actions">
+
+                    <button
+                        type="button"
+                        class="secondary-btn"
+                        id="cancelBtn"
+                    >
+                        Cancel
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn"
+                    >
+
+                        <i class="fa-solid fa-check"></i>
+
+                        Save Task
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+  
+
+    <script src="../jscode/sidebar.js"></script>
+
+    <script src="../jscode/mytask.js"></script>
+
 
 </body>
+
 </html>

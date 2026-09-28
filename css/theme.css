@@ -1,0 +1,151 @@
+/* =========================================================
+   THEME VARIABLES — 3D Project Management brand palette
+   Source: "Website Color Palette — Modern. Bold. Digital."
+
+   Brand colors (--brand-*) are constant in both modes — they
+   are the identity, not the surface. Everything else adapts
+   per mode. "System" is resolved to light/dark by theme.js,
+   which sets data-theme on <html>.
+
+   Load this file before ANY stylesheet that reads these
+   variables (sidebar.css, settings.css, dashboard.css, etc).
+   Every page-specific stylesheet must use these variables
+   instead of hardcoded hex values, or that page will not
+   respond to theme changes.
+========================================================= */
+
+:root {
+
+    /* ---- brand palette (constant across modes) ---- */
+    --brand-navy: #08082B;
+    --brand-indigo: #1F1F79;
+    --brand-blue-deep: #004AAD;
+    --brand-blue: #0066FF;
+    --brand-cyan: #00FFFF;
+    --brand-cyan-bright: #00E5FF;
+    --brand-blue-hover: #00CFFF;
+
+}
+
+:root,
+[data-theme="dark"] {
+
+    /* page background gradient */
+    --bg-gradient-1: #1F1F79;
+    --bg-gradient-2: #121250;
+    --bg-gradient-3: #08082B;
+
+    /* text tiers */
+    --text-primary: #FFFFFF;
+    --text-secondary: #A8B2C7;
+    --text-tertiary: #7F8BA8;
+    --text-muted: #667085;
+    --text-faint: #667085;
+
+    /* borders */
+    --border-soft: rgba(255, 255, 255, 0.08);
+    --border-softer: rgba(255, 255, 255, 0.06);
+    --border-input: rgba(255, 255, 255, 0.14);
+    --border-row: rgba(255, 255, 255, 0.05);
+
+    /* translucent surfaces (over the page gradient) */
+    --surface-1: rgba(255, 255, 255, 0.045);
+    --surface-2: rgba(255, 255, 255, 0.02);
+    --surface-input: rgba(255, 255, 255, 0.035);
+    --surface-row: rgba(255, 255, 255, 0.025);
+
+    /* solid/opaque panel surfaces (topbar, search, dropdown) */
+    --surface-panel: #10104A;
+    --topbar-bg: rgba(8, 8, 43, 0.92);
+
+    /* card + stat gradients */
+    --surface-card-1: rgba(16, 16, 74, 0.9);
+    --surface-card-2: rgba(8, 8, 43, 0.95);
+    --surface-stat-1: rgba(31, 31, 121, 0.7);
+    --surface-stat-2: rgba(8, 8, 43, 0.8);
+
+    /* progress/track background */
+    --track-bg: #171746;
+
+    /* accents (usage-mapped to brand palette) */
+    --accent-blue: var(--brand-blue);
+    --accent-cyan: var(--brand-cyan);
+    --accent-indigo: var(--brand-indigo);
+    --accent-blue-deep: var(--brand-blue-deep);
+    --accent-blue-hover: var(--brand-blue-hover);
+    --accent-teal: #00FFB4;
+    --accent-green: #2ED573;
+    --accent-red: #FF6B7A;
+    --accent-red-solid: #FF4B5A;
+
+    /* elevation */
+    --shadow-card: 0 10px 30px rgba(3, 3, 20, 0.45);
+
+    color-scheme: dark;
+}
+
+[data-theme="light"] {
+
+    /* page background gradient */
+    --bg-gradient-1: #F5F7FF;
+    --bg-gradient-2: #FAFBFF;
+    --bg-gradient-3: #FFFFFF;
+
+    /* text tiers */
+    --text-primary: #12152B;
+    --text-secondary: #454B72;
+    --text-tertiary: #5C6690;
+    --text-muted: #667085;
+    --text-faint: #93999E;
+
+    /* borders */
+    --border-soft: rgba(18, 21, 43, 0.09);
+    --border-softer: rgba(18, 21, 43, 0.06);
+    --border-input: rgba(18, 21, 43, 0.16);
+    --border-row: rgba(18, 21, 43, 0.06);
+
+    /* translucent surfaces (over the page gradient) */
+    --surface-1: #FFFFFF;
+    --surface-2: #F5F7FF;
+    --surface-input: #FFFFFF;
+    --surface-row: #F7F9FF;
+
+    /* solid/opaque panel surfaces (topbar, search, dropdown) */
+    --surface-panel: #FFFFFF;
+    --topbar-bg: rgba(255, 255, 255, 0.92);
+
+    /* card + stat gradients */
+    --surface-card-1: #FFFFFF;
+    --surface-card-2: #F5F7FF;
+    --surface-stat-1: #FFFFFF;
+    --surface-stat-2: #F5F7FF;
+
+    /* progress/track background */
+    --track-bg: #E7EBFC;
+
+    /* accents — pure cyan is unreadable as text/icon on white,
+       so text/icon contexts get a darkened on-brand cyan */
+    --accent-blue: var(--brand-blue);
+    --accent-cyan: #0099B3;
+    --accent-indigo: var(--brand-indigo);
+    --accent-blue-deep: var(--brand-blue-deep);
+    --accent-blue-hover: #00A8C2;
+    --accent-teal: #0EA37E;
+    --accent-green: #1AA35C;
+    --accent-red: #D8323F;
+    --accent-red-solid: #E23F4E;
+
+    /* elevation */
+    --shadow-card: 0 10px 24px rgba(18, 21, 43, 0.08);
+
+    color-scheme: light;
+}
+
+/* Respect reduced-motion preference site-wide */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}

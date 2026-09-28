@@ -1,0 +1,517 @@
+/* =========================================================
+   3D PROJECT MANAGEMENT
+   SHARED SIDEBAR
+   DO NOT PUT SIDEBAR CSS IN OTHER PAGE CSS FILES
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 240px;
+    height: 100vh;
+
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 26px 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #101047 0%,
+            #0b0b36 55%,
+            #08082b 100%
+        );
+
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.15);
+
+    font-family:
+        "Poppins",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    transition:
+        width 0.3s ease,
+        transform 0.3s ease;
+}
+
+
+/* =========================================================
+   LOGO AREA
+========================================================= */
+
+.sidebar-top {
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    padding: 8px 8px 25px;
+
+    text-align: center;
+}
+
+.sidebar-logo {
+    width: 70px;
+    height: 55px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 10px;
+}
+
+.sidebar-logo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+.brand-name {
+    width: 100%;
+
+    text-align: center;
+
+    overflow: hidden;
+}
+
+.brand-name h2 {
+    margin: 0;
+
+    color: #00d9ff;
+
+    font-family:
+        "Poppins",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 20px;
+    line-height: 1;
+
+    font-weight: 700;
+
+    letter-spacing: 0.5px;
+}
+
+.brand-name p {
+    margin: 7px 0 0;
+
+    color: #697596;
+
+    font-family:
+        "Poppins",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 9px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.sidebar-line {
+    width: 100%;
+    height: 1px;
+
+    margin-bottom: 18px;
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   NAV ITEM
+========================================================= */
+
+.sidebar .nav-item {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 48px;
+
+    padding: 0 18px;
+
+    gap: 15px;
+
+    border-radius: 9px;
+
+    color: #8995b5;
+
+    background: transparent;
+
+    text-decoration: none;
+
+    font-family:
+        "Poppins",
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    line-height: 1;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* ICON */
+
+.sidebar .nav-item i {
+    width: 19px;
+
+    min-width: 19px;
+
+    text-align: center;
+
+    font-size: 15px;
+
+    color: #8995b5;
+
+    transition: color 0.2s ease;
+}
+
+
+/* TEXT */
+
+.sidebar .nav-item span {
+    display: block;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.sidebar .nav-item:hover {
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.055);
+}
+
+.sidebar .nav-item:hover i {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   ACTIVE ITEM
+========================================================= */
+
+.sidebar .nav-item.active {
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0869ed 0%,
+            #0563e4 100%
+        );
+
+    box-shadow:
+        0 8px 22px rgba(0, 102, 255, 0.22);
+}
+
+.sidebar .nav-item.active i {
+    color: #ffffff;
+}
+
+
+/* LEFT ACTIVE INDICATOR */
+
+.sidebar .nav-item.active::before {
+    content: "";
+
+    position: absolute;
+
+    left: -16px;
+
+    top: 14px;
+    bottom: 14px;
+
+    width: 4px;
+
+    border-radius: 0 4px 4px 0;
+
+    background: #00eaff;
+
+    box-shadow:
+        0 0 10px rgba(0, 234, 255, 0.7);
+}
+
+
+/* =========================================================
+   BOTTOM MENU
+========================================================= */
+
+.sidebar-bottom {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-top: auto;
+
+    padding-top: 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.sidebar .nav-item.logout:hover {
+    color: #ff7185;
+
+    background: rgba(255, 75, 100, 0.06);
+}
+
+.sidebar .nav-item.logout:hover i {
+    color: #ff7185;
+}
+
+
+/* =========================================================
+   DESKTOP COLLAPSED
+========================================================= */
+
+body.sidebar-collapsed .sidebar {
+    width: 76px;
+}
+
+body.sidebar-collapsed .sidebar-top {
+    justify-content: center;
+}
+
+body.sidebar-collapsed .brand-name {
+    display: none;
+}
+
+body.sidebar-collapsed .sidebar-line {
+    margin-bottom: 18px;
+}
+
+body.sidebar-collapsed .sidebar .nav-item {
+    justify-content: center;
+
+    padding-left: 0;
+    padding-right: 0;
+
+    gap: 0;
+}
+
+body.sidebar-collapsed .sidebar .nav-item span {
+    display: none;
+}
+
+body.sidebar-collapsed .sidebar .nav-item i {
+    margin: 0;
+}
+
+
+/* =========================================================
+   CLOSE BUTTON
+========================================================= */
+
+.sidebar-close {
+    display: none;
+
+    position: absolute;
+
+    top: 15px;
+    right: 12px;
+
+    width: 32px;
+    height: 32px;
+
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 7px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: #a0abc3;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE OVERLAY
+========================================================= */
+
+.sidebar-overlay {
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 999;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    backdrop-filter: blur(2px);
+}
+
+.sidebar-overlay.show {
+    display: block;
+}
+
+
+/* =========================================================
+   MENU TOGGLE
+========================================================= */
+
+.menu-toggle {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 8px;
+
+    background: #101047;
+
+    color: #ffffff;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 240px;
+
+        transform: translateX(-100%);
+    }
+
+    .sidebar.mobile-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-close {
+        display: flex;
+    }
+
+    body.sidebar-collapsed .sidebar {
+        width: 240px;
+    }
+
+    body.sidebar-collapsed .brand-name {
+        display: block;
+    }
+
+    body.sidebar-collapsed .sidebar-top {
+        justify-content: center;
+    }
+
+    body.sidebar-collapsed .sidebar .nav-item {
+        justify-content: flex-start;
+
+        padding-left: 18px;
+        padding-right: 18px;
+
+        gap: 15px;
+    }
+
+    body.sidebar-collapsed .sidebar .nav-item span {
+        display: block;
+    }
+
+    body.sidebar-collapsed .sidebar .nav-item i {
+        margin: 0;
+    }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .sidebar .nav-item {
+        min-height: 45px;
+
+        font-size: 11px;
+    }
+
+    .sidebar-logo {
+        width: 65px;
+        height: 50px;
+    }
+}

@@ -4,83 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D - Project Management</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        .folder-cell {
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .folder-cell:hover {
-            background-color: #f0f0f0;
-            transform: scale(1.05);
-        }
-
-        .folder-cell:active {
-            transform: scale(0.98);
-        }
-    </style>
+    <link rel="stylesheet" href="../css/project.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
+    <div class="page-layout">
 
-    <h2>CREATE FOLDER</h2>
+        <div id="sidebar-container"></div>
 
-<table border="1" cellpadding="20">
-    <tr>
+        <div class="app">
 
-        <td width="120" height="100" align="center">
-            <h1>+</h1>
-            Create Folder
-        </td>
+            <header class="header">
+                <div class="header-left">
+                    <h1 class="title">Projects</h1>
+                    <p class="subtitle">Organize your work into project folders</p>
+                </div>
+            </header>
 
-        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 1')">
-            📁<br>
-            <span contenteditable="true">Project 1</span>
-        </td>
+            <main class="folder-grid" id="folderGrid">
+                <!-- Folder cards are rendered here by project.js -->
+            </main>
 
-        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 2')">
-            📁<br>
-            <span contenteditable="true">Project 2</span>
-        </td>
+        </div>
 
-        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 3')">
-            📁<br>
-            <span contenteditable="true">Project 3</span>
-        </td>
+    </div>
 
-    </tr>
-
-    <tr>
-
-        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 4')">
-            📁<br>
-            <span contenteditable="true">Project 4</span>
-        </td>
-
-        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 5')">
-            📁<br>
-            <span contenteditable="true">Project 5</span>
-        </td>
-
-        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 6')">
-            📁<br>
-            <span contenteditable="true">Project 6</span>
-        </td>
-
-        <td width="120" height="100" align="center" class="folder-cell" onclick="openProjectKanban('Project 7')">
-            📁<br>
-            <span contenteditable="true">Project 7</span>
-        </td>
-
-    </tr>
-</table>
-
-<script>
-    function openProjectKanban(projectName) {
-        window.location.href = `Kaban.html?project=${encodeURIComponent(projectName)}`;
-    }
-</script>
+    <script src="../jscode/sidebar.js"></script>
+    <script src="../jscode/project.js"></script>
 
 </body>
 </html>

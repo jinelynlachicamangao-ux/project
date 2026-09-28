@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top left,
+            #15155A 0%,
+            #09092D 38%,
+            #060622 100%
+        );
+
+    color: #ffffff;
+
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+/* =========================================================
+   PAGE LAYOUT
+========================================================= */
+
+.page-layout {
+    min-height: 100vh;
+    width: 100%;
+}
+
+
+/* =========================================================
+   MAIN APPLICATION
+   Shared sidebar = 240px
+========================================================= */
+
+.app {
+    min-height: 100vh;
+
+    width: calc(100% - 240px);
+
+    margin-left: 240px;
+
+    padding: 34px 42px 50px;
+
+    transition:
+        width 0.3s ease,
+        margin-left 0.3s ease;
+}
+
+body.sidebar-collapsed .app {
+    width: calc(100% - 76px);
+    margin-left: 76px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    margin-bottom: 30px;
+}
+
+.title {
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #ffffff;
+
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    margin-top: 6px;
+
+    color: #707DA1;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ANALYTICS CARD
+========================================================= */
+
+.analytics-card {
+    max-width: 720px;
+
+    padding: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(16, 16, 74, 0.9),
+            rgba(8, 8, 43, 0.95)
+        );
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+    margin-bottom: 22px;
+}
+
+.card-label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #00FFFF;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 1.2px;
+}
+
+.card-header h2 {
+    font-family: 'Poppins', sans-serif;
+
+    color: #ffffff;
+
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   PROGRESS LIST
+========================================================= */
+
+.progress-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.progress-row {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+.progress-row-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.progress-row-header strong {
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.progress-row-header span {
+    color: #00FFFF;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.progress-bar {
+    height: 8px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #171746;
+}
+
+.progress-fill {
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #004AAD,
+            #0066FF,
+            #00FFFF
+        );
+
+    transition: width 0.6s ease;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .app,
+    body.sidebar-collapsed .app {
+        width: 100%;
+        margin-left: 0;
+
+        padding: 25px 20px 40px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .title {
+        font-size: 25px;
+    }
+
+    .analytics-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 430px) {
+
+    .app,
+    body.sidebar-collapsed .app {
+        padding: 22px 14px 35px;
+    }
+
+    .title {
+        font-size: 23px;
+    }
+}

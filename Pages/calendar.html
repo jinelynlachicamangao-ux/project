@@ -2,144 +2,574 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Project Calendar - 3D Project Management</title>
-    <link rel="stylesheet" href="../styles.css">
-    
+
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+
+    <!-- Shared Sidebar CSS -->
+   <link
+        rel="stylesheet"
+        href="../Pages/sidebar.html">
+    <link
+        rel="stylesheet"
+        href="../css/sidebar.css"
+    >
+
+
+    <!-- Calendar CSS -->
+    <link
+        rel="stylesheet"
+        href="../css/calendar.css"
+    >
+
 </head>
 
+
 <body>
-    <!-- HEADER -->
-    <h1>📅 Project Calendar</h1>
-    <p>Track due dates and deadlines from your Kanban board</p>
 
-    <h2>September 2026</h2>
-    
-    <table border="1" cellpadding="10">
-        <thead>
-            <tr>
-                <th>Sunday</th>
-                <th>Monday</th>
-                <th>Tuesday</th>
-                <th>Wednesday</th>
-                <th>Thursday</th>
-                <th>Friday</th>
-                <th>Saturday</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>1</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>3</td>
-                <td>4</td>
-                <td>5</td>
-                <td>6</td>
-                <td>7</td>
-                <td>8</td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>10</td>
-                <td>11</td>
-                <td>12</td>
-                <td bgcolor="green"><font color="white"><b>13 (TODAY)</b></font></td>
-                <td>14</td>
-                <td>15</td>
-            </tr>
-            <tr>
-                <td>16</td>
-                <td>17</td>
-                <td>18</td>
-                <td>19</td>
-                <td>20</td>
-                <td>21</td>
-                <td>22</td>
-            </tr>
-            <tr>
-                <td>23</td>
-                <td>24</td>
-                <td>25</td>
-                <td>26</td>
-                <td>27</td>
-                <td>28</td>
-                <td>29</td>
-            </tr>
-            <tr>
-                <td>30</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
 
-    <h3>Upcoming Due Dates (from Kanban Board)</h3>
-    
-    <table border="1" cellpadding="10">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Task</th>
-                <th>Description</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr bgcolor="FFB6C6">
-                <td>May 25</td>
-                <td>Login Page</td>
-                <td>Design login screen</td>
-                <td>To Do</td>
-            </tr>
-            <tr bgcolor="FFB6C6">
-                <td>May 26</td>
-                <td>Database Setup</td>
-                <td>Create database schema</td>
-                <td>To Do</td>
-            </tr>
-            <tr bgcolor="FFB6C6">
-                <td>May 30</td>
-                <td>Research</td>
-                <td>Gather requirements</td>
-                <td>To Do</td>
-            </tr>
-            <tr bgcolor="FFB6C6">
-                <td>June 10</td>
-                <td>API Development</td>
-                <td>Build REST endpoints</td>
-                <td>In Progress</td>
-            </tr>
-            <tr bgcolor="FFB6C6">
-                <td>June 15</td>
-                <td>Frontend Testing</td>
-                <td>Test UI components</td>
-                <td>To Do</td>
-            </tr>
-            <tr bgcolor="FFB6C6">
-                <td>June 20</td>
-                <td>Deployment</td>
-                <td>Deploy to production</td>
-                <td>To Do</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- =========================================================
+         APP CONTAINER
+    ========================================================== -->
 
-    <h3>Legend</h3>
-    <p><span bgcolor="green"><font color="white">Green</font></span> = Today's Date (September 13)</p>
-    <p><span bgcolor="FFB6C6">Red/Pink</span> = Due Dates from Kanban Board</p>
+    <div class="app-container">
+
+
+        <!-- =========================================================
+             SHARED SIDEBAR
+        ========================================================== -->
+
+        <div id="sidebar-container"></div>
+
+
+
+        <!-- =========================================================
+             MAIN CONTENT
+        ========================================================== -->
+
+        <main class="main-content">
+
+
+            <div class="calendar-page">
+
+
+                <!-- =========================================================
+                     PAGE HEADER
+                ========================================================== -->
+
+                <div class="calendar-header">
+
+                    <div>
+
+                        <div class="breadcrumb">
+
+                            <span>
+                                Apps
+                            </span>
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                            <strong>
+                                Calendar
+                            </strong>
+
+                        </div>
+
+
+                        <h1>
+                            Project Calendar
+                        </h1>
+
+
+                        <p>
+                            Track due dates and deadlines from your Kanban board.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================================================
+                     CALENDAR CARD
+                ========================================================== -->
+
+                <section class="calendar-card">
+
+
+                    <div class="calendar-top">
+
+
+                        <!-- PREVIOUS MONTH -->
+
+                        <button
+                            class="calendar-nav"
+                            id="previousMonth"
+                            type="button"
+                            aria-label="Previous month"
+                        >
+
+                            <i class="fa-solid fa-chevron-left"></i>
+
+                        </button>
+
+
+
+                        <!-- MONTH / YEAR -->
+
+                        <h2 id="monthYear">
+                            September 2026
+                        </h2>
+
+
+
+                        <!-- NEXT MONTH -->
+
+                        <button
+                            class="calendar-nav"
+                            id="nextMonth"
+                            type="button"
+                            aria-label="Next month"
+                        >
+
+                            <i class="fa-solid fa-chevron-right"></i>
+
+                        </button>
+
+
+                    </div>
+
+
+
+                    <!-- =====================================================
+                         DAYS OF WEEK
+                    ====================================================== -->
+
+                    <div class="calendar-weekdays">
+
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+
+                    </div>
+
+
+
+                    <!-- =====================================================
+                         CALENDAR DAYS
+                    ====================================================== -->
+
+                    <div
+                        class="calendar-grid"
+                        id="calendarGrid"
+                    ></div>
+
+
+                </section>
+
+
+
+                <!-- =========================================================
+                     UPCOMING DUE DATES
+                ========================================================== -->
+
+                <section class="deadline-section">
+
+
+                    <div class="section-heading">
+
+                        <div>
+
+                            <h2>
+                                Upcoming Due Dates
+                            </h2>
+
+                            <p>
+                                Tasks and deadlines from your Kanban board
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="deadline-table-wrapper">
+
+
+                        <table class="deadline-table">
+
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Date
+                                    </th>
+
+                                    <th>
+                                        Task
+                                    </th>
+
+                                    <th>
+                                        Description
+                                    </th>
+
+                                    <th>
+                                        Status
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+
+                            <tbody id="deadlineTable">
+
+
+                                <!-- =================================================
+                                     LOGIN PAGE
+                                ================================================== -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="date-badge">
+                                            May 25
+                                        </span>
+
+                                    </td>
+
+
+                                    <td class="task-name">
+                                        Login Page
+                                    </td>
+
+
+                                    <td>
+                                        Design login screen
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status status-todo">
+                                            To Do
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     DATABASE SETUP
+                                ================================================== -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="date-badge">
+                                            May 26
+                                        </span>
+
+                                    </td>
+
+
+                                    <td class="task-name">
+                                        Database Setup
+                                    </td>
+
+
+                                    <td>
+                                        Create database schema
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status status-todo">
+                                            To Do
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     RESEARCH
+                                ================================================== -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="date-badge">
+                                            May 30
+                                        </span>
+
+                                    </td>
+
+
+                                    <td class="task-name">
+                                        Research
+                                    </td>
+
+
+                                    <td>
+                                        Gather requirements
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status status-todo">
+                                            To Do
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     API DEVELOPMENT
+                                ================================================== -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="date-badge">
+                                            June 10
+                                        </span>
+
+                                    </td>
+
+
+                                    <td class="task-name">
+                                        API Development
+                                    </td>
+
+
+                                    <td>
+                                        Build REST endpoints
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status status-progress">
+                                            In Progress
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     FRONTEND TESTING
+                                ================================================== -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="date-badge">
+                                            June 15
+                                        </span>
+
+                                    </td>
+
+
+                                    <td class="task-name">
+                                        Frontend Testing
+                                    </td>
+
+
+                                    <td>
+                                        Test UI components
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status status-todo">
+                                            To Do
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+
+                                <!-- =================================================
+                                     DEPLOYMENT
+                                ================================================== -->
+
+                                <tr>
+
+                                    <td>
+
+                                        <span class="date-badge">
+                                            June 20
+                                        </span>
+
+                                    </td>
+
+
+                                    <td class="task-name">
+                                        Deployment
+                                    </td>
+
+
+                                    <td>
+                                        Deploy to production
+                                    </td>
+
+
+                                    <td>
+
+                                        <span class="status status-todo">
+                                            To Do
+                                        </span>
+
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- =========================================================
+                     LEGEND
+                ========================================================== -->
+
+                <section class="legend-card">
+
+
+                    <h3>
+                        Calendar Legend
+                    </h3>
+
+
+                    <div class="legend-items">
+
+
+                        <!-- TODAY -->
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot today-dot"></span>
+
+                            <span>
+                                Today's Date
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- DUE DATE -->
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot deadline-dot"></span>
+
+                            <span>
+                                Due Date
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- IN PROGRESS -->
+
+                        <div class="legend-item">
+
+                            <span class="legend-dot progress-dot"></span>
+
+                            <span>
+                                In Progress
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+        </main>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <!-- Shared Sidebar -->
+    <script src="../jscode/sidebar.js"></script>
+
+
+    <!-- Calendar -->
+    <script src="../jscode/calendar.js"></script>
+
+
 </body>
 
 </html>

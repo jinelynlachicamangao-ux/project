@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications - 3D Project Management</title>
+
+    <link rel="stylesheet" href="../css/notification.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="page-layout">
+
+        <div id="sidebar-container"></div>
+
+        <div class="app">
+
+            <header class="header">
+                <div class="header-left">
+                    <h1 class="title">Notifications</h1>
+                    <p class="subtitle">Stay up to date with your projects</p>
+                </div>
+
+                <button class="secondary-action-btn" id="markAllBtn" type="button">
+                    <i class="fa-solid fa-check-double"></i>
+                    Mark all as read
+                </button>
+            </header>
+
+            <main class="notification-list" id="notificationList">
+                <!-- Notifications rendered here by notifications.js -->
+            </main>
+
+        </div>
+
+    </div>
+
+    <script src="../jscode/sidebar.js"></script>
+    <script src="../jscode/notification.js"></script>
+
+</body>
+</html>

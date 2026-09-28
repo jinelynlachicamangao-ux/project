@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D - Drag, Drop, Done</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap');
 
@@ -13,7 +16,8 @@
             box-sizing: border-box;
         }
 
-        html, body {
+        html,
+        body {
             margin: 0;
             padding: 0;
         }
@@ -21,8 +25,9 @@
         body {
             font-family: 'Inter', Arial, sans-serif;
             background-color: #08082b;
-            background-image: radial-gradient(circle at 15% 10%, #1f1f79, transparent 45%),
-                               radial-gradient(circle at 85% 90%, #0066ff, transparent 50%);
+            background-image:
+                radial-gradient(circle at 15% 10%, #1f1f79, transparent 45%),
+                radial-gradient(circle at 85% 90%, #0066ff, transparent 50%);
             background-attachment: fixed;
             color: #1c2340;
         }
@@ -32,7 +37,9 @@
             color: inherit;
         }
 
-        h1, h2, h3 {
+        h1,
+        h2,
+        h3 {
             font-family: 'Poppins', 'Inter', sans-serif;
             margin: 0;
         }
@@ -43,6 +50,8 @@
             background-clip: text;
             color: transparent;
         }
+
+        /* ================= BUTTONS ================= */
 
         .btn {
             display: inline-flex;
@@ -80,15 +89,16 @@
             color: #3b6bff;
         }
 
-        /* ============ NAVBAR ============ */
+        /* ================= NAVBAR ================= */
+
         .navbar {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 24px 32px;
-        }
+         width: 100%;
+        margin: 0;
+        display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px clamp(25px, 5vw, 80px);
+}
 
         .nav-logo {
             font-size: 24px;
@@ -97,7 +107,7 @@
 
         .nav-tagline {
             font-size: 11px;
-            color: #FFFFFF;
+            color: #ffffff;
             margin-top: -2px;
         }
 
@@ -114,7 +124,7 @@
         }
 
         .nav-links a:not(.btn):hover {
-            color: rgba(0, 42, 255, 0.533);
+            color: rgba(0, 194, 209, 0.9);
         }
 
         .nav-actions {
@@ -123,32 +133,84 @@
             gap: 12px;
         }
 
-        /* ============ HERO ============ */
+        .logo {
+            max-width: 70%;
+            height: auto;
+            max-height: 130px;
+            display: block;
+            margin: 0;
+        }
+
+        /* ================= HERO ================= */
+
         .hero {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 32px 90px;
-            display: flex;
-            align-items: center;
-            gap: 60px;
+    position: relative;
+
+    width: 100%;
+    min-height: calc(100vh - 120px);
+
+    margin: 0;
+    padding: 70px clamp(30px, 8vw, 140px);
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background-image: url("../logo&icons/imagess.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+        /* Dark gradient over the background image */
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                90deg,
+                rgba(8, 8, 43, 0.95) 0%,
+                rgba(8, 8, 43, 0.78) 25%,
+                rgba(8, 8, 43, 0.40) 55%,
+                rgba(8, 8, 43, 0.08) 100%
+            );
+
+            z-index: 0;
+            pointer-events: none;
         }
 
         .hero-copy {
+            position: relative;
+            z-index: 1;
+
             flex: 1;
+            max-width: 560px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
+
+            width: fit-content;
+
             background: #ffffff;
             border: 1px solid #dfe4f5;
             border-radius: 999px;
+
             padding: 7px 16px;
+
             font-size: 12.5px;
             font-weight: 600;
             color: #4b567f;
+
             margin-bottom: 22px;
+
             box-shadow: 0 2px 6px rgba(30, 45, 110, 0.06);
         }
 
@@ -163,14 +225,14 @@
             font-size: 48px;
             font-weight: 700;
             line-height: 1.15;
-            color: #FFFFFF;
+            color: #ffffff;
             margin-bottom: 20px;
         }
 
         .hero p {
             font-size: 16px;
             line-height: 1.6;
-            color: #FFFFFF;
+            color: #ffffff;
             max-width: 480px;
             margin-bottom: 32px;
         }
@@ -186,13 +248,6 @@
             padding: 15px 30px;
             font-size: 16px;
         }
-        .logo {
-    max-width: 70%;
-    height: auto;
-    max-height: 130px;
-    display: block;
-    margin: 0;
-}
 
         .hero-stats {
             display: flex;
@@ -203,74 +258,20 @@
             font-family: 'Poppins', sans-serif;
             font-size: 24px;
             font-weight: 700;
-            color: #FFFFFf;
+            color: #ffffff;
         }
 
         .hero-stat-label {
             font-size: 12.5px;
-            color: #FFFFFF;
+            color: #ffffff;
         }
 
-        /* ============ HERO VISUAL (mock board) ============ */
-        .hero-visual {
-            flex: 1;
-            background: #ffffff;
-            border: 1px solid #e5e9f7;
-            border-radius: 18px;
-            padding: 22px;
-            box-shadow: 0 20px 50px rgba(30, 45, 110, 0.1);
-        }
+        /* ================= FEATURES ================= */
 
-        .mock-col {
-            background: #f6f8fd;
-            border: 1px solid #e9ecf9;
-            border-radius: 12px;
-            padding: 14px;
-            margin-bottom: 12px;
-        }
-
-        .mock-col-title {
-            font-size: 12px;
-            font-weight: 600;
-            color: #7581ac;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
-            margin-bottom: 10px;
-        }
-
-        .mock-card {
-            background: #ffffff;
-            border: 1px solid #e9ecf9;
-            border-radius: 8px;
-            padding: 10px 12px;
-            font-size: 13px;
-            color: #2b3357;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .mock-card:last-child {
-            margin-bottom: 0;
-        }
-
-        .mock-tag {
-            font-size: 10px;
-            font-weight: 600;
-            padding: 3px 8px;
-            border-radius: 6px;
-        }
-
-        .tag-blue { background: #e8edfb; color: #3b6bff; }
-        .tag-teal { background: #e3f9fb; color: #00a8b5; }
-        .tag-red  { background: #fdeaea; color: #e5484d; }
-
-        /* ============ FEATURES ============ */
         .features {
-            max-width: 1200px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px 32px 90px;
+            padding: 90px clamp(25px, 5vw, 100px);
         }
 
         .section-heading {
@@ -282,40 +283,54 @@
         .section-heading h2 {
             font-size: 32px;
             font-weight: 700;
-            color: #FFFFFF;
+            color: #ffffff;
             margin-bottom: 12px;
         }
 
         .section-heading p {
             font-size: 15px;
-            color: #FFFFFF;
+            color: #ffffff;
             line-height: 1.6;
         }
 
         .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
 
         .feature-card {
             background: #ffffff;
             border: 1px solid #e5e9f7;
             border-radius: 16px;
             padding: 28px;
+
             box-shadow: 0 4px 14px rgba(30, 45, 110, 0.05);
         }
 
         .feature-icon {
             width: 46px;
             height: 46px;
+
             border-radius: 12px;
-            background: linear-gradient(135deg, #3b6bff, #00c2d1);
+
+            background: linear-gradient(
+                135deg,
+                #3b6bff,
+                #00c2d1
+            );
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             color: #ffffff;
             font-size: 18px;
+
             margin-bottom: 18px;
         }
 
@@ -333,20 +348,31 @@
             margin: 0;
         }
 
-        /* ============ CTA BAND ============ */
+        /* ================= CTA BAND ================= */
+
         .cta-band {
-            max-width: 1200px;
-            margin: 0 auto 90px;
-            padding: 0 32px;
-        }
+    width: 100%;
+    margin: 0 0 90px;
+    padding: 0 clamp(25px, 5vw, 100px);
+}
 
         .cta-inner {
-            background: linear-gradient(160deg, #1a1f6e 0%, #0a0e30 100%);
-            border-radius: 20px;
-            padding: 56px 40px;
-            text-align: center;
-            color: #ffffff;
-        }
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+
+    background: linear-gradient(
+        160deg,
+        #1a1f6e 0%,
+        #0a0e30 100%
+    );
+
+    border-radius: 20px;
+    padding: 56px 40px;
+
+    text-align: center;
+    color: #ffffff;
+}
 
         .cta-inner h2 {
             font-size: 28px;
@@ -360,25 +386,21 @@
             margin-bottom: 28px;
         }
 
-        /* ============ FOOTER ============ */
-        footer {
-            border-top: 1px solid #e5e9f7;
-            padding: 28px 32px;
-        }
+        /* ================= FOOTER ================= */
 
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
+        footer {
+    border-top: 1px solid #e5e9f7;
+    padding: 28px clamp(25px, 5vw, 80px);
+}
+
+       footer {
+    border-top: 1px solid #e5e9f7;
+    padding: 28px clamp(25px, 5vw, 80px);
+}
 
         .footer-inner p {
             font-size: 13px;
-            color: #8891b8;
+            color: #ffffff;
             margin: 0;
         }
 
@@ -389,65 +411,28 @@
 
         .footer-links a {
             font-size: 13px;
-            color: #7581ac;
+            color: #ffffff;
         }
 
         .footer-links a:hover {
-            color: #12173a;
+            color: #00c2d1;
         }
 
-        /* ============ RESPONSIVE ============ */
-        @media (max-width: 900px) {
-            .nav-links a:not(.btn) {
-                display: none;
-            }
-            .hero {
-                flex-direction: column;
-                text-align: center;
-            }
-            .hero p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-actions {
-                justify-content: center;
-            }
-            .hero-stats {
-                justify-content: center;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+        /* ================= MODAL POPUPS ================= */
 
-        @media (max-width: 640px) {
-            .hero h1 {
-                font-size: 34px;
-            }
-            .hero-actions {
-                flex-direction: column;
-                width: 100%;
-            }
-            .btn-large {
-                width: 100%;
-            }
-            .hero-stats {
-                gap: 24px;
-                flex-wrap: wrap;
-            }
-        }
-
-
-
-        /* ============ MODAL POPUPS ============ */
         .login-modal {
             display: none;
+
             position: fixed;
             inset: 0;
+
             z-index: 1000;
+
             align-items: center;
             justify-content: center;
+
             padding: 20px;
+
             background: rgba(8, 8, 43, 0.75);
         }
 
@@ -457,10 +442,14 @@
 
         .login-modal-content {
             position: relative;
+
             width: min(100%, 560px);
             height: min(780px, 90vh);
+
             overflow: hidden;
+
             border-radius: 16px;
+
             background: transparent;
             box-shadow: none;
         }
@@ -473,12 +462,17 @@
 
         .signup-modal {
             display: none;
+
             position: fixed;
             inset: 0;
+
             z-index: 1000;
+
             align-items: center;
             justify-content: center;
+
             padding: 20px;
+
             background: rgba(8, 8, 43, 0.75);
         }
 
@@ -488,10 +482,14 @@
 
         .signup-modal-content {
             position: relative;
+
             width: min(100%, 510px);
             height: min(840px, 90vh);
+
             overflow: hidden;
+
             border-radius: 16px;
+
             background: transparent;
             box-shadow: none;
         }
@@ -502,261 +500,985 @@
             border: 0;
         }
 
+        /* ================= RESPONSIVE ================= */
+
+       /* ================= RESPONSIVE ================= */
+
+@media (max-width: 1200px) {
+
+    .navbar {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .hero {
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+
+    .features {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+
+    .cta-band {
+        padding-left: 35px;
+        padding-right: 35px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 20px 25px;
+    }
+
+    .nav-links a:not(.btn) {
+        display: none;
+    }
+
+    .hero {
+        min-height: 650px;
+        height: auto;
+
+        padding: 70px 30px;
+
+        text-align: center;
+
+        background-position: center center;
+    }
+
+    .hero-copy {
+        max-width: 100%;
+        align-items: center;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-stats {
+        justify-content: center;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media (max-width: 640px) {
+
+    .navbar {
+        padding: 18px 16px;
+    }
+
+    .nav-actions {
+        gap: 6px;
+    }
+
+    .nav-actions .btn {
+        padding: 10px 14px;
+        font-size: 12px;
+    }
+
+    .hero {
+        min-height: 650px;
+        padding: 50px 20px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero p {
+        font-size: 14px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-large {
+        width: 100%;
+    }
+
+    .hero-stats {
+        gap: 24px;
+        flex-wrap: wrap;
+    }
+
+    .features {
+        padding: 70px 20px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .cta-band {
+        padding: 0 20px;
+    }
+
+    .cta-inner {
+        padding: 45px 25px;
+    }
+}
+
+        /* ================= EASE-IN ANIMATIONS ================= */
+
+        @media (prefers-reduced-motion: no-preference) {
+
+            .hero-badge,
+            .hero h1,
+            .hero p,
+            .hero-actions,
+            .hero-stats {
+                animation: fadeInUp 0.7s cubic-bezier(0.42, 0, 1, 1) forwards;
+                opacity: 0;
+            }
+
+            .hero-badge {
+                animation-delay: 0s;
+            }
+
+            .hero h1 {
+                animation-delay: 0.1s;
+            }
+
+            .hero p {
+                animation-delay: 0.2s;
+            }
+
+            .hero-actions {
+                animation-delay: 0.3s;
+            }
+
+            .hero-stats {
+                animation-delay: 0.4s;
+            }
+
+            .feature-card,
+            .cta-inner,
+            .section-heading {
+                opacity: 0;
+            }
+
+            .feature-card.reveal,
+            .cta-inner.reveal,
+            .section-heading.reveal {
+                animation: fadeInUp 0.7s cubic-bezier(0.42, 0, 1, 1) forwards;
+            }
+
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(24px);
+                }
+
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
     </style>
 </head>
 
+
 <body>
 
-    <!-- NAVBAR -->
+    <!-- ================= NAVBAR ================= -->
+
     <nav class="navbar">
+
         <div>
-            <div class="nav-logo gradient-text"><img src="../logo&icons/logo3dnew.png" alt="Logo" class="logo"></div>
-            <div class="nav-tagline">Drag, Drop, Done</div>
+            <div class="nav-logo gradient-text">
+                <img src="../logo&icons/logo3dnew.png"
+                    alt="Logo"
+                    class="logo">
+            </div>
+
+            <div class="nav-tagline">
+                Drag, Drop, Done
+            </div>
         </div>
+
 
         <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How it works</a>
-            <a href="#pricing">Pricing</a>
+
+            <a href="#features">
+                Features
+            </a>
+
+            <a href="#how-it-works">
+                How it works
+            </a>
+
+            <a href="#pricing">
+                Pricing
+            </a>
+
         </div>
+
 
         <div class="nav-actions">
-            <a href="LoginPage.html" class="btn btn-outline" id="login-link">Log In</a>
-            <a href="SignupPage.html" class="btn btn-primary" id="signup-link">Sign Up Free</a>
+
+            <a href="LoginPage.html"
+                class="btn btn-outline"
+                id="login-link">
+                Log In
+            </a>
+
+            <a href="SignupPage.html"
+                class="btn btn-primary"
+                id="signup-link">
+                Sign Up Free
+            </a>
+
         </div>
+
     </nav>
 
-    <!-- HERO -->
+
+    <!-- ================= HERO ================= -->
+
     <section class="hero">
+
         <div class="hero-copy">
+
             <div class="hero-badge">
+
                 <span class="dot"></span>
+
                 Built for fast-moving teams
+
             </div>
-            <h1>Organize your work.<br><span class="gradient-text">Do it faster.</span></h1>
-            <p>3D brings your tasks, projects, and deadlines into one clean board. Drag it, drop it, get it done — no clutter, no chaos.</p>
+
+
+            <h1>
+
+                Organize your work.<br>
+
+                <span class="gradient-text">
+                    Do it faster.
+                </span>
+
+            </h1>
+
+
+            <p>
+
+                3D brings your tasks, projects, and deadlines into one
+                clean board. Drag it, drop it, get it done —
+                no clutter, no chaos.
+
+            </p>
+
 
             <div class="hero-actions">
-                <a href="SignupPage.html" class="btn btn-primary btn-large">Get Started Free</a>
-                <a href="#how-it-works" class="btn btn-outline btn-large">See How It Works</a>
+
+                <a href="SignupPage.html"
+                    class="btn btn-primary btn-large">
+
+                    Get Started Free
+
+                </a>
+
+
+                <a href="#how-it-works"
+                    class="btn btn-outline btn-large">
+
+                    See How It Works
+
+                </a>
+
             </div>
+
 
             <div class="hero-stats">
+
                 <div>
-                    <div class="hero-stat-number">0+</div>
-                    <div class="hero-stat-label">Tasks completed</div>
+
+                    <div class="hero-stat-number">
+                        0+
+                    </div>
+
+                    <div class="hero-stat-label">
+                        Tasks completed
+                    </div>
+
                 </div>
+
+
                 <div>
-                    <div class="hero-stat-number">1+</div>
-                    <div class="hero-stat-label">Active teams</div>
+
+                    <div class="hero-stat-number">
+                        1+
+                    </div>
+
+                    <div class="hero-stat-label">
+                        Active teams
+                    </div>
+
                 </div>
+
+
                 <div>
-                    <div class="hero-stat-number">5/5</div>
-                    <div class="hero-stat-label">Average rating</div>
+
+                    <div class="hero-stat-number">
+                        5/5
+                    </div>
+
+                    <div class="hero-stat-label">
+                        Average rating
+                    </div>
+
                 </div>
+
             </div>
+
         </div>
 
-        <div class="hero-visual">
-            <div class="mock-col">
-                <div class="mock-col-title">To Do</div>
-                <div class="mock-card">
-                    Login Page
-                    <span class="mock-tag tag-blue">UI</span>
-                </div>
-                <div class="mock-card">
-                    Database Design
-                    <span class="mock-tag tag-red">Urgent</span>
-                </div>
-            </div>
-            <div class="mock-col">
-                <div class="mock-col-title">In Progress</div>
-                <div class="mock-card">
-                    Homepage Design
-                    <span class="mock-tag tag-teal">Design</span>
-                </div>
-            </div>
-            <div class="mock-col" style="margin-bottom: 0;">
-                <div class="mock-col-title">Done</div>
-                <div class="mock-card">
-                    Logo Design
-                    <span class="mock-tag tag-blue">Brand</span>
-                </div>
-            </div>
-        </div>
     </section>
 
-    <!-- FEATURES -->
-    <section class="features" id="features">
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features"
+        id="features">
+
         <div class="section-heading">
-            <h2>Everything your team needs</h2>
-            <p>From quick to-dos to full project timelines, 3D keeps everything visible and in sync.</p>
+
+            <h2>
+                Everything your team needs
+            </h2>
+
+            <p>
+                From quick to-dos to full project timelines,
+                3D keeps everything visible and in sync.
+            </p>
+
         </div>
+
 
         <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-table-columns"></i></div>
-                <h3>Drag & Drop Boards</h3>
-                <p>Move tasks across To Do, In Progress, and Done with a single drag. No forms, no friction.</p>
-            </div>
+
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
-                <h3>Deadlines & Calendar</h3>
-                <p>See every upcoming deadline at a glance, and never miss a launch date again.</p>
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-table-columns"></i>
+                </div>
+
+                <h3>
+                    Drag & Drop Boards
+                </h3>
+
+                <p>
+                    Move tasks across To Do, In Progress, and Done
+                    with a single drag. No forms, no friction.
+                </p>
+
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h3>Real-Time Analytics</h3>
-                <p>Track team progress with live stats on completed, overdue, and in-progress work.</p>
-            </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
-                <h3>Team Collaboration</h3>
-                <p>Assign tasks, leave updates, and keep everyone aligned inside one shared workspace.</p>
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-calendar-days"></i>
+                </div>
+
+                <h3>
+                    Deadlines & Calendar
+                </h3>
+
+                <p>
+                    See every upcoming deadline at a glance,
+                    and never miss a launch date again.
+                </p>
+
             </div>
 
-            <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-bell"></i></div>
-                <h3>Smart Activity Feed</h3>
-                <p>Know exactly who moved what, and when — recent activity is always one glance away.</p>
-            </div>
 
             <div class="feature-card">
-                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
-                <h3>Built for Speed</h3>
-                <p>A fast, lightweight interface that stays out of your way so your team can focus on work.</p>
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+
+                <h3>
+                    Real-Time Analytics
+                </h3>
+
+                <p>
+                    Track team progress with live stats on completed,
+                    overdue, and in-progress work.
+                </p>
+
             </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <h3>
+                    Team Collaboration
+                </h3>
+
+                <p>
+                    Assign tasks, leave updates, and keep everyone
+                    aligned inside one shared workspace.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <h3>
+                    Smart Activity Feed
+                </h3>
+
+                <p>
+                    Know exactly who moved what, and when —
+                    recent activity is always one glance away.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <h3>
+                    Built for Speed
+                </h3>
+
+                <p>
+                    A fast, lightweight interface that stays out
+                    of your way so your team can focus on work.
+                </p>
+
+            </div>
+
+
         </div>
+
     </section>
 
-    <div class="login-modal" id="login-modal" role="dialog" aria-modal="true" aria-label="Log in">
+
+    <!-- ================= LOGIN MODAL ================= -->
+
+    <div class="login-modal"
+        id="login-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Log in">
+
         <div class="login-modal-content">
-            <iframe src="LoginPage.html" title="Log in"></iframe>
+
+            <iframe src="LoginPage.html"
+                title="Log in">
+            </iframe>
+
         </div>
+
     </div>
 
-    <div class="signup-modal" id="signup-modal" role="dialog" aria-modal="true" aria-label="Sign up">
+
+    <!-- ================= SIGNUP MODAL ================= -->
+
+    <div class="signup-modal"
+        id="signup-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Sign up">
+
         <div class="signup-modal-content">
-            <iframe src="SignupPage.html" title="Sign up"></iframe>
+
+            <iframe src="SignupPage.html"
+                title="Sign up">
+            </iframe>
+
         </div>
+
     </div>
 
-    <script>
-        const loginLink = document.getElementById('login-link');
-        const loginModal = document.getElementById('login-modal');
-        const loginFrame = loginModal.querySelector('iframe');
-        const closeLoginModal = () => loginModal.classList.remove('open');
 
-        const continueAfterLogin = (destination) => {
-            closeLoginModal();
-            if (destination) window.location.href = destination;
-        };
+    <!-- ================= CTA ================= -->
 
-        loginLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            loginModal.classList.add('open');
-            loginFrame.src = 'LoginPage.html';
-        });
-
-        loginModal.addEventListener('click', (event) => {
-            if (event.target === loginModal) closeLoginModal();
-        });
-
-        // LoginPage.html should send this message after a successful login.
-        window.addEventListener('message', (event) => {
-            if (event.source !== loginFrame.contentWindow) return;
-            if (event.data?.type !== 'login-complete') return;
-
-            continueAfterLogin(event.data.destination || event.data.redirectUrl);
-        });
-
-        // Also continue if the login page redirects the iframe after login.
-        loginFrame.addEventListener('load', () => {
-            try {
-                const destination = loginFrame.contentWindow.location.href;
-                if (loginModal.classList.contains('open') &&
-                    !destination.endsWith('/LoginPage.html') &&
-                    !destination.endsWith('LoginPage.html')) {
-                    continueAfterLogin(destination);
-                }
-            } catch (error) {
-                // Ignore cross-origin iframe navigation.
-            }
-        });
-
-        const signupLink = document.getElementById('signup-link');
-        const signupModal = document.getElementById('signup-modal');
-        const signupFrame = signupModal.querySelector('iframe');
-        const closeSignupModal = () => signupModal.classList.remove('open');
-
-        const continueAfterSignup = (destination) => {
-            closeSignupModal();
-            if (destination) window.location.href = destination;
-        };
-
-        signupLink.addEventListener('click', (event) => {
-            event.preventDefault();
-            signupModal.classList.add('open');
-            signupFrame.src = 'SignupPage.html';
-        });
-
-        signupModal.addEventListener('click', (event) => {
-            if (event.target === signupModal) closeSignupModal();
-        });
-
-        // SignupPage.html should send this message after a successful signup.
-        window.addEventListener('message', (event) => {
-            if (event.source !== signupFrame.contentWindow) return;
-            if (!event.data || typeof event.data !== 'object' || event.data.type !== 'signup-complete') return;
-
-            continueAfterSignup(event.data.destination || event.data.redirectUrl);
-        });
-
-        // Also continue if the signup page redirects the iframe after signup.
-        signupFrame.addEventListener('load', () => {
-            try {
-                const destination = signupFrame.contentWindow.location.href;
-                if (signupModal.classList.contains('open') &&
-                    !destination.endsWith('/SignupPage.html') &&
-                    !destination.endsWith('SignupPage.html')) {
-                    continueAfterSignup(destination);
-                }
-            } catch (error) {
-                // Ignore cross-origin iframe navigation.
-            }
-        });
-
-        // The X inside LoginPage.html / SignupPage.html sends this message to close its modal.
-        window.addEventListener('message', (event) => {
-            if (event.data?.type !== 'close-modal') return;
-            if (event.source === loginFrame.contentWindow) closeLoginModal();
-            if (event.source === signupFrame.contentWindow) closeSignupModal();
-        });
-    </script>
-
-    <!-- CTA BAND -->
     <section class="cta-band">
+
         <div class="cta-inner">
-            <h2>Ready to get organized?</h2>
-            <p>Join thousands of teams already using 3D to plan, track, and ship their work.</p>
-            <a href="SignupPage.html" class="btn btn-primary btn-large">Create Your Free Account</a>
+
+            <h2>
+                Ready to get organized?
+            </h2>
+
+            <p>
+                Join thousands of teams already using 3D
+                to plan, track, and ship their work.
+            </p>
+
+            <a href="SignupPage.html"
+                class="btn btn-primary btn-large">
+
+                Create Your Free Account
+
+            </a>
+
         </div>
+
     </section>
 
-    <!-- FOOTER -->
+
+    <!-- ================= FOOTER ================= -->
+
     <footer>
+
         <div class="footer-inner">
-            <p>&copy; 2026 3D Project Management. All rights reserved.</p>
+
+            <p>
+                &copy; 2026 3D Project Management.
+                All rights reserved.
+            </p>
+
+
             <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact</a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms of Service
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
             </div>
+
         </div>
+
     </footer>
 
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        /* ================= LOGIN ================= */
+
+        const loginLink =
+            document.getElementById('login-link');
+
+        const loginModal =
+            document.getElementById('login-modal');
+
+        const loginFrame =
+            loginModal.querySelector('iframe');
+
+
+        const closeLoginModal = () => {
+            loginModal.classList.remove('open');
+        };
+
+
+        const continueAfterLogin = (destination) => {
+
+            closeLoginModal();
+
+            if (destination) {
+                window.location.href = destination;
+            }
+
+        };
+
+
+        loginLink.addEventListener('click', (event) => {
+
+            event.preventDefault();
+
+            loginModal.classList.add('open');
+
+            loginFrame.src = 'LoginPage.html';
+
+        });
+
+
+        loginModal.addEventListener('click', (event) => {
+
+            if (event.target === loginModal) {
+                closeLoginModal();
+            }
+
+        });
+
+
+        window.addEventListener('message', (event) => {
+
+            if (event.source !== loginFrame.contentWindow) {
+                return;
+            }
+
+            if (event.data?.type !== 'login-complete') {
+                return;
+            }
+
+            continueAfterLogin(
+                event.data.destination ||
+                event.data.redirectUrl
+            );
+
+        });
+
+
+        loginFrame.addEventListener('load', () => {
+
+            try {
+
+                const destination =
+                    loginFrame.contentWindow.location.href;
+
+                if (
+                    loginModal.classList.contains('open') &&
+                    !destination.endsWith('/LoginPage.html') &&
+                    !destination.endsWith('LoginPage.html')
+                ) {
+
+                    continueAfterLogin(destination);
+
+                }
+
+            } catch (error) {
+
+                // Ignore cross-origin iframe navigation.
+
+            }
+
+        });
+
+
+        /* ================= SIGNUP ================= */
+
+        const signupLink =
+            document.getElementById('signup-link');
+
+        const signupModal =
+            document.getElementById('signup-modal');
+
+        const signupFrame =
+            signupModal.querySelector('iframe');
+
+
+        const closeSignupModal = () => {
+
+            signupModal.classList.remove('open');
+
+        };
+
+
+        const continueAfterSignup = (destination) => {
+
+            closeSignupModal();
+
+            if (destination) {
+                window.location.href = destination;
+            }
+
+        };
+
+
+        signupLink.addEventListener('click', (event) => {
+
+            event.preventDefault();
+
+            signupModal.classList.add('open');
+
+            signupFrame.src = 'SignupPage.html';
+
+        });
+
+
+        signupModal.addEventListener('click', (event) => {
+
+            if (event.target === signupModal) {
+                closeSignupModal();
+            }
+
+        });
+
+
+        window.addEventListener('message', (event) => {
+
+            if (event.source !== signupFrame.contentWindow) {
+                return;
+            }
+
+            if (
+                !event.data ||
+                typeof event.data !== 'object' ||
+                event.data.type !== 'signup-complete'
+            ) {
+                return;
+            }
+
+            continueAfterSignup(
+                event.data.destination ||
+                event.data.redirectUrl
+            );
+
+        });
+
+
+        signupFrame.addEventListener('load', () => {
+
+            try {
+
+                const destination =
+                    signupFrame.contentWindow.location.href;
+
+                if (
+                    signupModal.classList.contains('open') &&
+                    !destination.endsWith('/SignupPage.html') &&
+                    !destination.endsWith('SignupPage.html')
+                ) {
+
+                    continueAfterSignup(destination);
+
+                }
+
+            } catch (error) {
+
+                // Ignore cross-origin iframe navigation.
+
+            }
+
+        });
+
+
+        /* ================= CLOSE MODALS ================= */
+
+        window.addEventListener('message', (event) => {
+
+            if (event.data?.type !== 'close-modal') {
+                return;
+            }
+
+            if (event.source === loginFrame.contentWindow) {
+                closeLoginModal();
+            }
+
+            if (event.source === signupFrame.contentWindow) {
+                closeSignupModal();
+            }
+
+        });
+
+
+        /* ================= SCROLL REVEAL ================= */
+
+        (function () {
+
+            var prefersReducedMotion =
+                window.matchMedia &&
+                window.matchMedia(
+                    '(prefers-reduced-motion: reduce)'
+                ).matches;
+
+
+            if (
+                prefersReducedMotion ||
+                !('animate' in Element.prototype)
+            ) {
+                return;
+            }
+
+
+            function fadeInUp(el, delay) {
+
+                if (!el) return;
+
+                el.style.opacity = '0';
+
+                el.animate(
+
+                    [
+                        {
+                            opacity: 0,
+                            transform: 'translateY(24px)'
+                        },
+
+                        {
+                            opacity: 1,
+                            transform: 'translateY(0)'
+                        }
+                    ],
+
+                    {
+                        duration: 700,
+                        delay: delay || 0,
+                        easing: 'cubic-bezier(0.42, 0, 1, 1)',
+                        fill: 'forwards'
+                    }
+
+                );
+
+            }
+
+
+            document.addEventListener(
+                'DOMContentLoaded',
+                function () {
+
+                    var heroBadge =
+                        document.querySelector('.hero-badge');
+
+                    var heroHeading =
+                        document.querySelector('.hero h1');
+
+                    var heroParagraph =
+                        document.querySelector('.hero p');
+
+                    var heroActions =
+                        document.querySelector('.hero-actions');
+
+                    var heroStats =
+                        document.querySelector('.hero-stats');
+
+
+                    fadeInUp(heroBadge, 0);
+
+                    fadeInUp(heroHeading, 100);
+
+                    fadeInUp(heroParagraph, 200);
+
+                    fadeInUp(heroActions, 300);
+
+                    fadeInUp(heroStats, 400);
+
+                }
+            );
+
+
+            function setupScrollReveal() {
+
+                var targets =
+                    document.querySelectorAll(
+                        '.feature-card, .cta-inner, .section-heading'
+                    );
+
+
+                if (!targets.length) {
+                    return;
+                }
+
+
+                if (!('IntersectionObserver' in window)) {
+
+                    targets.forEach(function (el) {
+                        fadeInUp(el, 0);
+                    });
+
+                    return;
+                }
+
+
+                var featureIndex = 0;
+
+
+                var observer =
+                    new IntersectionObserver(
+                        function (entries) {
+
+                            entries.forEach(
+                                function (entry) {
+
+                                    if (!entry.isIntersecting) {
+                                        return;
+                                    }
+
+
+                                    var el = entry.target;
+
+                                    var delay = 0;
+
+
+                                    if (
+                                        el.classList.contains(
+                                            'feature-card'
+                                        )
+                                    ) {
+
+                                        delay =
+                                            (featureIndex % 6) * 90;
+
+                                        featureIndex++;
+
+                                    }
+
+
+                                    fadeInUp(el, delay);
+
+                                    observer.unobserve(el);
+
+                                }
+                            );
+
+                        },
+
+                        {
+                            threshold: 0.15,
+                            rootMargin:
+                                '0px 0px -60px 0px'
+                        }
+                    );
+
+
+                targets.forEach(function (el) {
+
+                    el.style.opacity = '0';
+
+                    observer.observe(el);
+
+                });
+
+            }
+
+
+            document.addEventListener(
+                'DOMContentLoaded',
+                setupScrollReveal
+            );
+
+        })();
+
+    </script>
+
 </body>
+
 </html>

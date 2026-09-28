@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - 3D Project Management</title>
+
+    <!-- THEME (must load before sidebar.css / settings.css) -->
+    <link rel="stylesheet" href="../css/theme.css">
+    <script src="../jscode/theme.js"></script>
+
+    <link rel="stylesheet" href="../css/settings.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div class="page-layout">
+
+        <div id="sidebar-container"></div>
+
+        <div class="app">
+
+            <header class="header">
+                <div class="header-left">
+                    <h1 class="title">Settings</h1>
+                    <p class="subtitle">Manage your profile, appearance, and account</p>
+                </div>
+            </header>
+
+            <div class="settings-layout">
+
+                <!-- SUB-NAVIGATION -->
+
+                <nav class="settings-nav" id="settingsNav">
+
+                    <div class="nav-group">
+                        <span class="nav-group-label">ACCOUNT</span>
+                        <a href="#photo-cover" class="nav-link active" data-target="photo-cover">Photo &amp; cover</a>
+                        <a href="#personal-details" class="nav-link" data-target="personal-details">Personal details</a>
+                        <a href="#appearance" class="nav-link" data-target="appearance">Appearance</a>
+                    </div>
+
+                    <div class="nav-group">
+                        <span class="nav-group-label">PREFERENCES</span>
+                        <a href="#notifications" class="nav-link" data-target="notifications">Notifications</a>
+                    </div>
+
+                    <div class="nav-group">
+                        <span class="nav-group-label">SECURITY</span>
+                        <a href="#password" class="nav-link" data-target="password">Password</a>
+                        <a href="#danger-zone" class="nav-link danger" data-target="danger-zone">Danger zone</a>
+                    </div>
+
+                </nav>
+
+                <!-- CONTENT -->
+
+                <div class="settings-content">
+
+                    <form class="settings-form" id="settingsForm">
+
+                        <!-- PHOTO & COVER -->
+
+                        <section class="settings-card" id="photo-cover">
+
+                            <span class="card-label">ACCOUNT</span>
+                            <h2>Photo &amp; cover</h2>
+
+                            <div class="upload-row">
+
+                                <div class="upload-preview avatar-preview" id="avatarPreview">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+
+                                <div class="upload-info">
+                                    <h3>Your photo</h3>
+                                    <p class="upload-hint">
+                                        File smaller than 10MB and at least 400×400px. Shown in the member
+                                        directory and your profile page.
+                                    </p>
+                                    <div class="upload-actions">
+                                        <label class="upload-btn" for="avatarInput">
+                                            <i class="fa-solid fa-upload"></i>
+                                            Upload photo
+                                        </label>
+                                        <input type="file" id="avatarInput" accept="image/*" hidden>
+                                        <button type="button" class="icon-btn" id="removeAvatarBtn" aria-label="Remove photo">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="upload-divider"></div>
+
+                            <div class="upload-row">
+
+                                <div class="upload-preview cover-preview" id="coverPreview">
+                                    <i class="fa-solid fa-image"></i>
+                                </div>
+
+                                <div class="upload-info">
+                                    <h3>Profile page cover</h3>
+                                    <p class="upload-hint">
+                                        File smaller than 10MB and at least 1200×300px. Shown as the banner
+                                        on your profile page.
+                                    </p>
+                                    <div class="upload-actions">
+                                        <label class="upload-btn" for="coverInput">
+                                            <i class="fa-solid fa-upload"></i>
+                                            Upload photo
+                                        </label>
+                                        <input type="file" id="coverInput" accept="image/*" hidden>
+                                        <button type="button" class="icon-btn" id="removeCoverBtn" aria-label="Remove cover">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </section>
+
+                        <!-- PERSONAL DETAILS -->
+
+                        <section class="settings-card" id="personal-details">
+
+                            <span class="card-label">ACCOUNT</span>
+                            <h2>Personal details</h2>
+
+                            <div class="form-group">
+                                <label for="emailInput">Email address</label>
+                                <input id="emailInput" type="email" placeholder="you@example.com" disabled>
+                                <p class="field-message">Contact support to change your login email.</p>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nameInput">Full name *</label>
+                                    <input id="nameInput" type="text" placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="displayNameInput">What should we call you? *</label>
+                                    <input id="displayNameInput" type="text" placeholder="Preferred name">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="jobTitleInput">Job title</label>
+                                    <input id="jobTitleInput" type="text" placeholder="e.g. Product Designer">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phoneInput">Phone number</label>
+                                    <input id="phoneInput" type="tel" placeholder="+63 900 000 0000">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="timezoneInput">Time zone</label>
+                                    <select id="timezoneInput">
+                                        <option value="Asia/Manila">Asia/Manila (GMT+8)</option>
+                                        <option value="UTC">UTC</option>
+                                        <option value="America/New_York">America/New York (GMT-5)</option>
+                                        <option value="America/Los_Angeles">America/Los Angeles (GMT-8)</option>
+                                        <option value="Europe/London">Europe/London (GMT+0)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="genderInput">Gender</label>
+                                    <select id="genderInput">
+                                        <option value="">Prefer not to say</option>
+                                        <option value="female">Female</option>
+                                        <option value="male">Male</option>
+                                        <option value="nonbinary">Non-binary</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="dobInput">Date of birth</label>
+                                <input id="dobInput" type="date">
+                            </div>
+
+                        </section>
+
+                        <!-- APPEARANCE -->
+
+                        <section class="settings-card" id="appearance">
+
+                            <span class="card-label">APPEARANCE</span>
+                            <h2>Theme</h2>
+                            <p class="card-hint">Choose how 3D Project Management looks on this device.</p>
+
+                            <div class="theme-options" id="themeOptions">
+
+                                <button type="button" class="theme-option" data-theme-value="light">
+                                    <span class="theme-preview theme-preview-light">
+                                        <i class="fa-solid fa-sun"></i>
+                                    </span>
+                                    <span>Light</span>
+                                </button>
+
+                                <button type="button" class="theme-option" data-theme-value="dark">
+                                    <span class="theme-preview theme-preview-dark">
+                                        <i class="fa-solid fa-moon"></i>
+                                    </span>
+                                    <span>Dark</span>
+                                </button>
+
+                                <button type="button" class="theme-option" data-theme-value="system">
+                                    <span class="theme-preview theme-preview-system">
+                                        <i class="fa-solid fa-display"></i>
+                                    </span>
+                                    <span>System</span>
+                                </button>
+
+                            </div>
+
+                        </section>
+
+                        <!-- NOTIFICATIONS -->
+
+                        <section class="settings-card" id="notifications">
+
+                            <span class="card-label">PREFERENCES</span>
+                            <h2>Notifications</h2>
+
+                            <div class="toggle-row">
+                                <div>
+                                    <strong>Email notifications</strong>
+                                    <span>Get emailed about task updates</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="emailToggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-row">
+                                <div>
+                                    <strong>Deadline reminders</strong>
+                                    <span>Reminders before tasks are due</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="reminderToggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-row">
+                                <div>
+                                    <strong>Weekly summary</strong>
+                                    <span>A digest of your week every Monday</span>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="summaryToggle">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                        </section>
+
+                        <!-- PASSWORD -->
+
+                        <section class="settings-card" id="password">
+
+                            <span class="card-label">SECURITY</span>
+                            <h2>Change password</h2>
+
+                            <div class="form-group">
+                                <label for="currentPasswordInput">Current password</label>
+                                <input id="currentPasswordInput" type="password" placeholder="••••••••">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="newPasswordInput">New password</label>
+                                    <input id="newPasswordInput" type="password" placeholder="••••••••">
+                                </div>
+                                <div class="form-group">
+                                    <label for="confirmPasswordInput">Confirm new password</label>
+                                    <input id="confirmPasswordInput" type="password" placeholder="••••••••">
+                                </div>
+                            </div>
+
+                            <p class="field-message" id="passwordMessage"></p>
+
+                        </section>
+
+                        <div class="settings-actions">
+                            <span class="save-status" id="saveStatus">Saved</span>
+                            <button type="button" class="secondary-btn" id="viewProfileBtn">View my profile</button>
+                            <button type="submit" class="primary-btn">
+                                <i class="fa-solid fa-check"></i>
+                                Save changes
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <!-- DANGER ZONE -->
+
+                    <section class="settings-card danger-card" id="danger-zone">
+
+                        <span class="card-label danger-label">DANGER ZONE</span>
+                        <h2>Delete account</h2>
+                        <p class="card-hint">
+                            Permanently delete your account and all of your projects, tasks, and data. This cannot be undone.
+                        </p>
+
+                        <button type="button" class="danger-btn" id="deleteAccountBtn">
+                            <i class="fa-solid fa-trash"></i>
+                            Delete my account
+                        </button>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../jscode/sidebar.js"></script>
+    <script src="../jscode/settings.js"></script>
+
+</body>
+</html>
