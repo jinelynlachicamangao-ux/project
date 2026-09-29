@@ -5,88 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3D - Project Management</title>
-    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="stylesheet" href="../css/index.css">
 </head>
 
 <body>
     <div class="app-container">
-        <!-- For sidebar Nav (Donnot touch this just the css)  -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h1><img src="../logo&icons/logo3d.png" alt="Logo" class="logo"></h1>
-                <p>Drag, Drop, Done</p>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-logo">
+                    <img src="../logo&icons/logo3dnew.png" alt="3D Project Management">
+                </div>
+                <div class="brand-name">
+                    <h2>3D</h2>
+                    <p>Project Management</p>
+                </div>
             </div>
 
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item">
-                        <a href="Dashboard.html" target="content">
-                            Dashboard
-                        </a>
-                    </li>
+            <div class="sidebar-line"></div>
 
-                    <li class="nav-item">
-                        <a href="project.html" target="content">
-                            Projects
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="mytask.html" target="content">
-                            My Tasks
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="calendar.html" target="content">
-                            Calendar
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="analytics.html" target="content">
-                            Analytics
-                        </a>
-                    </li>
-                </ul>
+            <nav class="sidebar-nav">
+                <a href="Dashboard.html" class="nav-item active" data-page="dashboard.html" target="content">
+                    <i class="fa-solid fa-table-columns"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="mytask.html" class="nav-item" data-page="mytask.html" target="content">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>My Tasks</span>
+                </a>
+                <a href="Project.html" class="nav-item" data-page="project.html" target="content">
+                    <i class="fa-solid fa-folder"></i>
+                    <span>Projects</span>
+                </a>
+                <a href="calendar.html" class="nav-item" data-page="calendar.html" target="content">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span>Calendar</span>
+                </a>
+                <a href="analytics.html" class="nav-item" data-page="analytics.html" target="content">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="notification.html" class="nav-item" data-page="notification.html" target="content">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Notifications</span>
+                </a>
             </nav>
+
+            <div class="sidebar-bottom">
+                <a href="settings.html" class="nav-item" data-page="settings.html" target="content">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Settings</span>
+                </a>
+                <a href="logout.html" class="nav-item logout" data-page="logout.html" target="content">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </a>
+            </div>
         </aside>
 
-        <!-- RIGHT CONTENT -->
         <main class="main-content">
-            <div class="content-area">
-                <iframe
-                src="dashboard.html"
-        name="content"
-        id="contentFrame"
-        scrolling="no"
-        frameborder="0">
-            </iframe>
-            </div>
-            <script>
-    const iframe = document.getElementById('contentFrame');
+            <iframe src="Dashboard.html?embedded=1" name="content" id="contentFrame" title="Project dashboard"></iframe>
+        </main>
+    </div>
 
-    function resizeIframe() {
-        try {
-            iframe.style.height =
-                iframe.contentWindow.document.documentElement.scrollHeight + 'px';
-        } catch (e) {
-            console.warn('Could not resize iframe:', e);
-        }
-    }
+    <script>
+        const contentFrame = document.getElementById('contentFrame');
+        const navigationItems = document.querySelectorAll('.sidebar .nav-item[data-page]');
 
-    iframe.addEventListener('load', () => {
-        resizeIframe();
-        // in case content loads/changes images etc. after load
-        iframe.contentWindow.addEventListener('resize', resizeIframe);
-    });
-</script>
+        contentFrame.addEventListener('load', () => {
+            const currentPage = contentFrame.contentWindow.location.pathname.split('/').pop().toLowerCase();
 
-        </td>
-
-    </tr>
-
-</table>
-
+            navigationItems.forEach((item) => {
+                item.classList.toggle('active', item.dataset.page === currentPage);
+            });
+        });
+    </script>
 </body>
 </html>

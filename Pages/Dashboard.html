@@ -27,6 +27,11 @@
 
     <!-- Dashboard CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
+    <script>
+        if (new URLSearchParams(window.location.search).has('embedded')) {
+            document.documentElement.classList.add('embedded-dashboard');
+        }
+    </script>
 </head>
 
 <body>
@@ -837,7 +842,7 @@
     <script src="../jscode/sidebar.js"></script>
 
     <!-- Dashboard -->
-    <script src="../js/dashboard.js"></script>
+    <script src="../jscode/dashboard.js"></script>
 
 </body>
 

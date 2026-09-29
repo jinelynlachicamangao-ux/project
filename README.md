@@ -156,6 +156,42 @@ Edit the `<nav>` section in `index.html` to add or remove menu items:
 
 ---
 
+## ✅ To Work On
+
+### Reliability
+- [ ] Fix null-reference errors in `jscode/dashboard.js`.
+- [ ] Add the missing dashboard search input ID or update the JavaScript selector.
+- [ ] Add safe checks around optional buttons, inputs, and sidebar elements.
+- [ ] Add error handling for invalid or corrupted `localStorage` data.
+
+### Navigation and Layout
+- [ ] Choose one navigation architecture: a shared iframe shell or independent pages with their own sidebar.
+- [ ] Prevent duplicate sidebars when pages are loaded inside `index.html`.
+- [ ] Fix active sidebar states for Notifications, Settings, and Logout.
+- [ ] Remove the invalid `sidebar.html` stylesheet reference from `calendar.html`.
+- [ ] Use a local web server when testing pages that load `sidebar.html` with `fetch()`.
+
+### Authentication and Data
+- [ ] Replace the demo login and signup forms with real backend authentication.
+- [ ] Connect the password visibility buttons to the password inputs.
+- [ ] Avoid using `localStorage.clear()` when deleting account data.
+- [ ] Replace unsafe `innerHTML` usage for notification content with sanitized or text-only rendering.
+- [ ] Replace wildcard `postMessage` targets with a trusted origin.
+
+### Accessibility and Quality
+- [ ] Add labels, IDs, and names to all login and signup form fields.
+- [ ] Replace clickable `<span>` elements with accessible buttons.
+- [ ] Add accessible labels to icon-only buttons.
+- [ ] Replace hardcoded dates with current or stored project dates.
+- [ ] Add automated checks for broken links, missing assets, and JavaScript runtime errors.
+
+### Documentation
+- [ ] Update this README to match the current `Pages/`, `css/`, and `jscode/` folders.
+- [ ] Update outdated instructions such as “Remember me” and the old root-level file structure.
+- [ ] Consider renaming `Homapage.html` to `Homepage.html` and `Kaban.html` to `Kanban.html`.
+
+---
+
 ## 🚀 Future Enhancements
 
 - [ ] Implement drag-and-drop functionality for Kanban board
