@@ -80,6 +80,15 @@ a {
         width 0.3s ease;
 }
 
+html.embedded-dashboard #sidebar-container {
+    display: none;
+}
+
+html.embedded-dashboard .main-area {
+    width: 100%;
+    margin-left: 0;
+}
+
 
 /* Sidebar collapsed */
 

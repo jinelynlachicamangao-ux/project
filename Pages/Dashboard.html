@@ -27,6 +27,11 @@
 
     <!-- Dashboard CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
+    <script>
+        if (new URLSearchParams(window.location.search).has('embedded')) {
+            document.documentElement.classList.add('embedded-dashboard');
+        }
+    </script>
 </head>
 
 <body>
@@ -46,16 +51,7 @@
 
                 <div class="topbar-left">
 
-                    <button
-                        class="menu-toggle"
-                        id="menuToggle"
-                        type="button"
-                        aria-label="Open menu">
-
-                        <i class="fa-solid fa-bars"></i>
-
-                    </button>
-
+                    
 
                     <div class="page-title">
 
@@ -77,6 +73,7 @@
                         <i class="fa-solid fa-magnifying-glass"></i>
 
                         <input
+                            id="globalSearch"
                             type="text"
                             placeholder="Search projects, tasks...">
 
@@ -837,7 +834,7 @@
     <script src="../jscode/sidebar.js"></script>
 
     <!-- Dashboard -->
-    <script src="../js/dashboard.js"></script>
+    <script src="../jscode/dashboard.js"></script>
 
 </body>
 

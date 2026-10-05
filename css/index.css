@@ -1,0 +1,46 @@
+html,
+body {
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    background: #f4f7fb;
+}
+
+.app-container {
+    min-height: 100vh;
+}
+
+.main-content {
+    min-height: 100vh;
+    margin-left: 240px;
+}
+
+#contentFrame {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    border: 0;
+}
+
+@media (max-width: 800px) {
+    .app-container .sidebar {
+        width: 210px;
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 210px;
+    }
+}
+
+@media (max-width: 430px) {
+    .app-container .sidebar {
+        width: 190px;
+    }
+
+    .main-content {
+        margin-left: 190px;
+    }
+}
