@@ -10,20 +10,23 @@
 </head>
 
 <body>
+    <div class="background-blur"></div>
+
     <div class="signup-box">
 
         <!-- Header: logo + close button -->
         <div class="signup-header">
-            <img src="../logo&icons/logo3dnew.png" alt="Logo" class="logo">
-           <span class="close-btn" onclick="parent.document.getElementById('signup-modal').classList.remove('open')">&times;</span>
-
+            <div class="logo-wrapper">
+                <img src="../logo&icons/logo3dnew.png" alt="Logo" class="logo">
+            </div>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
         </div>
 
         <h1>Create Account</h1>
         <h3>Manage tasks. Track progress. Get things done.</h3>
 
         <!-- Signup Form -->
-        <form action="Homapage.html" method="post">
+        <form id="signupForm">
 
             <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
 
@@ -31,11 +34,14 @@
 
             <input type="text" id="email" name="email" placeholder="Email" required>
 
-            <input type="text" placeholder="Enter your birthday (mm/dd/yyyy)">
+            <input type="text" id="birthday" name="birthday" placeholder="Enter your birthday (mm/dd/yyyy)">
 
             <div class="input-with-icon">
-                <input type="password" placeholder="Enter your password" required>
-                <span class="icon-eye"><i class="fa-regular fa-eye"></i></span>
+                <input type="password" id="password" name="password" class="password-field" placeholder="Enter your password" required>
+                <span class="icon-eye" onclick="togglePassword()">
+                    <i class="fa-regular fa-eye" id="eyeOpen"></i>
+                    <i class="fa-regular fa-eye-slash" id="eyeClosed" style="display:none;"></i>
+                </span>
             </div>
             <p class="hint-text">Must be at least 8 characters</p>
 
@@ -58,7 +64,7 @@
                 Google
             </button>
             <button type="button">
-                <img src="../logo&icons/akar-icons--github-fill.svg" alt="Facebook">
+                <img src="../logo&icons/akar-icons--github-fill.svg" alt="GitHub">
                 GitHub
             </button>
         </div>
@@ -75,10 +81,50 @@
     </div>
 
     <script>
+        // Show/hide the password, and swap the eye icon to match
         function togglePassword() {
             const pwd = document.getElementById('password');
-            pwd.type = pwd.type === 'password' ? 'text' : 'password';
+            const eyeOpen = document.getElementById('eyeOpen');
+            const eyeClosed = document.getElementById('eyeClosed');
+            const isHidden = pwd.type === 'password';
+
+            pwd.type = isHidden ? 'text' : 'password';
+
+            eyeOpen.style.display = isHidden ? 'none' : 'block';
+            eyeClosed.style.display = isHidden ? 'block' : 'none';
         }
+
+        // Close the modal via the parent homepage
+        function closeModal() {
+            try {
+                parent.postMessage({ type: 'close-modal' }, '*');
+            } catch (e) {
+                // no-op if parent isn't listening
+            }
+        }
+
+        // Handle the signup submit
+        document.getElementById('signupForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+
+            if (password.length < 8) {
+                alert('Password must be at least 8 characters.');
+                return;
+            }
+
+            // TODO: replace this with a real API call to create the account.
+
+            try {
+                parent.postMessage({
+                    type: 'signup-complete',
+                    destination: 'Dashboard.html'
+                }, '*');
+            } catch (err) {
+                window.location.href = 'Dashboard.html';
+            }
+        });
     </script>
 </body>
 

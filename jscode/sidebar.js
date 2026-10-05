@@ -25,18 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* =====================================================
        LOAD SIDEBAR
-       
-       sidebar.html is inside the same /pages folder
-       as Dashboard.html, mytask.html, etc.
     ===================================================== */
 
     const sidebarPath = "sidebar.html";
-
-
-    console.log(
-        "Loading sidebar from:",
-        sidebarPath
-    );
 
 
     fetch(sidebarPath)
@@ -62,11 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
             sidebarContainer.innerHTML = html;
 
-
             console.log(
                 "✅ Sidebar HTML loaded successfully."
             );
-
 
             initializeSidebar();
 
@@ -79,7 +68,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 "❌ Sidebar loading error:",
                 error
             );
-
 
             sidebarContainer.innerHTML = `
                 <div style="
@@ -116,12 +104,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        console.log(
-            "✅ Sidebar initialized."
-        );
-
-
-
+        /* =================================================
+           MOBILE OVERLAY
+        ================================================= */
 
         let overlay =
             document.querySelector(".sidebar-overlay");
@@ -142,41 +127,221 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        /* =================================================
+           MENU TOGGLE
+        ================================================= */
 
- 
-
-let menuToggle = document.getElementById("menuToggle");
-
-if (!menuToggle) {
-
-    menuToggle = document.createElement("button");
-    menuToggle.id = "menuToggle";
-    menuToggle.className = "menu-toggle";
-    menuToggle.type = "button";
-    menuToggle.setAttribute("aria-label", "Open menu");
-    menuToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
-
-    document.body.appendChild(menuToggle);
-}
+        const menuToggle =
+            document.getElementById("menuToggle");
 
 
-/* =================================================
-   MENU BUTTON
-================================================= */
+        /* =================================================
+           LOGO
+        ================================================= */
 
-menuToggle.addEventListener("click", function (event) {
-    event.stopPropagation();
+        const sidebarLogo =
+            document.getElementById("sidebarLogo");
 
-    if (window.innerWidth <= 800) {
-        sidebar.classList.add("mobile-open");
-        overlay.classList.add("show");
-    } else {
-        document.body.classList.toggle("sidebar-collapsed");
-    }
-});
+
+
+        /* =================================================
+           REMEMBER SIDEBAR STATE
+           
+           true  = minimized
+           false = normal
+        ================================================= */
+
+        const sidebarCollapsed =
+            localStorage.getItem(
+                "sidebarCollapsed"
+            ) === "true";
+
+
+        /*
+         * Restore the previous sidebar state
+         * when changing pages.
+         */
+
+        if (
+            sidebarCollapsed &&
+            window.innerWidth > 800
+        ) {
+
+            document.body.classList.add(
+                "sidebar-collapsed"
+            );
+
+        }
+
+
+
+        /* =================================================
+           UPDATE MENU BUTTON
+        ================================================= */
+
+        function updateMenuButton() {
+
+            if (!menuToggle) {
+                return;
+            }
+
+
+            const collapsed =
+                document.body.classList.contains(
+                    "sidebar-collapsed"
+                );
+
+
+            if (collapsed) {
+
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Expand sidebar"
+                );
+
+                menuToggle.setAttribute(
+                    "title",
+                    "Expand sidebar"
+                );
+
+            }
+
+            else {
+
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Collapse sidebar"
+                );
+
+                menuToggle.setAttribute(
+                    "title",
+                    "Collapse sidebar"
+                );
+
+            }
+
+        }
+
+
+        updateMenuButton();
+
+
+
+        /* =================================================
+           MENU TOGGLE
+
+           CLICK ☰
+           → MINIMIZE SIDEBAR
+
+           CLICK AGAIN IS NOT AVAILABLE WHILE MINIMIZED.
+           USE LOGO TO EXPAND.
+        ================================================= */
+
+        if (menuToggle) {
+
+            menuToggle.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+
+                    /* =====================================
+                       MOBILE
+                    ===================================== */
+
+                    if (window.innerWidth <= 800) {
+
+                        sidebar.classList.add(
+                            "mobile-open"
+                        );
+
+                        overlay.classList.add(
+                            "show"
+                        );
+
+                        return;
+                    }
+
+
+                    /* =====================================
+                       DESKTOP
+                    ===================================== */
+
+                    document.body.classList.add(
+                        "sidebar-collapsed"
+                    );
+
+
+                    /*
+                     * REMEMBER MINIMIZED STATE
+                     */
+
+                    localStorage.setItem(
+                        "sidebarCollapsed",
+                        "true"
+                    );
+
+
+                    updateMenuButton();
+
+                }
+            );
+
+        }
+
+
+
+        /* =================================================
+           LOGO CLICK
+
+           LOGO ALWAYS EXPANDS SIDEBAR
+        ================================================= */
+
+        if (sidebarLogo) {
+
+            sidebarLogo.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+
+                    if (window.innerWidth > 800) {
+
+                        /*
+                         * EXPAND SIDEBAR
+                         */
+
+                        document.body.classList.remove(
+                            "sidebar-collapsed"
+                        );
+
+
+                        /*
+                         * REMEMBER NORMAL STATE
+                         */
+
+                        localStorage.setItem(
+                            "sidebarCollapsed",
+                            "false"
+                        );
+
+
+                        updateMenuButton();
+
+                    }
+
+                }
+            );
+
+        }
+
+
 
         /* =================================================
            CLOSE BUTTON
+           MOBILE ONLY
         ================================================= */
 
         const sidebarClose =
@@ -225,7 +390,6 @@ menuToggle.addEventListener("click", function (event) {
             function (event) {
 
                 if (window.innerWidth > 800) {
-
                     return;
                 }
 
@@ -237,6 +401,7 @@ menuToggle.addEventListener("click", function (event) {
 
 
                 const clickedMenu =
+                    menuToggle &&
                     menuToggle.contains(
                         event.target
                     );
@@ -266,6 +431,10 @@ menuToggle.addEventListener("click", function (event) {
 
         /* =================================================
            MOBILE NAVIGATION
+
+           IMPORTANT:
+           Clicking My Tasks, Projects, Calendar, etc.
+           DOES NOT CHANGE THE DESKTOP SIDEBAR STATE.
         ================================================= */
 
         const navItems =
@@ -289,6 +458,17 @@ menuToggle.addEventListener("click", function (event) {
 
                         }
 
+                        /*
+                         * DO NOT REMOVE:
+                         *
+                         * sidebar-collapsed
+                         *
+                         * DO NOT CHANGE localStorage.
+                         *
+                         * This allows the minimized state
+                         * to remain when opening another page.
+                         */
+
                     }
                 );
 
@@ -310,6 +490,34 @@ menuToggle.addEventListener("click", function (event) {
                 ) {
 
                     closeMobileSidebar();
+
+                    /*
+                     * Restore saved desktop state.
+                     */
+
+                    const savedState =
+                        localStorage.getItem(
+                            "sidebarCollapsed"
+                        ) === "true";
+
+
+                    if (savedState) {
+
+                        document.body.classList.add(
+                            "sidebar-collapsed"
+                        );
+
+                    }
+
+                    else {
+
+                        document.body.classList.remove(
+                            "sidebar-collapsed"
+                        );
+
+                    }
+
+                    updateMenuButton();
 
                 }
 

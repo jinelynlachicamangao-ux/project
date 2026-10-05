@@ -62,7 +62,7 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.2s ease, transform 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         }
 
         .btn:hover {
@@ -79,52 +79,101 @@
         }
 
         .btn-outline {
-            background: #ffffff;
-            border: 1.5px solid #dfe4f5;
-            color: #1c2340;
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            color: #ffffff;
         }
 
         .btn-outline:hover {
-            border-color: #3b6bff;
-            color: #3b6bff;
+            border-color: #00c2d1;
+            color: #00c2d1;
+            background: rgba(0, 194, 209, 0.08);
         }
 
         /* ================= NAVBAR ================= */
 
         .navbar {
-         width: 100%;
-        margin: 0;
-        display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 24px clamp(25px, 5vw, 80px);
-}
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            width: 100%;
+            margin: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 14px clamp(25px, 5vw, 80px);
+
+            background: rgba(8, 8, 43, 0.55);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.18);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
         .nav-logo {
             font-size: 24px;
             font-weight: 700;
         }
 
+        /* Scoped size just for the small navbar logo, separate from the big hero/signup logo */
+        .nav-logo .logo {
+            max-width: none;
+            max-height: 34px;
+            margin: 0;
+        }
+
         .nav-tagline {
             font-size: 11px;
-            color: #ffffff;
-            margin-top: -2px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 0.3px;
+            margin-top: 0;
+            padding-left: 10px;
+            border-left: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 34px;
         }
 
         .nav-links a:not(.btn) {
-            font-size: 14px;
+            position: relative;
+            font-size: 13.5px;
             font-weight: 500;
-            color: #ffffff;
+            color: rgba(255, 255, 255, 0.78);
+            padding: 6px 0;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:not(.btn)::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0;
+            height: 1.5px;
+            background: #00c2d1;
+            transition: width 0.2s ease;
         }
 
         .nav-links a:not(.btn):hover {
-            color: rgba(0, 194, 209, 0.9);
+            color: #ffffff;
+        }
+
+        .nav-links a:not(.btn):hover::after {
+            width: 100%;
         }
 
         .nav-actions {
@@ -144,24 +193,25 @@
         /* ================= HERO ================= */
 
         .hero {
-    position: relative;
+            position: relative;
 
-    width: 100%;
-    min-height: calc(100vh - 120px);
+            width: 100%;
+            min-height: calc(100vh - 120px);
 
-    margin: 0;
-    padding: 70px clamp(30px, 8vw, 140px);
+            margin: 0;
+            padding: 70px clamp(30px, 8vw, 140px);
 
-    display: flex;
-    align-items: center;
+            display: flex;
+            align-items: center;
 
-    overflow: hidden;
+            overflow: hidden;
 
-    background-image: url("../logo&icons/imagess.avif");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+            /* Background images are controlled by the slideshow below */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
         /* Dark gradient over the background image */
         .hero::before {
             content: "";
@@ -176,13 +226,42 @@
                 rgba(8, 8, 43, 0.08) 100%
             );
 
-            z-index: 0;
+            z-index: 1;
             pointer-events: none;
+        }
+
+        /* ================= HERO SLIDESHOW ================= */
+
+        .hero-slideshow {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transform: scale(1);
+            transition: opacity 1.5s ease-in-out, transform 6s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+            transform: scale(1.08);
         }
 
         .hero-copy {
             position: relative;
-            z-index: 1;
+            z-index: 2;
 
             flex: 1;
             max-width: 560px;
@@ -294,14 +373,14 @@
         }
 
         .features-grid {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
 
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
-}
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
 
         .feature-card {
             background: #ffffff;
@@ -351,28 +430,28 @@
         /* ================= CTA BAND ================= */
 
         .cta-band {
-    width: 100%;
-    margin: 0 0 90px;
-    padding: 0 clamp(25px, 5vw, 100px);
-}
+            width: 100%;
+            margin: 0 0 90px;
+            padding: 0 clamp(25px, 5vw, 100px);
+        }
 
         .cta-inner {
-    width: 100%;
-    max-width: 1500px;
-    margin: 0 auto;
+            width: 100%;
+            max-width: 1500px;
+            margin: 0 auto;
 
-    background: linear-gradient(
-        160deg,
-        #1a1f6e 0%,
-        #0a0e30 100%
-    );
+            background: linear-gradient(
+                160deg,
+                #1a1f6e 0%,
+                #0a0e30 100%
+            );
 
-    border-radius: 20px;
-    padding: 56px 40px;
+            border-radius: 20px;
+            padding: 56px 40px;
 
-    text-align: center;
-    color: #ffffff;
-}
+            text-align: center;
+            color: #ffffff;
+        }
 
         .cta-inner h2 {
             font-size: 28px;
@@ -389,14 +468,17 @@
         /* ================= FOOTER ================= */
 
         footer {
-    border-top: 1px solid #e5e9f7;
-    padding: 28px clamp(25px, 5vw, 80px);
-}
+            border-top: 1px solid #e5e9f7;
+            padding: 28px clamp(25px, 5vw, 80px);
+        }
 
-       footer {
-    border-top: 1px solid #e5e9f7;
-    padding: 28px clamp(25px, 5vw, 80px);
-}
+        .footer-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
 
         .footer-inner p {
             font-size: 13px;
@@ -446,12 +528,18 @@
             width: min(100%, 560px);
             height: min(780px, 90vh);
 
-            overflow: hidden;
+            overflow-y: auto;
+            scrollbar-width: none;        /* Firefox */
+            -ms-overflow-style: none;     /* IE/Edge legacy */
 
             border-radius: 16px;
 
             background: transparent;
             box-shadow: none;
+        }
+
+        .login-modal-content::-webkit-scrollbar {
+            display: none;                /* Chrome, Safari, Edge Chromium */
         }
 
         .login-modal-content iframe {
@@ -486,12 +574,18 @@
             width: min(100%, 510px);
             height: min(840px, 90vh);
 
-            overflow: hidden;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
 
             border-radius: 16px;
 
             background: transparent;
             box-shadow: none;
+        }
+
+        .signup-modal-content::-webkit-scrollbar {
+            display: none;
         }
 
         .signup-modal-content iframe {
@@ -502,139 +596,141 @@
 
         /* ================= RESPONSIVE ================= */
 
-       /* ================= RESPONSIVE ================= */
+        @media (max-width: 1200px) {
 
-@media (max-width: 1200px) {
+            .navbar {
+                padding-left: 35px;
+                padding-right: 35px;
+            }
 
-    .navbar {
-        padding-left: 35px;
-        padding-right: 35px;
-    }
+            .hero {
+                padding-left: 60px;
+                padding-right: 60px;
+            }
 
-    .hero {
-        padding-left: 60px;
-        padding-right: 60px;
-    }
+            .features {
+                padding-left: 35px;
+                padding-right: 35px;
+            }
 
-    .features {
-        padding-left: 35px;
-        padding-right: 35px;
-    }
-
-    .cta-band {
-        padding-left: 35px;
-        padding-right: 35px;
-    }
-}
+            .cta-band {
+                padding-left: 35px;
+                padding-right: 35px;
+            }
+        }
 
 
-@media (max-width: 900px) {
+        @media (max-width: 900px) {
 
-    .navbar {
-        padding: 20px 25px;
-    }
+            .navbar {
+                padding: 14px 25px;
+            }
 
-    .nav-links a:not(.btn) {
-        display: none;
-    }
+            .nav-links a:not(.btn) {
+                display: none;
+            }
 
-    .hero {
-        min-height: 650px;
-        height: auto;
+            .hero {
+                min-height: 650px;
+                height: auto;
 
-        padding: 70px 30px;
+                padding: 70px 30px;
 
-        text-align: center;
+                text-align: center;
 
-        background-position: center center;
-    }
+                background-position: center center;
+            }
 
-    .hero-copy {
-        max-width: 100%;
-        align-items: center;
-    }
+            .hero-copy {
+                max-width: 100%;
+                align-items: center;
+            }
 
-    .hero p {
-        margin-left: auto;
-        margin-right: auto;
-    }
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-    .hero-actions {
-        justify-content: center;
-    }
+            .hero-actions {
+                justify-content: center;
+            }
 
-    .hero-stats {
-        justify-content: center;
-    }
+            .hero-stats {
+                justify-content: center;
+            }
 
-    .features-grid {
-        grid-template-columns: 1fr 1fr;
-    }
-}
+            .features-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
 
 
-@media (max-width: 640px) {
+        @media (max-width: 640px) {
 
-    .navbar {
-        padding: 18px 16px;
-    }
+            .navbar {
+                padding: 12px 16px;
+            }
 
-    .nav-actions {
-        gap: 6px;
-    }
+            .nav-tagline {
+                display: none;
+            }
 
-    .nav-actions .btn {
-        padding: 10px 14px;
-        font-size: 12px;
-    }
+            .nav-actions {
+                gap: 6px;
+            }
 
-    .hero {
-        min-height: 650px;
-        padding: 50px 20px;
-    }
+            .nav-actions .btn {
+                padding: 10px 14px;
+                font-size: 12px;
+            }
 
-    .hero h1 {
-        font-size: 34px;
-    }
+            .hero {
+                min-height: 650px;
+                padding: 50px 20px;
+            }
 
-    .hero p {
-        font-size: 14px;
-    }
+            .hero h1 {
+                font-size: 34px;
+            }
 
-    .hero-actions {
-        flex-direction: column;
-        width: 100%;
-    }
+            .hero p {
+                font-size: 14px;
+            }
 
-    .btn-large {
-        width: 100%;
-    }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
 
-    .hero-stats {
-        gap: 24px;
-        flex-wrap: wrap;
-    }
+            .btn-large {
+                width: 100%;
+            }
 
-    .features {
-        padding: 70px 20px;
-    }
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
 
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
+            .features {
+                padding: 70px 20px;
+            }
 
-    .section-heading h2 {
-        font-size: 27px;
-    }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
 
-    .cta-band {
-        padding: 0 20px;
-    }
+            .section-heading h2 {
+                font-size: 27px;
+            }
 
-    .cta-inner {
-        padding: 45px 25px;
-    }
-}
+            .cta-band {
+                padding: 0 20px;
+            }
+
+            .cta-inner {
+                padding: 45px 25px;
+            }
+        }
 
         /* ================= EASE-IN ANIMATIONS ================= */
 
@@ -703,8 +799,8 @@
 
     <nav class="navbar">
 
-        <div>
-            <div class="nav-logo gradient-text">
+        <div class="nav-brand">
+            <div class="nav-logo">
                 <img src="../logo&icons/logo3dnew.png"
                     alt="Logo"
                     class="logo">
@@ -755,6 +851,28 @@
     <!-- ================= HERO ================= -->
 
     <section class="hero">
+
+        <!-- ================= HERO IMAGE SLIDESHOW ================= -->
+
+        <div class="hero-slideshow">
+
+            <div class="hero-slide active"
+                style="background-image: url('../logo&icons/imagess.avif');">
+            </div>
+
+            <div class="hero-slide"
+                style="background-image: url('../logo&icons/image2.jpg');">
+            </div>
+
+            <div class="hero-slide"
+                style="background-image: url('../logo&icons/image3.jpg');">
+            </div>
+
+            <div class="hero-slide"
+                style="background-image: url('../logo&icons/image4.avif');">
+            </div>
+
+        </div>
 
         <div class="hero-copy">
 
@@ -999,7 +1117,7 @@
 
         <div class="login-modal-content">
 
-            <iframe src="LoginPage.html"
+            <iframe src="about:blank"
                 title="Log in">
             </iframe>
 
@@ -1018,7 +1136,7 @@
 
         <div class="signup-modal-content">
 
-            <iframe src="SignupPage.html"
+            <iframe src="about:blank"
                 title="Sign up">
             </iframe>
 
@@ -1105,6 +1223,7 @@
 
         const closeLoginModal = () => {
             loginModal.classList.remove('open');
+            loginFrame.src = 'about:blank';
         };
 
 
@@ -1145,6 +1264,11 @@
                 return;
             }
 
+            if (event.data?.type === 'close-modal') {
+                closeLoginModal();
+                return;
+            }
+
             if (event.data?.type !== 'login-complete') {
                 return;
             }
@@ -1153,32 +1277,6 @@
                 event.data.destination ||
                 event.data.redirectUrl
             );
-
-        });
-
-
-        loginFrame.addEventListener('load', () => {
-
-            try {
-
-                const destination =
-                    loginFrame.contentWindow.location.href;
-
-                if (
-                    loginModal.classList.contains('open') &&
-                    !destination.endsWith('/LoginPage.html') &&
-                    !destination.endsWith('LoginPage.html')
-                ) {
-
-                    continueAfterLogin(destination);
-
-                }
-
-            } catch (error) {
-
-                // Ignore cross-origin iframe navigation.
-
-            }
 
         });
 
@@ -1198,6 +1296,7 @@
         const closeSignupModal = () => {
 
             signupModal.classList.remove('open');
+            signupFrame.src = 'about:blank';
 
         };
 
@@ -1239,6 +1338,11 @@
                 return;
             }
 
+            if (event.data?.type === 'close-modal') {
+                closeSignupModal();
+                return;
+            }
+
             if (
                 !event.data ||
                 typeof event.data !== 'object' ||
@@ -1255,45 +1359,49 @@
         });
 
 
-        signupFrame.addEventListener('load', () => {
+        /* ================= HERO AUTOMATIC IMAGE SLIDESHOW ================= */
 
-            try {
+        document.addEventListener('DOMContentLoaded', function () {
 
-                const destination =
-                    signupFrame.contentWindow.location.href;
+            var heroSlides =
+                document.querySelectorAll('.hero-slide');
 
-                if (
-                    signupModal.classList.contains('open') &&
-                    !destination.endsWith('/SignupPage.html') &&
-                    !destination.endsWith('SignupPage.html')
-                ) {
+            if (!heroSlides.length) {
+                return;
+            }
 
-                    continueAfterSignup(destination);
+            var currentSlide = 0;
 
+            setInterval(function () {
+
+                heroSlides[currentSlide].classList.remove('active');
+
+                currentSlide++;
+
+                if (currentSlide >= heroSlides.length) {
+                    currentSlide = 0;
                 }
 
-            } catch (error) {
+                heroSlides[currentSlide].classList.add('active');
 
-                // Ignore cross-origin iframe navigation.
-
-            }
+            }, 5000);
 
         });
 
 
-        /* ================= CLOSE MODALS ================= */
+        /* ================= ESCAPE KEY CLOSES MODALS ================= */
 
-        window.addEventListener('message', (event) => {
+        window.addEventListener('keydown', (event) => {
 
-            if (event.data?.type !== 'close-modal') {
+            if (event.key !== 'Escape') {
                 return;
             }
 
-            if (event.source === loginFrame.contentWindow) {
+            if (loginModal.classList.contains('open')) {
                 closeLoginModal();
             }
 
-            if (event.source === signupFrame.contentWindow) {
+            if (signupModal.classList.contains('open')) {
                 closeSignupModal();
             }
 

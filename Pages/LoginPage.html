@@ -18,14 +18,17 @@
         <h1>Welcome!</h1>
         <h3>Login your account</h3>
 
-        <form action="Dashboard.html" method="post">
-            <input type="text" placeholder="Enter your email" required>
+        <form id="loginForm">
+            <input type="text" id="email" name="email" placeholder="Enter your email" required>
 
             <div class="input-with-icon">
-                <input type="password" placeholder="Enter your password" required>
-                <span class="icon-eye"><i class="fa-regular fa-eye"></i></span>
+                <input type="password" id="password" name="password" class="password-field" placeholder="Enter your password" required>
+                <span class="icon-eye" onclick="togglePassword()">
+                    <i class="fa-regular fa-eye" id="eyeOpen"></i>
+                    <i class="fa-regular fa-eye-slash" id="eyeClosed" style="display:none;"></i>
+                </span>
             </div>
-            
+
             <p class="hint-text">Use 8 or more letters, numbers and symbols</p>
 
             <input type="submit" value="Continue">
@@ -34,35 +37,63 @@
         <p class="divider">OR</p>
 
         <div class="social-buttons">
-            <button><img src="../logo&icons/devicon--google.svg" alt="Google">Continue with Google</button>
-            <button><img src="../logo&icons/logos--facebook.svg" alt="Facebook">Continue with Facebook</button>
+            <button type="button"><img src="../logo&icons/devicon--google.svg" alt="Google">Continue with Google</button>
+            <button type="button"><img src="../logo&icons/logos--facebook.svg" alt="Facebook">Continue with Facebook</button>
         </div>
 
         <p class="return">You dont have an account? <a href="SignupPage.html">Signup</a></p>
 
         <div class="fine-print">
-        
-          <p class>
-             By continuing, you agree to our
-             <a href="#">Terms of Service</a> and acknowledge you've read our
-             <a href="#">Privacy Policy</a>.
-          </p>
+            <p>
+                By continuing, you agree to our
+                <a href="#">Terms of Service</a> and acknowledge you've read our
+                <a href="#">Privacy Policy</a>.
+            </p>
         </div>
 
     </div>
     <script>
-       function togglePassword() {
+        // Show/hide the password, and swap the eye icon to match
+        function togglePassword() {
             const pwd = document.getElementById('password');
-            const icon = document.querySelector('.icon-eye i');
-            const isPassword = pwd.type === 'password';
-            pwd.type = isPassword ? 'text' : 'password';
-            icon.classList.toggle('fa-eye');
-            icon.classList.toggle('fa-eye-slash');
+            const eyeOpen = document.getElementById('eyeOpen');
+            const eyeClosed = document.getElementById('eyeClosed');
+            const isHidden = pwd.type === 'password';
+
+            pwd.type = isHidden ? 'text' : 'password';
+
+            eyeOpen.style.display = isHidden ? 'none' : 'block';
+            eyeClosed.style.display = isHidden ? 'block' : 'none';
         }
- 
+
+        // Close the modal via the parent homepage
         function closeModal() {
             window.parent.postMessage({ type: 'close-modal' }, '*');
         }
+
+        // Handle the login submit
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            if (!email || !password) {
+                alert('Please enter your email and password.');
+                return;
+            }
+
+            // TODO: replace this with a real API call to verify login credentials.
+
+            try {
+                parent.postMessage({
+                    type: 'login-complete',
+                    destination: 'Dashboard.html'
+                }, '*');
+            } catch (err) {
+                window.location.href = 'Dashboard.html';
+            }
+        });
     </script>
 </body>
 </html>

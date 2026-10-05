@@ -2,6 +2,8 @@ html, body {
     height: 100%;
     margin: 0;
     padding: 0;
+    scrollbar-gutter: stable;   /* reserves scrollbar space permanently */
+    overflow-x: hidden;         /* guarantees no horizontal shift ever */
 }
 
 body {
@@ -35,8 +37,8 @@ body {
     position: relative;
     z-index: 1;
     background: linear-gradient(160deg, #1a1f6e 0%, #0a0e30 100%);
-    width: 100%;
-    max-width: 420px;
+    width: 420px;              /* fixed px, not 100% — can't shrink with its parent */
+    max-width: calc(100vw - 40px);
     padding: 1px 35px;
     border-radius: 16px;
     text-align: left;
@@ -67,7 +69,7 @@ body {
 .logo {
     max-width: 50%;
     height: auto;
-    max-height: 90px;
+    max-height: 100px;
     display: block;
     margin: 0;
 }
@@ -99,11 +101,14 @@ body {
 .signup-box input[type="text"],
 .signup-box input[type="password"] {
     width: 100%;
-    padding: 12px 15px;
+    height: 48px;
+    padding: 0 40px 0 15px;
     margin-bottom: 12px;
     border: 1.5px solid #3d4a8a;
     border-radius: 10px;
+    font-family: 'Inter', Arial, sans-serif;
     font-size: 15px;
+    line-height: 48px;
     background-color: #141b42;
     color: #ffffff;
     box-sizing: border-box;
@@ -121,13 +126,15 @@ body {
 .signup-box input[type="password"]::placeholder {
     color: #7c8fb8;
 }
+
 .input-with-icon {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
-.signup-box .input-with-icon input[type="password"] {
+.signup-box .input-with-icon .password-field {
     margin-bottom: 0;
     padding-right: 40px;
 }
@@ -137,15 +144,25 @@ body {
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    color: #9fb3d9;
-    cursor: pointer;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    color: #9fb3d9;
+    cursor: pointer;
     line-height: 1;
 }
 
 .icon-eye:hover {
     color: #ffffff;
+}
+
+.eye-icon {
+    width: 18px;
+    height: 18px;
+    display: block;
+    pointer-events: none;   /* clicks always land on the parent .icon-eye span */
 }
 
 .hint-text {
@@ -210,12 +227,6 @@ body {
 .social-buttons img {
     width: 18px;
     height: 18px;
-}
-
-.signup-box .divider {
-    text-align: center;
-    color: #9fb3d9;
-    margin: 5px 0 15px;
 }
 
 .signup-box p a {
