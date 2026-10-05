@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", function () {
        
         localStorage.removeItem("3dProjectTasks");
 
-        window.location.href = "../Homapage.html";
+        window.location.href = "../Pages/Homapage.html";
 
     });
 

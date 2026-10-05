@@ -17,26 +17,38 @@ body {
     box-sizing: border-box;
 }
 
-/* ==========================================================
-   Shared box styling — applies to both the Login and Signup
-   cards (.login-box, .signup-box)
-   ========================================================== */
+/* Shared card styles */
 
-.signup-box,
-.login-box {
+.login-box{
     position: relative;
     z-index: 1;
     background: linear-gradient(160deg, #1a1f6e 0%, #0a0e30 100%);
     width: 100%;
-    max-width: 480px;
-    padding: 45px;
-    padding-bottom: 5px;
-    padding-top: 1px;
+    max-width: 420px;
+    padding: 28px 30px 18px;
     border-radius: 16px;
     text-align: left;
     box-sizing: border-box;
     box-shadow: none;
     margin: 20px;
+    border: 1px solid rgba(0, 229, 255, 0.15);
+    color: #9fb3d9;
+}
+
+
+
+.signup-box {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(160deg, #1a1f6e 0%, #0a0e30 100%);
+    width: 100%;
+    max-width: 420px;
+    padding: 5px 30px 5px;
+    border-radius: 16px;
+    text-align: left;
+    box-sizing: border-box;
+    box-shadow: none;
+    margin: 5px;
     border: 1px solid rgba(0, 229, 255, 0.15);
     color: #9fb3d9;
 }
@@ -50,9 +62,9 @@ body {
 }
 
 .logo {
-    max-width: 50%;
+    max-width: 42%;
     height: auto;
-    max-height: 90px;
+    max-height: 72px;
     display: block;
     margin: 0;
 }
@@ -69,34 +81,66 @@ body {
     color: #ffffff;
 }
 
-.signup-box h1,
+/* Signup-specific styles */
+.signup-box h1 {
+    font-size: 15px;
+    margin: 0 0 4px;
+    color: #ffffff;
+}
+
+
+/* Login-specific styles */
 .login-box h1 {
-    font-size: 28px;
+    font-size: 26px;
     margin: 0 0 5px;
     color: #ffffff;
 }
 
-.signup-box h3,
-.login-box h3 {
+
+.signup-box h3{
     font-weight: normal;
-    font-size: 15px;
-    margin: 0 0 20px;
+    font-size: 12px;
+    margin: 0 0 18px;
     color: #9fb3d9;
 }
 
+
+.login-box h3 {
+    font-weight: normal;
+    font-size: 14px;
+    margin: 0 0 18px;
+    color: #9fb3d9;
+}
+
+/* Signup fields */
 .signup-box input[type="text"],
 .signup-box input[type="email"],
 .signup-box input[type="date"],
-.signup-box input[type="password"],
+.signup-box input[type="password"] {
+
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+    border: 1.5px solid #3d4a8a;
+    border-radius: 10px;
+    font-size: 12px;
+    background-color: #141b42;
+    color: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+
+/* Login fields */
 .login-box input[type="text"],
 .login-box input[type="email"],
 .login-box input[type="password"] {
     width: 100%;
-    padding: 12px 15px;
+    padding: 11px 14px;
     margin-bottom: 12px;
     border: 1.5px solid #3d4a8a;
     border-radius: 10px;
-    font-size: 15px;
+    font-size: 14px;
     background-color: #141b42;
     color: #ffffff;
     box-sizing: border-box;
@@ -106,7 +150,12 @@ body {
 .signup-box input[type="text"]:focus,
 .signup-box input[type="email"]:focus,
 .signup-box input[type="date"]:focus,
-.signup-box input[type="password"]:focus,
+.signup-box input[type="password"]:focus {
+    outline: none;
+    border-color: #00e5ff;
+    background-color: #182050;
+}
+
 .login-box input[type="text"]:focus,
 .login-box input[type="email"]:focus,
 .login-box input[type="password"]:focus {
@@ -115,7 +164,10 @@ body {
     background-color: #182050;
 }
 
-.signup-box input::placeholder,
+.signup-box input::placeholder {
+    color: #7c8fb8;
+}
+
 .login-box input::placeholder {
     color: #7c8fb8;
 }
@@ -161,12 +213,12 @@ body {
 .signup-box input[type="submit"],
 .login-box input[type="submit"] {
     width: 100%;
-    padding: 13px;
+    padding: 12px 14px;
     background: linear-gradient(90deg, #0047ab, #00c2d1);
     color: white;
     border: none;
     border-radius: 10px;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     margin-top: 5px;
