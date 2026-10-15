@@ -41,6 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const doneList =
         document.getElementById("doneList");
 
+    const board =
+        document.getElementById("board");
+
 
     /* =====================================================
        TASK STORAGE
@@ -447,6 +450,116 @@ document.addEventListener("DOMContentLoaded", function () {
             doneCount;
 
     }
+
+
+    /* =================================================
+       TASK DRAG AND DROP
+    ================================================== */
+
+    board.addEventListener("dragstart", function (event) {
+
+        const card = event.target.closest(".task-card");
+
+        if (!card) return;
+
+        card.classList.add("dragging");
+
+    });
+
+
+    board.addEventListener("dragend", function (event) {
+
+        const card = event.target.closest(".task-card");
+
+        if (!card) return;
+
+        card.classList.remove("dragging");
+
+    });
+
+
+    board.addEventListener("dragover", function (event) {
+
+        const cardsContainer =
+            event.target.closest(".cards");
+
+        if (!cardsContainer) return;
+
+        event.preventDefault();
+
+        const column =
+            cardsContainer.closest(".column");
+
+        if (column) {
+
+            column.classList.add("drag-over");
+
+        }
+
+    });
+
+
+    board.addEventListener("dragleave", function (event) {
+
+        const column =
+            event.target.closest(".column");
+
+        if (!column) return;
+
+        if (!column.contains(event.relatedTarget)) {
+
+            column.classList.remove("drag-over");
+
+        }
+
+    });
+
+
+    board.addEventListener("drop", function (event) {
+
+        const cardsContainer =
+            event.target.closest(".cards");
+
+        if (!cardsContainer) return;
+
+        event.preventDefault();
+
+        const card =
+            document.querySelector(".task-card.dragging");
+
+        if (!card) return;
+
+        const column =
+            cardsContainer.closest(".column");
+
+        if (!column) return;
+
+        const newStatus =
+            column.dataset.status;
+
+        const taskId =
+            Number(card.dataset.id);
+
+        const task =
+            tasks.find(function (item) {
+
+                return Number(item.id) === taskId;
+
+            });
+
+        if (task) {
+
+            task.status = newStatus;
+
+            saveTasks();
+
+            renderTasks();
+
+        }
+
+        column.classList.remove("drag-over");
+
+    });
 
 
     /* =====================================================
