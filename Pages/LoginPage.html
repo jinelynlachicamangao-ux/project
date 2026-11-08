@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log In</title>
     <link rel="stylesheet" type="text/css" href="../css/login-signup.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -53,6 +55,11 @@
 
     </div>
     <script>
+        // When opened as a normal page (not inside the popup), give it its own background
+        if (window.parent === window) {
+            document.body.classList.add('standalone');
+        }
+
         // Show/hide the password, and swap the eye icon to match
         function togglePassword() {
             const pwd = document.getElementById('password');
@@ -66,9 +73,13 @@
             eyeClosed.style.display = isHidden ? 'block' : 'none';
         }
 
-        // Close the modal via the parent homepage
+        // Close the popup (or go back to the homepage if opened as a normal page)
         function closeModal() {
-            window.parent.postMessage({ type: 'close-modal' }, '*');
+            if (window.parent !== window) {
+                window.parent.postMessage({ type: 'close-modal' }, '*');
+            } else {
+                window.location.href = 'Homapage.html';
+            }
         }
 
         // Handle the login submit
@@ -85,12 +96,12 @@
 
             // TODO: replace this with a real API call to verify login credentials.
 
-            try {
+            if (window.parent !== window) {
                 parent.postMessage({
                     type: 'login-complete',
                     destination: 'Dashboard.html'
                 }, '*');
-            } catch (err) {
+            } else {
                 window.location.href = 'Dashboard.html';
             }
         });

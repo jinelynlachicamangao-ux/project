@@ -68,7 +68,6 @@
     text-align: center;
 }
 
-
 /* Clickable logo */
 
 .sidebar-logo {
@@ -90,7 +89,6 @@
     cursor: pointer;
 }
 
-
 .sidebar-logo img {
     display: block;
 
@@ -99,7 +97,6 @@
 
     object-fit: contain;
 }
-
 
 /* Brand text */
 
@@ -110,7 +107,6 @@
 
     overflow: hidden;
 }
-
 
 .brand-name h2 {
     margin: 0;
@@ -125,7 +121,6 @@
     font-weight: 700;
     letter-spacing: 0.5px;
 }
-
 
 .brand-name p {
     margin: 7px 0 0;
@@ -158,8 +153,7 @@
 
 
 /* =========================================================
-   DESKTOP MENU TOGGLE
-   TOP-RIGHT CORNER
+   DESKTOP MENU TOGGLE (TOP-RIGHT CORNER)
 ========================================================= */
 
 .menu-toggle {
@@ -195,7 +189,6 @@
         border-color 0.2s ease;
 }
 
-
 .menu-toggle:hover {
     background: rgba(0, 217, 255, 0.10);
 
@@ -203,8 +196,6 @@
 
     color: #00d9ff;
 }
-
-
 
 .menu-toggle img {
     display: block;
@@ -218,8 +209,6 @@
 
     transition: filter 0.2s ease;
 }
-
-
 
 .menu-toggle:hover img {
     filter: brightness(0) saturate(100%) invert(72%) sepia(94%)
@@ -281,7 +270,6 @@
         color 0.2s ease;
 }
 
-
 /* Icons */
 
 .sidebar .nav-item i {
@@ -296,7 +284,6 @@
 
     transition: color 0.2s ease;
 }
-
 
 /* Labels */
 
@@ -320,7 +307,6 @@
     background: rgba(255, 255, 255, 0.055);
 }
 
-
 .sidebar .nav-item:hover i {
     color: #ffffff;
 }
@@ -342,11 +328,9 @@
     box-shadow: 0 8px 22px rgba(0, 102, 255, 0.22);
 }
 
-
 .sidebar .nav-item.active i {
     color: #ffffff;
 }
-
 
 /* Active indicator */
 
@@ -388,13 +372,11 @@
     border-top: 1px solid rgba(255, 255, 255, 0.07);
 }
 
-
 .sidebar .nav-item.logout:hover {
     color: #ff7185;
 
     background: rgba(255, 75, 100, 0.06);
 }
-
 
 .sidebar .nav-item.logout:hover i {
     color: #ff7185;
@@ -409,14 +391,12 @@ body.sidebar-collapsed .sidebar {
     width: 76px;
 }
 
-
 body.sidebar-collapsed .sidebar-top {
     align-items: center;
     justify-content: flex-start;
 
     padding: 8px 0 25px;
 }
-
 
 body.sidebar-collapsed .sidebar-logo {
     width: 44px;
@@ -427,27 +407,22 @@ body.sidebar-collapsed .sidebar-logo {
     cursor: pointer;
 }
 
-
 body.sidebar-collapsed .sidebar-logo img {
     width: 100%;
     height: 100%;
 }
 
-
 body.sidebar-collapsed .brand-name {
     display: none;
 }
-
 
 body.sidebar-collapsed .menu-toggle {
     display: none;
 }
 
-
 body.sidebar-collapsed .sidebar-line {
     margin-bottom: 18px;
 }
-
 
 body.sidebar-collapsed .sidebar .nav-item {
     justify-content: center;
@@ -464,11 +439,9 @@ body.sidebar-collapsed .sidebar .nav-item {
     gap: 0;
 }
 
-
 body.sidebar-collapsed .sidebar .nav-item span {
     display: none;
 }
-
 
 body.sidebar-collapsed .sidebar .nav-item i {
     margin: 0;
@@ -476,13 +449,11 @@ body.sidebar-collapsed .sidebar .nav-item i {
     font-size: 17px;
 }
 
-
 body.sidebar-collapsed .sidebar .nav-item.active {
     width: 44px;
 
     border-radius: 10px;
 }
-
 
 body.sidebar-collapsed .sidebar .nav-item.active::before {
     left: -16px;
@@ -493,11 +464,9 @@ body.sidebar-collapsed .sidebar .nav-item.active::before {
     width: 3px;
 }
 
-
 body.sidebar-collapsed .sidebar-bottom {
     width: 100%;
 }
-
 
 body.sidebar-collapsed .sidebar-bottom .nav-item {
     width: 44px;
@@ -508,7 +477,7 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
 
 
 /* =========================================================
-   MOBILE CLOSE BUTTON
+   MOBILE CLOSE BUTTON (inside the sidebar)
 ========================================================= */
 
 .sidebar-close {
@@ -539,6 +508,15 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
 
 
 /* =========================================================
+   MOBILE MENU BUTTON (outside the sidebar, opens it)
+========================================================= */
+
+.mobile-menu-btn {
+    display: none;
+}
+
+
+/* =========================================================
    MOBILE OVERLAY
 ========================================================= */
 
@@ -556,7 +534,6 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
     backdrop-filter: blur(2px);
 }
 
-
 .sidebar-overlay.show {
     display: block;
 }
@@ -571,14 +548,41 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
     .sidebar {
         width: 240px;
 
+        height: 100vh;
+        height: 100dvh;
+
         transform: translateX(-100%);
     }
-
 
     .sidebar.mobile-open {
         transform: translateX(0);
     }
 
+    /* Hamburger button that opens the sidebar */
+
+    .mobile-menu-btn {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 900;
+
+        width: 44px;
+        height: 44px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 10px;
+
+        background: #101047;
+        color: #ffffff;
+        font-size: 18px;
+
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
 
     /* Mobile uses the X button */
 
@@ -586,18 +590,15 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
         display: flex;
     }
 
-
     .menu-toggle {
         display: none;
     }
-
 
     /* Ignore desktop collapsed width on mobile */
 
     body.sidebar-collapsed .sidebar {
         width: 240px;
     }
-
 
     body.sidebar-collapsed .sidebar-top {
         align-items: center;
@@ -606,7 +607,6 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
         padding: 8px 8px 25px;
     }
 
-
     body.sidebar-collapsed .sidebar-logo {
         width: 70px;
         height: 55px;
@@ -614,11 +614,9 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
         margin-bottom: 10px;
     }
 
-
     body.sidebar-collapsed .brand-name {
         display: block;
     }
-
 
     body.sidebar-collapsed .sidebar .nav-item {
         justify-content: flex-start;
@@ -635,11 +633,9 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
         gap: 15px;
     }
 
-
     body.sidebar-collapsed .sidebar .nav-item span {
         display: block;
     }
-
 
     body.sidebar-collapsed .sidebar .nav-item i {
         margin: 0;
@@ -647,11 +643,9 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
         font-size: 15px;
     }
 
-
     body.sidebar-collapsed .sidebar .nav-item.active {
         width: 100%;
     }
-
 
     body.sidebar-collapsed .sidebar-bottom .nav-item {
         width: 100%;
@@ -668,7 +662,6 @@ body.sidebar-collapsed .sidebar-bottom .nav-item {
     .sidebar {
         width: 230px;
     }
-
 
     .sidebar .nav-item {
         min-height: 45px;

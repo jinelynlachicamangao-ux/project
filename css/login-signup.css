@@ -18,6 +18,15 @@ body {
     box-sizing: border-box;
 }
 
+/* Background when the page is opened on its own (not inside the popup) */
+body.standalone {
+    background-color: #08082b;
+    background-image:
+        radial-gradient(circle at 15% 10%, #1f1f79, transparent 45%),
+        radial-gradient(circle at 85% 90%, #0066ff, transparent 50%);
+    background-attachment: fixed;
+}
+
 /* Shared card styles */
 
 .login-box{
@@ -349,4 +358,80 @@ body {
     color: #7c8fb8;
     text-decoration: underline;
     font-weight: normal;
+}
+
+/* ================= PHONE FRIENDLY ================= */
+
+@media (max-width: 640px) {
+
+    html, body {
+        height: auto;
+    }
+
+    body {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 12px;
+        align-items: flex-start;
+    }
+
+    .login-box,
+    .signup-box {
+        width: 100%;
+        max-width: 420px;
+        height: auto;
+        max-height: none;
+        margin: 0 auto;
+        padding: 22px 18px 18px;
+    }
+
+    .login-box h1 { font-size: 24px; }
+    .signup-box h1 { font-size: 22px; }
+
+    .login-box h3,
+    .signup-box h3 { font-size: 14px; }
+
+    /* 16px stops iPhones from zooming into the fields */
+    .login-box input[type="text"],
+    .login-box input[type="email"],
+    .login-box input[type="password"],
+    .signup-box input[type="text"],
+    .signup-box input[type="email"],
+    .signup-box input[type="date"],
+    .signup-box input[type="password"] {
+        font-size: 16px;
+        padding: 12px 14px;
+    }
+
+    .login-box .input-with-icon .password-field,
+    .signup-box .input-with-icon .password-field {
+        padding-right: 44px;
+    }
+
+    .login-box input[type="submit"],
+    .signup-box input[type="submit"] {
+        padding: 14px;
+    }
+
+    .social-buttons {
+        flex-direction: column;
+    }
+
+    .social-buttons button {
+        padding: 12px;
+    }
+
+    .signup-box .divider {
+        font-size: 13px;
+    }
+
+    .hint-text {
+        font-size: 12px;
+    }
+
+    .signup-box p,
+    .login-box p,
+    .fine-print p {
+        font-size: 13px;
+    }
 }

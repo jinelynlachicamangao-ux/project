@@ -81,6 +81,11 @@
     </div>
 
     <script>
+        // When opened as a normal page (not inside the popup), give it its own background
+        if (window.parent === window) {
+            document.body.classList.add('standalone');
+        }
+
         // Show/hide the password, and swap the eye icon to match
         function togglePassword() {
             const pwd = document.getElementById('password');
@@ -94,12 +99,12 @@
             eyeClosed.style.display = isHidden ? 'block' : 'none';
         }
 
-        // Close the modal via the parent homepage
+        // Close the popup (or go back to the homepage if opened as a normal page)
         function closeModal() {
-            try {
-                parent.postMessage({ type: 'close-modal' }, '*');
-            } catch (e) {
-                // no-op if parent isn't listening
+            if (window.parent !== window) {
+                window.parent.postMessage({ type: 'close-modal' }, '*');
+            } else {
+                window.location.href = 'Homapage.html';
             }
         }
 
@@ -116,16 +121,16 @@
 
             // TODO: replace this with a real API call to create the account.
 
-            try {
+            if (window.parent !== window) {
                 parent.postMessage({
                     type: 'signup-complete',
                     destination: 'Dashboard.html'
                 }, '*');
-            } catch (err) {
+            } else {
                 window.location.href = 'Dashboard.html';
             }
         });
     </script>
 </body>
 
-</html>
+</html> 

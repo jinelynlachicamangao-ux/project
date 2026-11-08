@@ -1467,3 +1467,201 @@ body.sidebar-collapsed .main-area {
         height: 35px;
     }
 }
+/* =========================================================
+   DASHBOARD EXTRAS
+   Notification dropdown + profile dropdown header
+   Link this AFTER dashboard.css
+========================================================= */
+
+.notif-container {
+    position: relative;
+}
+
+.notif-dropdown {
+    position: absolute;
+    right: 0;
+    top: 50px;
+
+    width: 340px;
+    max-width: calc(100vw - 32px);
+
+    display: none;
+
+    border-radius: 12px;
+
+    background: var(--surface-panel);
+    border: 1px solid var(--border-input);
+    box-shadow: var(--shadow-card);
+
+    z-index: 200;
+
+    overflow: hidden;
+}
+
+.notif-dropdown.show {
+    display: block;
+    animation: dropdownIn 0.2s ease;
+}
+
+.notif-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 13px 14px;
+
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.notif-head strong {
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    color: var(--text-primary);
+}
+
+.notif-head button {
+    border: none;
+    background: transparent;
+
+    color: var(--accent-cyan);
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.notif-head button:hover {
+    text-decoration: underline;
+}
+
+.notif-list {
+    max-height: 320px;
+    overflow-y: auto;
+}
+
+.notif-item {
+    width: 100%;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+
+    padding: 12px 14px;
+
+    border: none;
+    border-bottom: 1px solid var(--border-row);
+
+    background: transparent;
+
+    text-align: left;
+    color: inherit;
+}
+
+.notif-item:hover {
+    background: color-mix(in srgb, var(--accent-blue) 8%, transparent);
+}
+
+.notif-item.unread {
+    background: color-mix(in srgb, var(--accent-cyan) 6%, transparent);
+}
+
+.notif-icon {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: color-mix(in srgb, var(--accent-blue) 15%, transparent);
+    color: var(--accent-cyan);
+
+    font-size: 11px;
+}
+
+.notif-body {
+    min-width: 0;
+}
+
+.notif-text {
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.notif-text strong {
+    color: var(--text-primary);
+}
+
+.notif-time {
+    margin-top: 3px;
+    color: var(--text-muted);
+    font-size: 9px;
+}
+
+.notif-empty {
+    padding: 28px 14px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+.notif-footer {
+    display: block;
+
+    padding: 12px;
+
+    text-align: center;
+
+    color: var(--accent-blue);
+
+    font-size: 11px;
+    font-weight: 600;
+
+    border-top: 1px solid var(--border-soft);
+}
+
+.notif-footer:hover {
+    color: var(--accent-cyan);
+}
+
+/* Profile dropdown header (name + email) */
+
+.dropdown-user {
+    display: flex;
+    flex-direction: column;
+
+    padding: 8px 10px 4px;
+}
+
+.dropdown-user strong {
+    color: var(--text-primary);
+    font-size: 12px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dropdown-user span {
+    margin-top: 2px;
+
+    color: var(--text-muted);
+    font-size: 10px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-dropdown {
+    width: 220px;
+}
+
+.profile-avatar {
+    background-size: cover;
+    background-position: center;
+}

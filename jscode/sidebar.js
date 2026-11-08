@@ -9,16 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
        SIDEBAR CONTAINER
     ===================================================== */
 
-    const sidebarContainer =
-        document.getElementById("sidebar-container");
-
+    const sidebarContainer = document.getElementById("sidebar-container");
 
     if (!sidebarContainer) {
-
-        console.error(
-            "❌ #sidebar-container was not found."
-        );
-
+        console.error("❌ #sidebar-container was not found.");
         return;
     }
 
@@ -29,45 +23,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const sidebarPath = "sidebar.html";
 
-
     fetch(sidebarPath)
 
         .then(function (response) {
 
             if (!response.ok) {
-
                 throw new Error(
-                    "HTTP " +
-                    response.status +
+                    "HTTP " + response.status +
                     " - sidebar.html could not be loaded."
                 );
-
             }
 
             return response.text();
-
         })
-
 
         .then(function (html) {
 
             sidebarContainer.innerHTML = html;
 
-            console.log(
-                "✅ Sidebar HTML loaded successfully."
-            );
+            console.log("✅ Sidebar HTML loaded successfully.");
 
             initializeSidebar();
-
         })
-
 
         .catch(function (error) {
 
-            console.error(
-                "❌ Sidebar loading error:",
-                error
-            );
+            console.error("❌ Sidebar loading error:", error);
 
             sidebarContainer.innerHTML = `
                 <div style="
@@ -79,9 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     Please open this project using Live Server.
                 </div>
             `;
-
         });
-
 
 
     /* =====================================================
@@ -90,16 +69,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function initializeSidebar() {
 
-        const sidebar =
-            document.getElementById("sidebar");
-
+        const sidebar = document.getElementById("sidebar");
 
         if (!sidebar) {
-
-            console.error(
-                "❌ #sidebar was not found inside sidebar.html."
-            );
-
+            console.error("❌ #sidebar was not found inside sidebar.html.");
             return;
         }
 
@@ -108,71 +81,62 @@ document.addEventListener("DOMContentLoaded", function () {
            MOBILE OVERLAY
         ================================================= */
 
-        let overlay =
-            document.querySelector(".sidebar-overlay");
-
+        let overlay = document.querySelector(".sidebar-overlay");
 
         if (!overlay) {
-
-            overlay =
-                document.createElement("div");
-
-            overlay.className =
-                "sidebar-overlay";
-
-            document.body.appendChild(
-                overlay
-            );
-
+            overlay = document.createElement("div");
+            overlay.className = "sidebar-overlay";
+            document.body.appendChild(overlay);
         }
 
 
         /* =================================================
-           MENU TOGGLE
+           MOBILE HAMBURGER BUTTON (outside the sidebar)
+           This is the button that opens the sidebar on phones.
         ================================================= */
 
-        const menuToggle =
-            document.getElementById("menuToggle");
+        let mobileBtn = document.getElementById("mobileMenuBtn");
+
+        if (!mobileBtn) {
+            mobileBtn = document.createElement("button");
+            mobileBtn.id = "mobileMenuBtn";
+            mobileBtn.className = "mobile-menu-btn";
+            mobileBtn.type = "button";
+            mobileBtn.setAttribute("aria-label", "Open menu");
+            mobileBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
+            document.body.appendChild(mobileBtn);
+        }
+
+        mobileBtn.addEventListener("click", function (event) {
+            event.stopPropagation();
+            sidebar.classList.add("mobile-open");
+            overlay.classList.add("show");
+        });
 
 
         /* =================================================
-           LOGO
+           MENU TOGGLE + LOGO
         ================================================= */
 
-        const sidebarLogo =
-            document.getElementById("sidebarLogo");
-
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebarLogo = document.getElementById("sidebarLogo");
 
 
         /* =================================================
            REMEMBER SIDEBAR STATE
-           
+
            true  = minimized
            false = normal
         ================================================= */
 
         const sidebarCollapsed =
-            localStorage.getItem(
-                "sidebarCollapsed"
-            ) === "true";
+            localStorage.getItem("sidebarCollapsed") === "true";
 
+        /* Restore the previous sidebar state when changing pages. */
 
-        /*
-         * Restore the previous sidebar state
-         * when changing pages.
-         */
-
-        if (
-            sidebarCollapsed &&
-            window.innerWidth > 800
-        ) {
-
-            document.body.classList.add(
-                "sidebar-collapsed"
-            );
-
+        if (sidebarCollapsed && window.innerWidth > 800) {
+            document.body.classList.add("sidebar-collapsed");
         }
-
 
 
         /* =================================================
@@ -185,240 +149,110 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-
             const collapsed =
-                document.body.classList.contains(
-                    "sidebar-collapsed"
-                );
+                document.body.classList.contains("sidebar-collapsed");
 
+            const label = collapsed ? "Expand sidebar" : "Collapse sidebar";
 
-            if (collapsed) {
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Expand sidebar"
-                );
-
-                menuToggle.setAttribute(
-                    "title",
-                    "Expand sidebar"
-                );
-
-            }
-
-            else {
-
-                menuToggle.setAttribute(
-                    "aria-label",
-                    "Collapse sidebar"
-                );
-
-                menuToggle.setAttribute(
-                    "title",
-                    "Collapse sidebar"
-                );
-
-            }
-
+            menuToggle.setAttribute("aria-label", label);
+            menuToggle.setAttribute("title", label);
         }
 
-
         updateMenuButton();
-
 
 
         /* =================================================
            MENU TOGGLE
 
-           CLICK ☰
-           → MINIMIZE SIDEBAR
-
-           CLICK AGAIN IS NOT AVAILABLE WHILE MINIMIZED.
-           USE LOGO TO EXPAND.
+           Desktop: minimizes the sidebar.
+           Use the logo to expand it again.
         ================================================= */
 
         if (menuToggle) {
 
-            menuToggle.addEventListener(
-                "click",
-                function (event) {
+            menuToggle.addEventListener("click", function (event) {
 
-                    event.stopPropagation();
+                event.stopPropagation();
 
+                /* MOBILE */
 
-                    /* =====================================
-                       MOBILE
-                    ===================================== */
-
-                    if (window.innerWidth <= 800) {
-
-                        sidebar.classList.add(
-                            "mobile-open"
-                        );
-
-                        overlay.classList.add(
-                            "show"
-                        );
-
-                        return;
-                    }
-
-
-                    /* =====================================
-                       DESKTOP
-                    ===================================== */
-
-                    document.body.classList.add(
-                        "sidebar-collapsed"
-                    );
-
-
-                    /*
-                     * REMEMBER MINIMIZED STATE
-                     */
-
-                    localStorage.setItem(
-                        "sidebarCollapsed",
-                        "true"
-                    );
-
-
-                    updateMenuButton();
-
+                if (window.innerWidth <= 800) {
+                    sidebar.classList.add("mobile-open");
+                    overlay.classList.add("show");
+                    return;
                 }
-            );
 
+                /* DESKTOP */
+
+                document.body.classList.add("sidebar-collapsed");
+
+                localStorage.setItem("sidebarCollapsed", "true");
+
+                updateMenuButton();
+            });
         }
 
 
-
         /* =================================================
-           LOGO CLICK
-
-           LOGO ALWAYS EXPANDS SIDEBAR
+           LOGO CLICK (desktop): ALWAYS EXPANDS SIDEBAR
         ================================================= */
 
         if (sidebarLogo) {
 
-            sidebarLogo.addEventListener(
-                "click",
-                function (event) {
+            sidebarLogo.addEventListener("click", function (event) {
 
-                    event.stopPropagation();
+                event.stopPropagation();
 
+                if (window.innerWidth > 800) {
 
-                    if (window.innerWidth > 800) {
+                    document.body.classList.remove("sidebar-collapsed");
 
-                        /*
-                         * EXPAND SIDEBAR
-                         */
+                    localStorage.setItem("sidebarCollapsed", "false");
 
-                        document.body.classList.remove(
-                            "sidebar-collapsed"
-                        );
-
-
-                        /*
-                         * REMEMBER NORMAL STATE
-                         */
-
-                        localStorage.setItem(
-                            "sidebarCollapsed",
-                            "false"
-                        );
-
-
-                        updateMenuButton();
-
-                    }
-
+                    updateMenuButton();
                 }
-            );
-
+            });
         }
-
 
 
         /* =================================================
-           CLOSE BUTTON
-           MOBILE ONLY
+           CLOSE BUTTON (MOBILE ONLY)
         ================================================= */
 
-        const sidebarClose =
-            document.getElementById(
-                "sidebarClose"
-            );
-
+        const sidebarClose = document.getElementById("sidebarClose");
 
         if (sidebarClose) {
-
-            sidebarClose.addEventListener(
-                "click",
-                function () {
-
-                    closeMobileSidebar();
-
-                }
-            );
-
+            sidebarClose.addEventListener("click", closeMobileSidebar);
         }
-
 
 
         /* =================================================
            OVERLAY CLICK
         ================================================= */
 
-        overlay.addEventListener(
-            "click",
-            function () {
-
-                closeMobileSidebar();
-
-            }
-        );
-
+        overlay.addEventListener("click", closeMobileSidebar);
 
 
         /* =================================================
-           CLICK OUTSIDE SIDEBAR
-           MOBILE ONLY
+           CLICK OUTSIDE SIDEBAR (MOBILE ONLY)
         ================================================= */
 
-        document.addEventListener(
-            "click",
-            function (event) {
+        document.addEventListener("click", function (event) {
 
-                if (window.innerWidth > 800) {
-                    return;
-                }
-
-
-                const clickedInsideSidebar =
-                    sidebar.contains(
-                        event.target
-                    );
-
-
-                const clickedMenu =
-                    menuToggle &&
-                    menuToggle.contains(
-                        event.target
-                    );
-
-
-                if (
-                    !clickedInsideSidebar &&
-                    !clickedMenu
-                ) {
-
-                    closeMobileSidebar();
-
-                }
-
+            if (window.innerWidth > 800) {
+                return;
             }
-        );
 
+            const clickedInsideSidebar = sidebar.contains(event.target);
+
+            const clickedMenu =
+                (menuToggle && menuToggle.contains(event.target)) ||
+                mobileBtn.contains(event.target);
+
+            if (!clickedInsideSidebar && !clickedMenu) {
+                closeMobileSidebar();
+            }
+        });
 
 
         /* =================================================
@@ -428,102 +262,50 @@ document.addEventListener("DOMContentLoaded", function () {
         setActivePage();
 
 
-
         /* =================================================
            MOBILE NAVIGATION
 
-           IMPORTANT:
-           Clicking My Tasks, Projects, Calendar, etc.
-           DOES NOT CHANGE THE DESKTOP SIDEBAR STATE.
+           Clicking a link closes the mobile sidebar.
+           It does NOT change the desktop collapsed state.
         ================================================= */
 
-        const navItems =
-            sidebar.querySelectorAll(
-                ".nav-item"
-            );
+        const navItems = sidebar.querySelectorAll(".nav-item");
 
+        navItems.forEach(function (item) {
 
-        navItems.forEach(
-            function (item) {
+            item.addEventListener("click", function () {
 
-                item.addEventListener(
-                    "click",
-                    function () {
-
-                        if (
-                            window.innerWidth <= 800
-                        ) {
-
-                            closeMobileSidebar();
-
-                        }
-
-                        /*
-                         * DO NOT REMOVE:
-                         *
-                         * sidebar-collapsed
-                         *
-                         * DO NOT CHANGE localStorage.
-                         *
-                         * This allows the minimized state
-                         * to remain when opening another page.
-                         */
-
-                    }
-                );
-
-            }
-        );
-
+                if (window.innerWidth <= 800) {
+                    closeMobileSidebar();
+                }
+            });
+        });
 
 
         /* =================================================
            WINDOW RESIZE
         ================================================= */
 
-        window.addEventListener(
-            "resize",
-            function () {
+        window.addEventListener("resize", function () {
 
-                if (
-                    window.innerWidth > 800
-                ) {
+            if (window.innerWidth > 800) {
 
-                    closeMobileSidebar();
+                closeMobileSidebar();
 
-                    /*
-                     * Restore saved desktop state.
-                     */
+                /* Restore saved desktop state. */
 
-                    const savedState =
-                        localStorage.getItem(
-                            "sidebarCollapsed"
-                        ) === "true";
+                const savedState =
+                    localStorage.getItem("sidebarCollapsed") === "true";
 
-
-                    if (savedState) {
-
-                        document.body.classList.add(
-                            "sidebar-collapsed"
-                        );
-
-                    }
-
-                    else {
-
-                        document.body.classList.remove(
-                            "sidebar-collapsed"
-                        );
-
-                    }
-
-                    updateMenuButton();
-
+                if (savedState) {
+                    document.body.classList.add("sidebar-collapsed");
+                } else {
+                    document.body.classList.remove("sidebar-collapsed");
                 }
 
+                updateMenuButton();
             }
-        );
-
+        });
 
 
         /* =================================================
@@ -531,18 +313,9 @@ document.addEventListener("DOMContentLoaded", function () {
         ================================================= */
 
         function closeMobileSidebar() {
-
-            sidebar.classList.remove(
-                "mobile-open"
-            );
-
-
-            overlay.classList.remove(
-                "show"
-            );
-
+            sidebar.classList.remove("mobile-open");
+            overlay.classList.remove("show");
         }
-
 
 
         /* =================================================
@@ -557,45 +330,18 @@ document.addEventListener("DOMContentLoaded", function () {
                     .pop()
                     .toLowerCase();
 
+            const links = sidebar.querySelectorAll(".nav-item[data-page]");
 
-            const links =
-                sidebar.querySelectorAll(
-                    ".nav-item[data-page]"
-                );
+            links.forEach(function (link) {
 
+                const page = link.getAttribute("data-page").toLowerCase();
 
-            links.forEach(
-                function (link) {
-
-                    const page =
-                        link
-                            .getAttribute(
-                                "data-page"
-                            )
-                            .toLowerCase();
-
-
-                    if (
-                        page === currentPage
-                    ) {
-
-                        link.classList.add(
-                            "active"
-                        );
-
-                    }
-
-                    else {
-
-                        link.classList.remove(
-                            "active"
-                        );
-
-                    }
-
+                if (page === currentPage) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
                 }
-            );
-
+            });
         }
 
     }

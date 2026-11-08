@@ -132,15 +132,14 @@
             margin: 0;
         }
 
-        .nav-tagline {
-            font-size: 11px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.6);
-            letter-spacing: 0.3px;
-            margin-top: 0;
-            padding-left: 10px;
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-        }
+       .nav-tagline {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: 0.3px;
+    padding-left: 14px;
+    border-left: 1px solid rgba(255, 255, 255, 0.3);
+}
 
         .nav-links {
             display: flex;
@@ -206,7 +205,6 @@
 
             overflow: hidden;
 
-            /* Background images are controlled by the slideshow below */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -230,33 +228,18 @@
             pointer-events: none;
         }
 
-        /* ================= HERO SLIDESHOW ================= */
+        /* ================= HERO IMAGE ================= */
 
-        .hero-slideshow {
+        .hero-bg {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .hero-slide {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
+            background-image: url('../logo&icons/imagess.avif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0;
-            transform: scale(1);
-            transition: opacity 1.5s ease-in-out, transform 6s ease-in-out;
-        }
-
-        .hero-slide.active {
-            opacity: 1;
-            transform: scale(1.08);
+            z-index: 0;
         }
 
         .hero-copy {
@@ -351,6 +334,7 @@
             max-width: 100%;
             margin: 0 auto;
             padding: 90px clamp(25px, 5vw, 100px);
+            scroll-margin-top: 70px;
         }
 
         .section-heading {
@@ -475,7 +459,7 @@
         .footer-inner {
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
             flex-wrap: wrap;
             gap: 12px;
         }
@@ -662,6 +646,7 @@
             .features-grid {
                 grid-template-columns: 1fr 1fr;
             }
+
         }
 
 
@@ -718,6 +703,8 @@
             .features-grid {
                 grid-template-columns: 1fr;
             }
+
+
 
             .section-heading h2 {
                 font-size: 27px;
@@ -814,16 +801,15 @@
 
         <div class="nav-links">
 
-            <a href="#features">
+            <a href="#Home">
+                Home
+            </a>
+             <a href="#features">
                 Features
             </a>
 
-            <a href="#how-it-works">
+            <a href="HowItWorks.html">
                 How it works
-            </a>
-
-            <a href="#pricing">
-                Pricing
             </a>
 
         </div>
@@ -852,27 +838,9 @@
 
     <section class="hero">
 
-        <!-- ================= HERO IMAGE SLIDESHOW ================= -->
+        <!-- ================= HERO IMAGE ================= -->
 
-        <div class="hero-slideshow">
-
-            <div class="hero-slide active"
-                style="background-image: url('../logo&icons/imagess.avif');">
-            </div>
-
-            <div class="hero-slide"
-                style="background-image: url('../logo&icons/image2.jpg');">
-            </div>
-
-            <div class="hero-slide"
-                style="background-image: url('../logo&icons/image3.jpg');">
-            </div>
-
-            <div class="hero-slide"
-                style="background-image: url('../logo&icons/image4.avif');">
-            </div>
-
-        </div>
+        <div class="hero-bg"></div>
 
         <div class="hero-copy">
 
@@ -915,7 +883,7 @@
                 </a>
 
 
-                <a href="#how-it-works"
+                <a href="HowItWorks.html"
                     class="btn btn-outline btn-large">
 
                     See How It Works
@@ -1355,36 +1323,6 @@
                 event.data.destination ||
                 event.data.redirectUrl
             );
-
-        });
-
-
-        /* ================= HERO AUTOMATIC IMAGE SLIDESHOW ================= */
-
-        document.addEventListener('DOMContentLoaded', function () {
-
-            var heroSlides =
-                document.querySelectorAll('.hero-slide');
-
-            if (!heroSlides.length) {
-                return;
-            }
-
-            var currentSlide = 0;
-
-            setInterval(function () {
-
-                heroSlides[currentSlide].classList.remove('active');
-
-                currentSlide++;
-
-                if (currentSlide >= heroSlides.length) {
-                    currentSlide = 0;
-                }
-
-                heroSlides[currentSlide].classList.add('active');
-
-            }, 5000);
 
         });
 

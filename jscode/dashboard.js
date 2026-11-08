@@ -1,80 +1,307 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const menuButton = document.getElementById("menuToggle");
-    const sidebar = document.getElementById("sidebar");
+
     const profileButton = document.getElementById("profileButton");
     const profileDropdown = document.getElementById("profileDropdown");
     const searchInput = document.getElementById("globalSearch");
 
-    // Open the sidebar as a drawer on small screens and collapse it on larger screens.
-    if (menuButton && sidebar) {
-        menuButton.addEventListener("click", function () {
-            if (window.innerWidth <= 800) {
-                sidebar.classList.toggle("mobile-open");
-            } else {
-                document.body.classList.toggle("sidebar-collapsed");
-            }
-        });
+    const notifButton = document.getElementById("notifButton");
+    const notifDropdown = document.getElementById("notifDropdown");
+    const notifList = document.getElementById("notifList");
+    const notifDot = document.getElementById("notifDot");
+    const notifMarkAll = document.getElementById("notifMarkAll");
 
-        document.addEventListener("click", function (event) {
-            const clickedSidebar = sidebar.contains(event.target);
-            const clickedMenu = menuButton.contains(event.target);
+    const settingsButton = document.getElementById("settingsButton");
+    const viewDeadlinesBtn = document.getElementById("viewDeadlinesBtn");
 
-            if (window.innerWidth <= 800 && !clickedSidebar && !clickedMenu) {
-                sidebar.classList.remove("mobile-open");
-            }
-        });
 
-        window.addEventListener("resize", function () {
-            if (window.innerWidth > 800) {
-                sidebar.classList.remove("mobile-open");
-            }
+    /* =====================================================
+       USER: initials avatar, name, email
+    ===================================================== */
+
+    function applyUser() {
+
+        if (!window.ThreeDUser) return;
+
+        const user = ThreeDUser.get();
+
+        ThreeDUser.renderAvatar(
+            document.getElementById("profileAvatar"),
+            user
+        );
+
+        const welcomeName = document.getElementById("welcomeName");
+        const dropdownName = document.getElementById("dropdownName");
+        const dropdownEmail = document.getElementById("dropdownEmail");
+
+        if (welcomeName) welcomeName.textContent = user.displayName;
+        if (dropdownName) dropdownName.textContent = user.fullName;
+        if (dropdownEmail) dropdownEmail.textContent = user.email || "No email set";
+    }
+
+    applyUser();
+
+
+    /* =====================================================
+       TODAY'S DATE (updates every day, even if the tab stays open)
+    ===================================================== */
+
+    const todayDate = document.getElementById("todayDate");
+
+    function updateDate() {
+
+        if (!todayDate) return;
+
+        todayDate.textContent = new Date().toLocaleDateString("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
         });
     }
 
-    // Highlight the selected sidebar link for in-page links and logout.
-    const navigationItems = document.querySelectorAll(".nav-item");
+    function scheduleMidnightUpdate() {
 
-    navigationItems.forEach(function (item) {
-        item.addEventListener("click", function () {
-            const href = item.getAttribute("href") || "";
-            const isLogout = item.classList.contains("logout");
+        const now = new Date();
 
-            if (!isLogout && !href.startsWith("#")) {
-                return;
-            }
+        const nextMidnight = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            now.getDate() + 1,
+            0, 0, 1
+        );
 
-            navigationItems.forEach(function (navigationItem) {
-                navigationItem.classList.remove("active");
-            });
+        setTimeout(function () {
+            updateDate();
+            scheduleMidnightUpdate();
+        }, nextMidnight - now);
+    }
 
-            item.classList.add("active");
-        });
+    updateDate();
+    scheduleMidnightUpdate();
+
+    document.addEventListener("visibilitychange", function () {
+        if (!document.hidden) updateDate();
     });
 
-    // Open the profile menu and close it when the user clicks elsewhere.
-    if (profileButton && profileDropdown) {
-        profileButton.addEventListener("click", function (event) {
-            event.stopPropagation();
-            profileDropdown.classList.toggle("show");
-        });
 
-        document.addEventListener("click", function (event) {
-            const clickedProfile = profileButton.contains(event.target);
-            const clickedDropdown = profileDropdown.contains(event.target);
+    /* =====================================================
+       NOTIFICATIONS  (same storage key as notification.html)
+    ===================================================== */
 
-            if (!clickedProfile && !clickedDropdown) {
-                profileDropdown.classList.remove("show");
-            }
+    const NOTIF_KEY = "3dProjectNotifications";
+
+    const defaultNotifications = [
+        { id: 1, icon: "fa-solid fa-circle-check", text: "<strong>Maria</strong> completed <strong>Login Page</strong>", time: "2 hours ago", unread: true },
+        { id: 2, icon: "fa-solid fa-database", text: "<strong>John</strong> updated <strong>Database Design</strong>", time: "5 hours ago", unread: true },
+        { id: 3, icon: "fa-solid fa-list-check", text: "<strong>Anna</strong> added a new task <strong>User Interface</strong>", time: "Yesterday", unread: false },
+        { id: 4, icon: "fa-solid fa-clock", text: "<strong>3 tasks</strong> are overdue and need attention", time: "2 days ago", unread: false }
+    ];
+
+    let notifications = null;
+
+    try {
+        notifications = JSON.parse(localStorage.getItem(NOTIF_KEY));
+    } catch (e) {
+        notifications = null;
+    }
+
+    if (!Array.isArray(notifications)) {
+        notifications = defaultNotifications;
+        saveNotifications();
+    }
+
+    function saveNotifications() {
+        localStorage.setItem(NOTIF_KEY, JSON.stringify(notifications));
+    }
+
+    function renderNotifications() {
+
+        if (!notifList) return;
+
+        notifList.innerHTML = "";
+
+        const unreadCount = notifications.filter(function (n) {
+            return n.unread;
+        }).length;
+
+        if (notifDot) {
+            notifDot.style.display = unreadCount > 0 ? "block" : "none";
+        }
+
+        if (notifications.length === 0) {
+
+            const empty = document.createElement("div");
+            empty.className = "notif-empty";
+            empty.textContent = "You're all caught up.";
+            notifList.appendChild(empty);
+
+            return;
+        }
+
+        /* Show the 5 most recent in the dropdown */
+
+        notifications.slice(0, 5).forEach(function (item) {
+
+            const row = document.createElement("button");
+            row.type = "button";
+            row.className = "notif-item" + (item.unread ? " unread" : "");
+
+            const icon = document.createElement("div");
+            icon.className = "notif-icon";
+            icon.innerHTML = '<i class="' + item.icon + '"></i>';
+
+            const body = document.createElement("div");
+            body.className = "notif-body";
+
+            const text = document.createElement("div");
+            text.className = "notif-text";
+            text.innerHTML = item.text;
+
+            const time = document.createElement("div");
+            time.className = "notif-time";
+            time.textContent = item.time;
+
+            body.appendChild(text);
+            body.appendChild(time);
+
+            row.appendChild(icon);
+            row.appendChild(body);
+
+            row.addEventListener("click", function (event) {
+
+                event.stopPropagation();
+
+                if (item.unread) {
+                    item.unread = false;
+                    saveNotifications();
+                    renderNotifications();
+                }
+            });
+
+            notifList.appendChild(row);
         });
     }
 
-    // Fade checked tasks and restore them when unchecked.
+    renderNotifications();
+
+    if (notifMarkAll) {
+        notifMarkAll.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            notifications.forEach(function (n) {
+                n.unread = false;
+            });
+
+            saveNotifications();
+            renderNotifications();
+        });
+    }
+
+    /* keep in sync if notifications change in another tab */
+
+    window.addEventListener("storage", function (event) {
+
+        if (event.key === NOTIF_KEY) {
+            try {
+                notifications = JSON.parse(event.newValue) || [];
+            } catch (e) {
+                notifications = [];
+            }
+            renderNotifications();
+        }
+
+        if (event.key === "3dUserSettings") {
+            applyUser();
+        }
+    });
+
+
+    /* =====================================================
+       DROPDOWNS (notifications + profile)
+    ===================================================== */
+
+    function closeAllDropdowns() {
+
+        if (notifDropdown) notifDropdown.classList.remove("show");
+        if (profileDropdown) profileDropdown.classList.remove("show");
+
+        if (notifButton) notifButton.setAttribute("aria-expanded", "false");
+    }
+
+    if (notifButton && notifDropdown) {
+        notifButton.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            const willOpen = !notifDropdown.classList.contains("show");
+
+            closeAllDropdowns();
+
+            if (willOpen) {
+                notifDropdown.classList.add("show");
+                notifButton.setAttribute("aria-expanded", "true");
+            }
+        });
+
+        notifDropdown.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
+
+    if (profileButton && profileDropdown) {
+        profileButton.addEventListener("click", function (event) {
+
+            event.stopPropagation();
+
+            const willOpen = !profileDropdown.classList.contains("show");
+
+            closeAllDropdowns();
+
+            if (willOpen) {
+                profileDropdown.classList.add("show");
+            }
+        });
+
+        profileDropdown.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+    }
+
+    document.addEventListener("click", closeAllDropdowns);
+
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeAllDropdowns();
+    });
+
+
+    /* =====================================================
+       SETTINGS BUTTON + VIEW ALL DEADLINES
+    ===================================================== */
+
+    if (settingsButton) {
+        settingsButton.addEventListener("click", function () {
+            window.location.href = "settings.html";
+        });
+    }
+
+    if (viewDeadlinesBtn) {
+        viewDeadlinesBtn.addEventListener("click", function () {
+            window.location.href = "calendar.html";
+        });
+    }
+
+
+    /* =====================================================
+       TASK CHECKBOXES
+    ===================================================== */
+
     const taskCheckboxes = document.querySelectorAll(
         '.task-check input[type="checkbox"]'
     );
 
     taskCheckboxes.forEach(function (checkbox) {
         checkbox.addEventListener("change", function () {
+
             const task = checkbox.closest(".task-item");
 
             if (task) {
@@ -83,30 +310,28 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Filter task, deadline, and activity items as the user types.
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
     if (searchInput) {
+
         const searchableItems = document.querySelectorAll(
             ".task-item, .deadline-item, .activity-item"
         );
 
         searchInput.addEventListener("input", function () {
+
             const searchText = searchInput.value.trim().toLowerCase();
 
             searchableItems.forEach(function (item) {
-                const itemText = item.textContent.toLowerCase();
-                item.style.display = itemText.includes(searchText) ? "" : "none";
+                item.style.display =
+                    item.textContent.toLowerCase().includes(searchText)
+                        ? ""
+                        : "none";
             });
         });
     }
 
-    // Set transitions on dashboard cards when the pointer first enters them.
-    const dashboardCards = document.querySelectorAll(
-        ".dashboard-card, .stat-card"
-    );
-
-    dashboardCards.forEach(function (card) {
-        card.addEventListener("mouseenter", function () {
-            card.style.transition = "transform 0.2s ease, border-color 0.2s ease";
-        });
-    });
 });
